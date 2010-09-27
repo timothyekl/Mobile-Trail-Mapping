@@ -8,7 +8,8 @@ class ServerTest < Test::Unit::TestCase
 
   def setup
     @base_url = "/5500"
-    @test_user = "/test@brousalis"
+    @test_user = "test@brousalis.com"
+    @invalid_user = "invalid@brousalis.com"
   end
 
   def app
@@ -21,24 +22,27 @@ class ServerTest < Test::Unit::TestCase
   end
 
   def test_invalid_api_key
-    get "123/anon/point/get/none"
+    get "123/point/get/none"
     assert_equal 'Invalid API Key', last_response.body
   end
 
   def test_get_point
-    get @base_url + "/anon/point/get/none"
+    get @base_url + "/point/get/none"
     assert_equal 'test point', last_response.body
   end
 
   def test_add_point
-    put @base_url + @test_user + "/point/put/none" 
+    post @base_url + "/point/put/none", {:user => @test_user} 
+    assert_equal 'added point', last_response.body
   end
 
   def test_add_point_invalid_user
-    put @base_url + '/unkown/point/put/none'
+    post @base_url + '/point/put/none', {:user => @invalid_user}
+    assert_equal 'Must be an admin for this action', last_response.body
   end
 
   def test_add_point_invalid_api
-    put "/2341213" + @test_user + "/point/put/none"
+    post "/2341213/point/put/none", {:user => @test_user}
+    assert_equal 'Invalid API Key', last_response.body
   end
 end

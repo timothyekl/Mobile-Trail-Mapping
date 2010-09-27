@@ -1,8 +1,8 @@
 class Point < Sequel::Model
   DB.create_table? :point do
     primary_key :id
-    int :x
-    int :y
+    int :lat
+    int :long
     int :next
     int :prev
     text :desc

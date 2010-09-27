@@ -7,7 +7,8 @@ class ServerTest < Test::Unit::TestCase
   include Rack::Test::Methods
 
   def setup
-    @api_key = 5500
+    @base_url = "/5500"
+    @test_user = "/test@brousalis"
   end
 
   def app
@@ -20,12 +21,16 @@ class ServerTest < Test::Unit::TestCase
   end
 
   def test_invalid_api_key
-    get "/#{@api_key}/anon/point/get/none"
-    assert_equal 'test point', last_response.body
+    get "123/anon/point/get/none"
+    assert_equal 'Invalid API Key', last_response.body
   end
 
   def test_get_point
-    get "/#{@api_key}/anon/point/get/none"
+    get @base_url + "/anon/point/get/none"
     assert_equal 'test point', last_response.body
+  end
+
+  def test_add_point
+    put @base_url + @test_user + "/point/put/none" 
   end
 end

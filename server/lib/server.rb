@@ -10,6 +10,7 @@ configure do
 
   #connect to db
   DB = Sequel.sqlite('test.db')
+  DB[:user].insert(:email => 'test@brousalis', :pwhash => 1234)
 end
 
 Dir[File.dirname(__FILE__) + '/server/*'].each { |model| require model }
@@ -46,5 +47,3 @@ put '/:api_key/:user/point/put/:opts' do
   return 'Must be an admin for this action' if user_exists?(params[:user])
   return 'Invalid API Key' if params[:api_key].to_i != API_KEY
 end
-
-

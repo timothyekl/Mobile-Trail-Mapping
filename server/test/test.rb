@@ -33,4 +33,12 @@ class ServerTest < Test::Unit::TestCase
   def test_add_point
     put @base_url + @test_user + "/point/put/none" 
   end
+
+  def test_add_point_invalid_user
+    put @base_url + '/unkown/point/put/none'
+  end
+
+  def test_add_point_invalid_api
+    put "/2341213" + @test_user + "/point/put/none"
+  end
 end

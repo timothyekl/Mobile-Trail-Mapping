@@ -1,9 +1,4 @@
-require 'rubygems'
-require '/Users/davidpick/Documents/Mobile-Trail-Mapping/server/lib/server'
-require 'rack/test'
-require 'test/unit'
-require 'digest/sha1'
-
+require File.dirname(__FILE__) + '/test_helper'
 
 class ServerTest < Test::Unit::TestCase
   include Rack::Test::Methods
@@ -35,7 +30,7 @@ class ServerTest < Test::Unit::TestCase
   end
 
   def test_add_point
-    post @base_url + "/point/add/none", {:user => @test_user, :pwhash => @test_pw} 
+    post @base_url + "/point/add/none", {:user => @test_user, :pwhash => @test_pw, :lat => 4, :long => 5} 
     assert_equal 'added point', last_response.body
   end
 

@@ -8,6 +8,11 @@ class ServerTest < Test::Unit::TestCase
     @test_user = "test@brousalis.com"
     @test_pw = Digest::SHA1.hexdigest('password')
     @invalid_user = "invalid@brousalis.com"
+    User.new(:email => 'test@brousalis.com', :pwhash => Digest::SHA1.hexdigest('password'))
+  end
+
+  def teardown
+    User.select(@test_user, @test_pw).delete
   end
 
   def app

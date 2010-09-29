@@ -6,7 +6,7 @@ require 'digest/sha1'
 configure do
   API_KEY = 5500
   OPT_DELIMITER = '|'
-  User.new(:email => 'test@brousalis.com', :pwhash => Digest::SHA1.hexdigest('password'))
+  #User.new(:email => 'test@brousalis.com', :pwhash => Digest::SHA1.hexdigest('password'))
 end
 
 get '/' do

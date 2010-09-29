@@ -60,8 +60,6 @@ public class ShowMap extends MapActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        MobileTrailsApp.ActivityRunning = true;
         setContentView(R.layout.main);
         mapView = (MapView) findViewById(R.id.mapView);
 		mapView.setBuiltInZoomControls(true);
@@ -99,7 +97,6 @@ public class ShowMap extends MapActivity {
     @Override
     public void onDestroy() {
     	super.onDestroy();
-    	MobileTrailsApp.ActivityRunning = false;
     	Log.w("MTM", "MTM: onDestroy()");
     }
     

@@ -10,7 +10,6 @@ import android.test.TouchUtils;
 import android.util.Log;
 
 import com.brousalis.DataLoader;
-import com.brousalis.MobileTrailsApp;
 import com.brousalis.ShowMap;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
@@ -156,7 +155,7 @@ public class BaseTests extends ActivityInstrumentationTestCase2<ShowMap> {
 	
 	public void testNoServerResponse() {
 		DataLoader d = new DataLoader("FailServer");
-		assertTrue(d.validConnection());
+		assertFalse(d.validConnection());
 	}
 	
 	public void testSuccessfulServerResponse() {

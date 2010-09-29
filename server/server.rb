@@ -13,17 +13,19 @@ get '/' do
   "Welcome to mobile trail mapping application"
 end
 
-get '/:api_key/point/get' do
-  return 'Invalid API Key' if params[:api_key].to_i != API_KEY
-
-  'test point'
-end
-
+#User Routes
 post '/:api_key/user/add' do
   return 'Invalid API KEY' if params[:api_key].to_i != API_KEY
 
   user = User.new(:email => params[:email], :pwhash => params[:pwhash]).save
   return "Added user #{user.email}"
+end
+
+#Point Routes
+get '/:api_key/point/get' do
+  return 'Invalid API Key' if params[:api_key].to_i != API_KEY
+
+  'test point'
 end
 
 post '/:api_key/point/add' do

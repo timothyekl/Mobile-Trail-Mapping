@@ -13,21 +13,20 @@ get '/' do
   "Welcome to mobile trail mapping application"
 end
 
-get '/:api_key/point/get/:opts' do
+get '/:api_key/point/get' do
   return 'Invalid API Key' if params[:api_key].to_i != API_KEY
-  opts = parse_opts(params[:opts])
 
   'test point'
 end
 
-post '/:api_key/user/add/:opts' do
+post '/:api_key/user/add' do
   return 'Invalid API KEY' if params[:api_key].to_i != API_KEY
 
   user = User.new(:email => params[:email], :pwhash => params[:pwhash]).save
   return "Added user #{user.email}"
 end
 
-post '/:api_key/point/add/:opts' do
+post '/:api_key/point/add' do
   return 'Invalid username or password' if password_matches_user?(params[:user], params[:pwhash])
   return 'Invalid API Key' if params[:api_key].to_i != API_KEY
 

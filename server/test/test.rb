@@ -20,27 +20,27 @@ class ServerTest < Test::Unit::TestCase
   end
 
   def test_invalid_api_key
-    get "123/point/get/none"
+    get "123/point/get"
     assert_equal 'Invalid API Key', last_response.body
   end
 
   def test_get_point
-    get @base_url + "/point/get/none"
+    get @base_url + "/point/get"
     assert_equal 'test point', last_response.body
   end
 
   def test_add_point
-    post @base_url + "/point/add/none", {:user => @test_user, :pwhash => @test_pw, :lat => 4, :long => 5} 
+    post @base_url + "/point/add", {:user => @test_user, :pwhash => @test_pw, :lat => 4, :long => 5} 
     assert_equal 'added point', last_response.body
   end
 
   def test_add_point_invalid_user
-    post @base_url + '/point/add/none', {:user => @invalid_user, :pwhash => @test_pw}
+    post @base_url + '/point/add', {:user => @invalid_user, :pwhash => @test_pw}
     assert_equal 'Invalid username or password', last_response.body
   end
 
   def test_add_point_invalid_api
-    post "/2341213/point/add/none", {:user => @test_user, :pwhash => @test_pw}
+    post "/2341213/point/add", {:user => @test_user, :pwhash => @test_pw}
     assert_equal 'Invalid API Key', last_response.body
   end
 end

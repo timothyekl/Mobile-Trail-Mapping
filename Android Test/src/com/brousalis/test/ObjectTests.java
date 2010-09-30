@@ -49,6 +49,6 @@ public class ObjectTests extends TestCase {
 	}
 	
 	public void testModifyTrail() {
-		fail()
+		fail();
 	}
 }

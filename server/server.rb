@@ -15,7 +15,7 @@ end
 post '/:api_key/user/add' do
   return 'Invalid API Key' if params[:api_key].to_i != API_KEY
 
-  user = User.new(:email => params[:email], :pwhash => params[:pwhash]).save
+  user = User.create(:email => params[:email], :pwhash => params[:pwhash])
   return "Added user #{user.email}"
 end
 

@@ -1,3 +1,4 @@
+require 'pp'
 require 'sinatra/sequel'
 require 'sqlite3'
 
@@ -28,4 +29,14 @@ helpers do
   def password_matches_user?(user, pass)
     User.filter(:email => user, :pwhash => pass).empty?
   end  
+
+  def addCatagory(catagory)
+    return Catagory.first(:name => catagory) if !Catagory.filter(:name => catagory).empty?
+    Catagory.create(:name => catagory) 
+  end
+
+  def addTrail(trail)
+    return Trail.first(:name => trail) if !Trail.filter(:name => trail).empty?
+    Trail.create(:name => trail) 
+  end
 end

@@ -11,18 +11,28 @@ migration "create the tables" do
 
   database.create_table :photos do
     primary_key :id
+    integer :point_id
     text :desc
+  end
+
+  database.create_table :trails do
+    primary_key :id
+    text :name
   end
 
   database.create_table :points do
     primary_key :id
     integer :lat
     integer :long
-    integer :next
-    integer :prev
     text :desc
-    many_to_one :catagory
-    one_to_many :photo
+    integer :catagory_id
+    integer :trail_id
+  end
+
+  database.create_table :points_points do
+    primary_key :id
+    integer :id_left
+    integer :id_right
   end
 
   database.create_table :users do

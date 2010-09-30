@@ -5,8 +5,6 @@ require 'digest/sha1'
 
 configure do
   API_KEY = 5500
-  OPT_DELIMITER = '|'
-  #User.new(:email => 'test@brousalis.com', :pwhash => Digest::SHA1.hexdigest('password'))
 end
 
 get '/' do
@@ -15,7 +13,7 @@ end
 
 #User Routes
 post '/:api_key/user/add' do
-  return 'Invalid API KEY' if params[:api_key].to_i != API_KEY
+  return 'Invalid API Key' if params[:api_key].to_i != API_KEY
 
   user = User.new(:email => params[:email], :pwhash => params[:pwhash]).save
   return "Added user #{user.email}"
@@ -29,8 +27,19 @@ get '/:api_key/point/get' do
 end
 
 post '/:api_key/point/add' do
-  return 'Invalid username or password' if password_matches_user?(params[:user], params[:pwhash])
   return 'Invalid API Key' if params[:api_key].to_i != API_KEY
+  return 'Invalid username or password' if password_matches_user?(params[:user], params[:pwhash])
 
-  'added point'
+  point = Point.create do |p|
+    p.lat = params[:lat]
+    p.long = params[:long]
+    p.desc = params[:desc]
+  end
+
+  params[:connections].split(',').each { |p| point.add_point(:id => p.to_i)}
+  point.catagory = addCatagory(params[:catagory])
+  point.trail = addTrail(params[:trail])
+  point.save
+
+  "added point #{point.lat}, #{point.long}"
 end

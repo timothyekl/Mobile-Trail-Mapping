@@ -10,20 +10,12 @@ end
 
 before do
   if params.keys.include?("api_key")
-    halt 404 if params[:api_key].to_i != API_KEY
+    halt 'Invalid API Key' if params[:api_key].to_i != API_KEY
   end
 
   if params.keys.include?("user") and params.keys.include?("pwhash") 
-    halt 403 if password_matches_user?(params[:user], params[:pwhash])
+    halt 'Invalid username or password' if password_matches_user?(params[:user], params[:pwhash])
   end
-end
-
-error 403 do
-  'Invalid username or password'
-end
-
-error 404 do
-  'Invalid API Key'
 end
 
 get '/' do

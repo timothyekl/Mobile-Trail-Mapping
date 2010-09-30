@@ -71,7 +71,7 @@ describe "Server Tests" do
 
       post '/trail/add', params
       Trail.first(:name => trail).name.should == trailname
-      last_response.body.should == "added trail #{trailname}"
+      last_response.body.should == "Added Trail #{trailname}"
     end
 
     it "should error for an invalid user" do
@@ -79,9 +79,63 @@ describe "Server Tests" do
       params = {:name => 'trail',
                 :api_key => @api_key,
                 :user => @invalid_user,
-                :pshash => @test_pw }
+                :pwhash => @test_pw }
 
       post '/trail/add', params
+      last_response.body.should == "Invalid username or password"   
+    end
+  end
+
+  describe "Catagory Actions" do
+    it "should add a catagory" do
+      pending('Add a catagory')
+      catagoryName = 'catagory'
+
+      params = {:name => catagoryName,
+                :api_key => @api_key,
+                :user => @valid_user,
+                :pwhash => @test_pw }
+
+      post '/catagory/add', params
+      Catagory.first(:name => catagoryName).name.should == catagoryName
+      last_response.body.should == "Added Catagory #{catagoryName}"
+    end
+
+    it "should error for an invalid user" do
+      pending('Add a trail with an invalid user')
+      params = {:name => 'catagory',
+                :api_key => @api_key,
+                :user => @invalid_user,
+                :pwhash => @test_pw }
+
+      post '/catagory/add', params
+      last_response.body.should == "Invalid username or password"   
+    end
+  end
+
+  describe "Condition Actions" do
+    it "should add a catagory" do
+      pending('Add a catagory')
+      condition = 'condition'
+
+      params = {:name => condition,
+                :api_key => @api_key,
+                :user => @valid_user,
+                :pwhash => @test_pw }
+
+      post '/condition/add', params
+      Catagory.first(:name => condition).name.should == condition
+      last_response.body.should == "Added Catagory #{condition}"
+    end
+
+    it "should error for an invalid user" do
+      pending('Add a trail with an invalid user')
+      params = {:name => 'condition',
+                :api_key => @api_key,
+                :user => @invalid_user,
+                :pwhash => @test_pw }
+
+      post '/condition/add', params
       last_response.body.should == "Invalid username or password"   
     end
   end

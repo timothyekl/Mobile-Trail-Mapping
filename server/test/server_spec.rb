@@ -9,7 +9,7 @@ describe "Server Tests" do
 
   before :all do
     @base_response = 'Welcome to mobile trail mapping application'
-    @base_url = "/5500"
+    @api_key = 5500
     @test_user = "test@brousalis.com"
     @test_pw = Digest::SHA1.hexdigest('password')
     @invalid_user = "invalid@brousalis.com"
@@ -17,13 +17,6 @@ describe "Server Tests" do
 
   before :each do
     User.new(:email => 'test@brousalis.com', :pwhash => Digest::SHA1.hexdigest('password')).save
-  end
-
-  after :each do
-    User.destroy
-    Point.destroy
-    Catagory.destroy
-    Trail.destroy
   end
 
   describe "base actions" do
@@ -34,7 +27,7 @@ describe "Server Tests" do
 
     it "should error for an invalid api key" do
       ['user', 'point'].each do |object|
-        post "/12345/#{object}/add"
+        post "/#{object}/add", {:api_key => 12345}
         last_response.body.should == 'Invalid API Key'
       end
     end
@@ -42,7 +35,7 @@ describe "Server Tests" do
 
   describe "Point Actions" do
     it "should return a test point" do
-      get @base_url + "/point/get"
+      get "/point/get", {:api_key => @api_key}
       last_response.body.should == 'test point'
     end
 
@@ -54,14 +47,15 @@ describe "Server Tests" do
                 :connections => "",
                 :catagory => 'test',
                 :trail => 'test',
+                :api_key => @api_key,
                 :desc => 'test'}
 
-      post @base_url + "/point/add", params
+      post "/point/add", params
       last_response.body.should == "added point 4, 5"
     end
 
     it "should catch an invalid user" do
-      post @base_url + '/point/add', {:user => @invalid_user, :pwhash => @test_pw}
+      post '/point/add', {:user => @invalid_user, :pwhash => @test_pw, :api_key => @api_key}
       last_response.body.should == 'Invalid username or password'
     end
   end
@@ -71,10 +65,11 @@ describe "Server Tests" do
       pending('Add a Trail')
       trailname = 'trail'
       params = {:name => trailname,
+                :api_key => @api_key,
                 :user => @test_user,
                 :pshash => @test_pw }
 
-      post @base_url + '/trail/add', params
+      post '/trail/add', params
       Trail.first(:name => trail).name.should == trailname
       last_response.body.should == "added trail #{trailname}"
     end
@@ -82,10 +77,11 @@ describe "Server Tests" do
     it "should error for an invalid user" do
       pending('Add a trail with an invalid user')
       params = {:name => 'trail',
+                :api_key => @api_key,
                 :user => @invalid_user,
                 :pshash => @test_pw }
 
-      post @base_url + '/trail/add', params
+      post '/trail/add', params
       last_response.body.should == "Invalid username or password"   
     end
   end

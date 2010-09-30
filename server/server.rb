@@ -1,3 +1,4 @@
+require 'pp'
 require 'rubygems'
 require 'sinatra'
 require 'config/init'
@@ -7,29 +8,40 @@ configure do
   API_KEY = 5500
 end
 
+before do
+  if params.keys.include?("api_key")
+    halt 404 if params[:api_key].to_i != API_KEY
+  end
+
+  if params.keys.include?("user") and params.keys.include?("pwhash") 
+    halt 403 if password_matches_user?(params[:user], params[:pwhash])
+  end
+end
+
+error 403 do
+  'Invalid username or password'
+end
+
+error 404 do
+  'Invalid API Key'
+end
+
 get '/' do
   "Welcome to mobile trail mapping application"
 end
 
 #User Routes
-post '/:api_key/user/add' do
-  return 'Invalid API Key' if params[:api_key].to_i != API_KEY
-
+post '/user/add' do
   user = User.create(:email => params[:email], :pwhash => params[:pwhash])
   return "Added user #{user.email}"
 end
 
 #Point Routes
-get '/:api_key/point/get' do
-  return 'Invalid API Key' if params[:api_key].to_i != API_KEY
-
+get '/point/get' do
   'test point'
 end
 
-post '/:api_key/point/add' do
-  return 'Invalid API Key' if params[:api_key].to_i != API_KEY
-  return 'Invalid username or password' if password_matches_user?(params[:user], params[:pwhash])
-
+post '/point/add' do
   point = Point.new(:lat => params[:lat],
                     :long => params[:long],
                     :desc => params[:desc],

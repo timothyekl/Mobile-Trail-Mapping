@@ -3,7 +3,8 @@ require 'dm-core'
 require 'dm-migrations'
 
 configure :development do
-  DataMapper.setup(:default, 'sqlite://tmp/development.db')
+  puts File.dirname(__FILE__)
+  DataMapper.setup(:default, 'sqlite://' + Dir.pwd + '/tmp/development.db' )
 end
 
 configure :test do

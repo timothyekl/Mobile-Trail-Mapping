@@ -46,6 +46,19 @@ class Point
   belongs_to  :condition
   belongs_to  :trail
   has n, :photos  
+
+  has n, :connections, :child_key => [ :source_id ]
+  has n, :connected_points, self, :through => :connections, :via => :target
+end
+
+class Connection
+  include DataMapper::Resource
+
+  property :source_id, Integer, :key => true, :min => 1
+  property :target_id, Integer, :key => true, :min => 1
+
+  belongs_to :source, 'Point', :key => true
+  belongs_to :target, 'Point', :key => true
 end
 
 class User

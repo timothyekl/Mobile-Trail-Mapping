@@ -73,7 +73,7 @@ public class ShowMap extends MapActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
       super.onConfigurationChanged(newConfig);
-      setContentView(R.layout.main);
+      Log.w("MTM", "MTM: conFigChanged()");
     }
 
     @Override

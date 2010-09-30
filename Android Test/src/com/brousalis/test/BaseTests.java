@@ -12,7 +12,6 @@ import android.util.Log;
 import com.brousalis.DataLoader;
 import com.brousalis.ShowMap;
 import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 
 public class BaseTests extends ActivityInstrumentationTestCase2<ShowMap> {
@@ -22,7 +21,6 @@ public class BaseTests extends ActivityInstrumentationTestCase2<ShowMap> {
 	private MapView mView;
 	private int initialZoomLevel;
 	private Configuration config;
-	private GeoPoint initialPosition;
 	
 	public BaseTests() {
 		super("com.brousalis", ShowMap.class);
@@ -37,7 +35,6 @@ public class BaseTests extends ActivityInstrumentationTestCase2<ShowMap> {
 		mActivity = this.getActivity();
 		mView = (MapView) mActivity.findViewById(com.brousalis.R.id.mapView);
 		initialZoomLevel = mView.getZoomLevel();
-		initialPosition = mView.getMapCenter();
 		setSaveLocation(true);
 	}
 	

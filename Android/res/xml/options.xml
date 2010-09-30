@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+    	android:title="Application Settings">
+    	<CheckBoxPreference
+    		android:title="Save Location"
+    		android:defaultValue="true"
+    		android:summary="Should the current screen location be saved when you exit?"
+    		android:key="SavedMapState" />
+    	<CheckBoxPreference
+    		android:title="Zoom on Center"
+    		android:summary="Should the zoom change when the center button is pressed?"
+    		android:key="ZoomOnCenter"
+    		android:defaultValue="true" />
+    	<ListPreference
+    		android:title="Default Zoom"
+    		android:summary="The Zoom Level that is set when the map is centered"
+    		android:key="DefaultZoom"
+    		android:entries="@array/DefaultZoomsHuman"
+    		android:entryValues="@array/DefaultZoomsInts"
+    		android:defaultValue="15" />
+    </PreferenceCategory>
+    <PreferenceCategory
+    	android:title="Community Settings">
+    	<EditTextPreference
+    		android:dialogTitle="Enter your email"
+    		android:dialogMessage="Test Dialog Message"
+    		android:title="Email address"
+    		android:summary="Enter your email address to enable community features!"
+    		android:key="emailAddressPref" />
+    </PreferenceCategory>
+</PreferenceScreen>

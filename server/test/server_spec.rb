@@ -13,10 +13,7 @@ describe "Server Tests" do
     @test_user = "test@brousalis.com"
     @test_pw = Digest::SHA1.hexdigest('password')
     @invalid_user = "invalid@brousalis.com"
-  end
-
-  before :each do
-    User.new(:email => 'test@brousalis.com', :pwhash => Digest::SHA1.hexdigest('password')).save
+    User.first_or_create(:email => 'test@brousalis.com', :pwhash => Digest::SHA1.hexdigest('password')).save
   end
 
   describe "base actions" do
@@ -35,7 +32,11 @@ describe "Server Tests" do
 
   describe "Point Actions" do
     it "should return a test point" do
-      get "/point/get", {:api_key => @api_key}
+      params = {:api_key => @api_key,
+                :user => @test_user,
+                :pwhash => @test_pw }
+
+      get "/point/get", params
       last_response.body.should == 'test point'
     end
 
@@ -51,7 +52,7 @@ describe "Server Tests" do
                 :desc => 'test'}
 
       post "/point/add", params
-      last_response.body.should == "added point 4, 5"
+      last_response.body.should == "Added Point 4, 5"
     end
 
     it "should catch an invalid user" do
@@ -93,16 +94,16 @@ describe "Server Tests" do
 
       params = {:name => catagoryName,
                 :api_key => @api_key,
-                :user => @valid_user,
+                :user => @test_user,
                 :pwhash => @test_pw }
 
       post '/catagory/add', params
-      Catagory.first(:name => catagoryName).name.should == catagoryName
       last_response.body.should == "Added Catagory #{catagoryName}"
+      Catagory.first(:name => catagoryName).name.should == catagoryName
     end
 
     it "should error for an invalid user" do
-      pending('Add a trail with an invalid user')
+      pending('Add a catagory with an invalid user')
       params = {:name => 'catagory',
                 :api_key => @api_key,
                 :user => @invalid_user,
@@ -114,22 +115,19 @@ describe "Server Tests" do
   end
 
   describe "Condition Actions" do
-    it "should add a catagory" do
-      pending('Add a catagory')
+    it "should add a condition" do
       condition = 'condition'
-
-      params = {:name => condition,
+      params = {:condition => condition,
                 :api_key => @api_key,
-                :user => @valid_user,
+                :user => @test_user,
                 :pwhash => @test_pw }
 
       post '/condition/add', params
-      Catagory.first(:name => condition).name.should == condition
-      last_response.body.should == "Added Catagory #{condition}"
+      last_response.body.should == "Added Condition #{condition}"
+      Condition.first(:desc => condition).desc.should == condition
     end
 
     it "should error for an invalid user" do
-      pending('Add a trail with an invalid user')
       params = {:name => 'condition',
                 :api_key => @api_key,
                 :user => @invalid_user,

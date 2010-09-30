@@ -30,15 +30,13 @@ post '/:api_key/point/add' do
   return 'Invalid API Key' if params[:api_key].to_i != API_KEY
   return 'Invalid username or password' if password_matches_user?(params[:user], params[:pwhash])
 
-  point = Point.create do |p|
-    p.lat = params[:lat]
-    p.long = params[:long]
-    p.desc = params[:desc]
-  end
+  point = Point.new(:lat => params[:lat],
+                    :long => params[:long],
+                    :desc => params[:desc],
+                    :catagory => Catagory.first_or_create(:name => params[:catagory]),
+                    :trail => Trail.first_or_create(:name => params[:trail]))
 
-  params[:connections].split(',').each { |p| point.add_point(:id => p.to_i)}
-  point.catagory = addCatagory(params[:catagory])
-  point.trail = addTrail(params[:trail])
+  params[:connections].split(',').each { |p| point.connections << Point.get(p.to_i)}
   point.save
 
   "added point #{point.lat}, #{point.long}"

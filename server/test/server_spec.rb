@@ -20,10 +20,10 @@ describe "Server Tests" do
   end
 
   after :each do
-    User.delete
-    Point.delete
-    Catagory.delete
-    Trail.delete
+    User.destroy
+    Point.destroy
+    Catagory.destroy
+    Trail.destroy
   end
 
   describe "base actions" do

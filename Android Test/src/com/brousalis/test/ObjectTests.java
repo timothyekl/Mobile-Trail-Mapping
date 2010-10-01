@@ -1,7 +1,7 @@
 package com.brousalis.test;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 import junit.framework.TestCase;
 
@@ -99,13 +99,14 @@ public class ObjectTests extends TestCase {
 		assertNotNull(p1);
 		
 		Trail t = new Trail("Herritage");
-		ArrayList<TrailPoint> list = new ArrayList<TrailPoint>();
+		LinkedList<TrailPoint> list = new LinkedList<TrailPoint>();
 		list.add(p1);
 		list.add(p2);
 		list.add(p3);
+		int size = list.size();
 		t.addLinkedPoints(list);
 		
-		assertEquals(list.size(), t.getNumberOfTrailPoints());
+		assertEquals(size, t.getNumberOfTrailPoints());
 	}
 	public void testAddPointToTrail() {
 		int numOfTrailPoints = 0;
@@ -127,16 +128,16 @@ public class ObjectTests extends TestCase {
 		TrailPoint p3 = new TrailPoint(0, new GeoPoint(10,10), new HashSet<Integer>());
 		
 		Trail t = new Trail("Herritage");
-		ArrayList<TrailPoint> list = new ArrayList<TrailPoint>();
+		LinkedList<TrailPoint> list = new LinkedList<TrailPoint>();
 		list.add(p1);
 		list.add(p2);
 		list.add(p3);
+		int size = list.size();
 		t.addLinkedPoints(list);
-		
-		assertEquals(list.size(), t.getNumberOfTrailPoints());
+		assertEquals(size, t.getNumberOfTrailPoints());
 		
 		t.removePoint(p2);
-		list.remove(p2);
-		assertEquals(list.size(), t.getNumberOfTrailPoints());
+		size--;
+		assertEquals(size, t.getNumberOfTrailPoints());
 	}
 }

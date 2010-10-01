@@ -55,7 +55,7 @@ public class TrailPoint extends InterestPoint {
 	 * @return True if a connection was added, False if it already existed
 	 */
 	public boolean addConnection(TrailPoint connection) {
-		return _connections.add(connection.getID());
+		return (connection == null) ? false :_connections.add(connection.getID());
 	}
 	/**
 	 * Attempts to remove a connection from this point's connections
@@ -63,7 +63,7 @@ public class TrailPoint extends InterestPoint {
 	 * @return True if a connection was removed, False if it did not exist
 	 */
 	public boolean removeConnection(TrailPoint connection) {
-		return _connections.remove(connection.getID());
+		return (connection == null) ? false :_connections.remove(connection.getID());
 	}
 	/**
 	 * Checks to see if this TrailPoint has a connection to the passed in TrailPoint
@@ -71,6 +71,6 @@ public class TrailPoint extends InterestPoint {
 	 * @return True if the connection's ID is in the Set, False if it is not
 	 */
 	public boolean hasConnection(TrailPoint connection) {
-		return _connections.contains(connection.getID());
+		return (connection == null) ? false :_connections.contains(connection.getID());
 	}
 }

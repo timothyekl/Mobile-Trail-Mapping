@@ -14,7 +14,6 @@ describe "Server Tests" do
     @test_user = "test@brousalis.com"
     @test_pw = Digest::SHA1.hexdigest('password')
     @invalid_user = "invalid@brousalis.com"
-    User.first_or_create(:email => 'test@brousalis.com', :pwhash => Digest::SHA1.hexdigest('password')).save
   end
 
   describe "base actions" do
@@ -55,6 +54,7 @@ describe "Server Tests" do
 
       post "/point/add", params
       last_response.body.should == "Added Point 4, 5"
+      Point.first(:lat => 4, :long => 5).catagory.should == 'test'
     end
 
     it "should catch an invalid user" do

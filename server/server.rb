@@ -21,6 +21,12 @@ before do
 end
 
 get '/' do
+  Point.new(:lat => 1,
+            :long => 1,
+            :desc => 'test',
+            :catagory => Catagory.first,
+            :trail => Trail.first)
+
   "Welcome to mobile trail mapping application"
 end
 
@@ -32,32 +38,28 @@ end
 
 #Point Routes
 post '/point/add' do
-  point = Point.new(:lat => params[:lat],
-                    :long => params[:long],
-                    :desc => params[:desc],
-                    :catagory => Catagory.first_or_create(:name => params[:catagory]),
-                    :trail => Trail.first_or_create(:name => params[:trail]))
+  point = Point.first_or_create(:lat => params[:lat],
+                                :long => params[:long],
+                                :desc => params[:desc],
+                                :catagory => Catagory.first_or_create(:name => params[:catagory]),
+                                :trail => Trail.first_or_create(:name => params[:trail]))
 
   params[:connections].split(',').each { |p| point.connections << Point.get(p.to_i)}
-  point.save
 
   "Added Point #{point.lat}, #{point.long}"
 end
 
 post '/condition/add' do
   condition = Condition.first_or_create(:desc => params[:condition])
-
   "Added Condition #{condition.desc}"
 end
 
 post '/catagory/add' do
   catagory = Catagory.first_or_create(:name => params[:catagory])
-
   "Added Catagory #{catagory.name}"
 end
 
 post '/trail/add' do
   trail = Trail.first_or_create(:name => params[:trail])
-
   "Added Trail #{trail.name}"
 end

@@ -22,6 +22,11 @@ public class TrailPoint extends InterestPoint {
 		_connections = connections;
 		_trail = trail;
 	}
+	public TrailPoint(int id, GeoPoint p, Set<Integer> connections) {
+		super(id, p, "", "", "");
+		_connections = connections;
+		_trail = "";
+	}
 	
 	public void setTrail(String trail) {
 		_trail = trail;
@@ -46,26 +51,26 @@ public class TrailPoint extends InterestPoint {
 	}
 	/**
 	 * Attempts to add a new connection to this point's connections
-	 * @param connection The ID of a connection to add
+	 * @param connection The TrailPoint to add a connection to
 	 * @return True if a connection was added, False if it already existed
 	 */
-	public boolean addConnection(Integer connection) {
-		return _connections.add(connection);
+	public boolean addConnection(TrailPoint connection) {
+		return _connections.add(connection.getID());
 	}
 	/**
 	 * Attempts to remove a connection from this point's connections
 	 * @param connection The ID of a connection to delete
 	 * @return True if a connection was removed, False if it did not exist
 	 */
-	public boolean removeConnection(Integer connection) {
-		return _connections.remove(connection);
+	public boolean removeConnection(TrailPoint connection) {
+		return _connections.remove(connection.getID());
 	}
 	/**
-	 * Checks to see if this TrailPoint has a connection
-	 * @param connection The connection ID to check the Set against
+	 * Checks to see if this TrailPoint has a connection to the passed in TrailPoint
+	 * @param connection The TrailPoint to check the Set against
 	 * @return True if the connection's ID is in the Set, False if it is not
 	 */
-	public boolean hasConnection(Integer connection) {
-		return _connections.contains(connection);
+	public boolean hasConnection(TrailPoint connection) {
+		return _connections.contains(connection.getID());
 	}
 }

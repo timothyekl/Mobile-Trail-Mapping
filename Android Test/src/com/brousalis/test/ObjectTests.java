@@ -1,6 +1,6 @@
 package com.brousalis.test;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import junit.framework.TestCase;
 
@@ -30,12 +30,12 @@ public class ObjectTests extends TestCase {
 	}
 	
 	public void testCreateTrailPoint() {
-		TrailPoint p = new TrailPoint(0, new GeoPoint(0,0), "Bathroom", "New Bathroom", "A Bathroom", "Heritage", new ArrayList<Integer>());
+		TrailPoint p = new TrailPoint(0, new GeoPoint(0,0), "Bathroom", "New Bathroom", "A Bathroom", "Heritage", new HashSet<Integer>());
 		assertNotNull(p);
 	}
 	
 	public void testModifyTrailPoint() {
-		TrailPoint p = new TrailPoint(0, new GeoPoint(0,0), "Bathroom", "New Bathroom", "A Bathroom", "Heritage", new ArrayList<Integer>());
+		TrailPoint p = new TrailPoint(0, new GeoPoint(0,0), "Bathroom", "New Bathroom", "A Bathroom", "Heritage", new HashSet<Integer>());
 		assertNotNull(p);
 		
 		// Test the methods in the subclass

@@ -8,6 +8,7 @@ describe "Server Tests" do
   end
 
   before :all do
+    @objects = ['user', 'point', 'trail', 'condition', 'catagory']
     @base_response = 'Welcome to mobile trail mapping application'
     @api_key = 5500
     @test_user = "test@brousalis.com"
@@ -23,7 +24,7 @@ describe "Server Tests" do
     end
 
     it "should error for an invalid api key" do
-      ['user', 'point'].each do |object|
+      @objects.each do |object|
         post "/#{object}/add", {:api_key => 12345}
         last_response.body.should == 'Invalid API Key'
       end
@@ -32,6 +33,7 @@ describe "Server Tests" do
 
   describe "Point Actions" do
     it "should return a test point" do
+      pending("haven't decided xml structure yet")
       params = {:api_key => @api_key,
                 :user => @test_user,
                 :pwhash => @test_pw }
@@ -63,21 +65,19 @@ describe "Server Tests" do
 
   describe "Trail Actions" do
     it "should add a trail" do
-      pending('Add a Trail')
       trailname = 'trail'
-      params = {:name => trailname,
+      params = {:trail => trailname,
                 :api_key => @api_key,
                 :user => @test_user,
-                :pshash => @test_pw }
+                :pwhash => @test_pw }
 
       post '/trail/add', params
-      Trail.first(:name => trail).name.should == trailname
       last_response.body.should == "Added Trail #{trailname}"
+      Trail.first(:name => trailname).name.should == trailname
     end
 
     it "should error for an invalid user" do
-      pending('Add a trail with an invalid user')
-      params = {:name => 'trail',
+      params = {:trail => 'trail',
                 :api_key => @api_key,
                 :user => @invalid_user,
                 :pwhash => @test_pw }
@@ -89,10 +89,9 @@ describe "Server Tests" do
 
   describe "Catagory Actions" do
     it "should add a catagory" do
-      pending('Add a catagory')
       catagoryName = 'catagory'
 
-      params = {:name => catagoryName,
+      params = {:catagory => catagoryName,
                 :api_key => @api_key,
                 :user => @test_user,
                 :pwhash => @test_pw }
@@ -103,8 +102,7 @@ describe "Server Tests" do
     end
 
     it "should error for an invalid user" do
-      pending('Add a catagory with an invalid user')
-      params = {:name => 'catagory',
+      params = {:catagory => 'catagory',
                 :api_key => @api_key,
                 :user => @invalid_user,
                 :pwhash => @test_pw }
@@ -135,6 +133,18 @@ describe "Server Tests" do
 
       post '/condition/add', params
       last_response.body.should == "Invalid username or password"   
+    end
+
+    it "should get a condition" do
+      pending("haven't decided on xml structure yet")
+      Condition.first_or_create(:desc => 'condition')
+
+      params = {:api_key => @api_key,
+                :user => @test_user,
+                :pwhash => @test_pw }
+
+      get '/condition/get', params
+      last_response.body.should == "condition"
     end
   end
 end

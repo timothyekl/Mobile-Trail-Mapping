@@ -31,10 +31,6 @@ post '/user/add' do
 end
 
 #Point Routes
-get '/point/get' do
-  'test point'
-end
-
 post '/point/add' do
   point = Point.new(:lat => params[:lat],
                     :long => params[:long],
@@ -52,4 +48,16 @@ post '/condition/add' do
   condition = Condition.first_or_create(:desc => params[:condition])
 
   "Added Condition #{condition.desc}"
+end
+
+post '/catagory/add' do
+  catagory = Catagory.first_or_create(:name => params[:catagory])
+
+  "Added Catagory #{catagory.name}"
+end
+
+post '/trail/add' do
+  trail = Trail.first_or_create(:name => params[:trail])
+
+  "Added Trail #{trail.name}"
 end

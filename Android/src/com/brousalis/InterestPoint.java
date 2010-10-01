@@ -1,14 +1,21 @@
 package com.brousalis;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Point;
+
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapView;
+import com.google.android.maps.Overlay;
 
 
-public class InterestPoint {
+public class InterestPoint extends Overlay {
 	private int _ID;
 	private GeoPoint _location;
 	private String _category;
 	private String _title;
 	private String _summary;
+	private Paint _color;
 	
 	/**
 	 * Creates a new Interest point with the required params.
@@ -25,6 +32,18 @@ public class InterestPoint {
 		_summary = summary;
 		_title = title;
 	}
+	
+	@Override
+    public boolean draw(Canvas canvas, MapView mapView, boolean shadow, long when) 
+    {
+        super.draw(canvas, mapView, shadow);                   
+
+        Point screenPts = new Point();
+        mapView.getProjection().toPixels(_location, screenPts);
+
+		canvas.drawCircle(screenPts.x, screenPts.y, 5, _color );
+        return true;
+    }
 	
 	public void setID(int id) {
 		_ID = id;

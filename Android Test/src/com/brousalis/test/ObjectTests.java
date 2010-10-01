@@ -66,6 +66,32 @@ public class ObjectTests extends TestCase {
 		assertTrue("P1 is not connected to P2",p1.hasConnection(p2));
 		assertTrue("P2 is not connected to P1",p2.hasConnection(p1));
 	}
+	public void testAddPointConnections() {
+		TrailPoint p1 = new TrailPoint(0, new GeoPoint(0,0), new HashSet<Integer>());
+		TrailPoint p2 = new TrailPoint(0, new GeoPoint(5,5), new HashSet<Integer>());
+		TrailPoint p3 = new TrailPoint(0, new GeoPoint(10,10), new HashSet<Integer>());
+		TrailPoint p4 = new TrailPoint(0, new GeoPoint(15,15), new HashSet<Integer>());
+		p1.addConnection(p2);
+		p2.addConnection(p1);
+		
+		p2.addConnection(p4);
+		p4.addConnection(p2);
+		
+		p3.addConnection(p4);
+		p4.addConnection(p3);
+		
+		assertTrue("P1 is not connected to P2",p1.hasConnection(p2));
+		assertTrue("P2 is not connected to P1",p2.hasConnection(p1));
+		
+		assertTrue("P2 is not connected to P4",p2.hasConnection(p4));
+		assertTrue("P4 is not connected to P2",p4.hasConnection(p2));
+		
+		assertTrue("P3 is not connected to P4",p3.hasConnection(p4));
+		assertTrue("P4 is not connected to P3",p4.hasConnection(p3));
+		
+		assertTrue("P1 is connected to P3",p1.hasConnection(p3));
+		assertTrue("P3 is connected to P1",p3.hasConnection(p1));
+	}
 	public void testAddLinkedPointsToTrail() {
 		TrailPoint p1 = new TrailPoint(0, new GeoPoint(0,0), new HashSet<Integer>());
 		TrailPoint p2 = new TrailPoint(0, new GeoPoint(5,5), new HashSet<Integer>());

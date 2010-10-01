@@ -1,8 +1,11 @@
 package com.brousalis;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+
+import com.google.android.maps.Overlay;
 
 import android.graphics.Paint;
 
@@ -79,5 +82,9 @@ public class Trail {
 			}
 		}
 		return null;
+	}
+
+	public Collection<? extends Overlay> getTrailPoints() {
+		return _trailPoints;
 	}
 }

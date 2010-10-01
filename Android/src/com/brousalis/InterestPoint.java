@@ -31,6 +31,9 @@ public class InterestPoint extends Overlay {
 		_category = category;
 		_summary = summary;
 		_title = title;
+		_color = new Paint();
+		_color.setARGB(255, 0, 0, 255);
+		_color.setAntiAlias(true);
 	}
 	
 	@Override

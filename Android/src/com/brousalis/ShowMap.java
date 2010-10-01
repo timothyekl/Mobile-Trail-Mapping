@@ -1,5 +1,7 @@
 package com.brousalis;
 
+import java.util.HashSet;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -168,6 +170,8 @@ public class ShowMap extends MapActivity {
 		
 		if(_settings.getBoolean(SAVED_MAP_STATE, false)) {
 			p = new GeoPoint(_settings.getInt(SAVED_MAP_LAT, DEFAULT_MAP_LAT), _settings.getInt(SAVED_MAP_LONG, DEFAULT_MAP_LONG));
+			
+			
 			mapController.animateTo(p);
 			// Zoom to the Saved Map zoom.  If none is present, get the Saved Default zoom from the prefs.  
 			// If that's not there, Use the DefaultMapZoom.  That last one should NEVER happen
@@ -179,6 +183,12 @@ public class ShowMap extends MapActivity {
 			centerMapOnCurrentLocation(false);
 		}
 	}
+	private void drawFakeDot(GeoPoint p) {
+		mapView.getOverlays().clear();
+		Trail t = new Trail("Heritage");
+		t.addPoint(new TrailPoint(0, p, new HashSet<Integer>()));
+		mapView.getOverlays().addAll(t.getTrailPoints());
+	}
 	/**
 	 * Centers the map on the current location (GPS, Cell or WiFi, whichever is more accurate and present)
 	 * @param zoomOnCenter Should the zoom level be changed to what is defined in prefs
@@ -189,6 +199,7 @@ public class ShowMap extends MapActivity {
 		Location gpsLoc = locMgr.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 		Location recentLoc = (gpsLoc != null)?gpsLoc:networkLoc;
 		
+		
 		// CSN01
 		// We can't just pull this from prefs, as this function is shared
 		// It's sometimes called by the initializer, not the "center me" button.
@@ -198,6 +209,7 @@ public class ShowMap extends MapActivity {
 		
 		if(recentLoc != null) {
 			p = new GeoPoint((int) (recentLoc.getLatitude() * 1E6), (int) (recentLoc.getLongitude() * 1E6));
+			drawFakeDot(p);
 			mapController.animateTo(p);
 			mapView.setSatellite(true);
 			mapView.invalidate();

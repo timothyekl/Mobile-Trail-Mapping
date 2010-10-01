@@ -111,7 +111,7 @@ public class ObjectTests extends TestCase {
 	public void testAddPointToTrail() {
 		int numOfTrailPoints = 0;
 		TrailPoint pOld = new TrailPoint(0, new GeoPoint(0,0), new HashSet<Integer>());
-		TrailPoint pNew = new TrailPoint(0, new GeoPoint(5,5), new HashSet<Integer>());
+		TrailPoint pNew = new TrailPoint(1, new GeoPoint(5,5), new HashSet<Integer>());
 		Trail t = new Trail("Herritage");
 		t.addPoint(pOld);
 		numOfTrailPoints++;
@@ -120,6 +120,8 @@ public class ObjectTests extends TestCase {
 		t.addPoint(pNew, pOld);
 		numOfTrailPoints++;
 		assertEquals(numOfTrailPoints, t.getNumberOfTrailPoints());
+		assertTrue(t.getTrailPoint(pOld.getID()).getConnections().contains(pNew.getID()));
+		assertFalse(t.getTrailPoint(pNew.getID()).getConnections().contains(pOld.getID()));
 	}
 	
 	public void testRemovePointFromTrail() {

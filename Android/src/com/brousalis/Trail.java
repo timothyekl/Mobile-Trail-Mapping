@@ -1,6 +1,7 @@
 package com.brousalis;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import android.graphics.Paint;
@@ -33,23 +34,50 @@ public class Trail {
 			p.addConnection(trailPoints.peek());
 		}
 	}
-
+	
+	/**
+	 * Returns the number of points in this trail
+	 * @return The number of points in this trail
+	 */
 	public int getNumberOfTrailPoints() {
 		return _trailPoints.size();
 	}
 
+	/**
+	 * Adds a new TrailPoint to this Trail and
+	 * Adds a new connection from pOld to pNew
+	 * @param pNew The new TrailPoint to add
+	 * @param pOld The existing TrailPoint to form the connection from
+	 */
 	public void addPoint(TrailPoint pNew, TrailPoint pOld) {
-		// TODO Auto-generated method stub
-		
+		_trailPoints.add(pNew);
+		pOld.addConnection(pNew);
 	}
 
-	public void addPoint(TrailPoint pOld) {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * Adds a new TrailPoint to this Trail
+	 * @param point The new TrailPoint to add
+	 */
+	public void addPoint(TrailPoint point) {
+		_trailPoints.add(point);
 	}
 
-	public void removePoint(TrailPoint p2) {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * Removes a TrailPoint if it is in the current trail
+	 * @param point The TrailPoint to remove
+	 */
+	public void removePoint(TrailPoint point) {
+		_trailPoints.remove(point);
+	}
+	
+	public TrailPoint getTrailPoint(int id) {
+		Iterator<TrailPoint> iter = _trailPoints.iterator();
+		while(iter.hasNext()) {
+			TrailPoint current = iter.next();
+			if (current.getID() == id) {
+				return current;
+			}
+		}
+		return null;
 	}
 }

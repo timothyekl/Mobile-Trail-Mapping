@@ -7,6 +7,7 @@ require 'digest/sha1'
 configure do
   API_KEY = 5500
   OBJECTS = ['user', 'point', 'trail', 'condition', 'catagory']
+  User.first_or_create(:email => 'test@brousalis.com', :pwhash => Digest::SHA1.hexdigest('password'))
 end
 
 before do

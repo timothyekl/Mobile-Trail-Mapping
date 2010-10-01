@@ -5,6 +5,7 @@ import java.util.HashSet;
 import junit.framework.TestCase;
 
 import com.brousalis.InterestPoint;
+import com.brousalis.Trail;
 import com.brousalis.TrailPoint;
 import com.google.android.maps.GeoPoint;
 
@@ -45,10 +46,15 @@ public class ObjectTests extends TestCase {
 	}
 	
 	public void testCreateTrail() {
-		fail();
+		Trail t = new Trail("Sac and Fox");
+		assertNotNull(t);
 	}
 	
 	public void testModifyTrail() {
-		fail();
+		Trail t = new Trail("Sac and Fox");
+		assertNotNull(t);
+		String trailName = t.getName();
+		t.setName("Heritage");
+		assertFalse("Trail name did not get changed", trailName.equals(t.getName()));
 	}
 }

@@ -5,9 +5,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import com.google.android.maps.Overlay;
-
 import android.graphics.Paint;
+
+import com.google.android.maps.Overlay;
 
 public class Trail {
 	
@@ -86,5 +86,9 @@ public class Trail {
 
 	public Collection<? extends Overlay> getTrailPoints() {
 		return _trailPoints;
+	}
+
+	public boolean hasPoint(TrailPoint point) {
+		return _trailPoints.contains(getTrailPoint(point.getID()));
 	}
 }

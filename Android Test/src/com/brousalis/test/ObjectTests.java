@@ -97,6 +97,8 @@ public class ObjectTests extends TestCase {
 		TrailPoint p2 = new TrailPoint(0, new GeoPoint(5,5), new HashSet<Integer>());
 		TrailPoint p3 = new TrailPoint(0, new GeoPoint(10,10), new HashSet<Integer>());
 		assertNotNull(p1);
+		assertNotNull(p2);
+		assertNotNull(p3);
 		
 		Trail t = new Trail("Herritage");
 		LinkedList<TrailPoint> list = new LinkedList<TrailPoint>();
@@ -107,21 +109,35 @@ public class ObjectTests extends TestCase {
 		t.addLinkedPoints(list);
 		
 		assertEquals(size, t.getNumberOfTrailPoints());
+		// TODO: Verifiy Connections
+		assertTrue("Trail did not contain P1",t.hasPoint(p1));
+		assertTrue("Trail did not contain P2",t.hasPoint(p2));
+		assertTrue("Trail did not contain P3",t.hasPoint(p3));
 	}
+	
 	public void testAddPointToTrail() {
 		int numOfTrailPoints = 0;
 		TrailPoint pOld = new TrailPoint(0, new GeoPoint(0,0), new HashSet<Integer>());
 		TrailPoint pNew = new TrailPoint(1, new GeoPoint(5,5), new HashSet<Integer>());
 		Trail t = new Trail("Herritage");
 		t.addPoint(pOld);
+		
+		assertTrue("Trail did not contain pOld",t.hasPoint(pOld));
+		assertFalse("Trail did contain pNew",t.hasPoint(pNew));
+		
 		numOfTrailPoints++;
 		assertEquals(numOfTrailPoints, t.getNumberOfTrailPoints());
 		
 		t.addPoint(pNew, pOld);
 		numOfTrailPoints++;
 		assertEquals(numOfTrailPoints, t.getNumberOfTrailPoints());
+		
 		assertTrue(t.getTrailPoint(pOld.getID()).getConnections().contains(pNew.getID()));
 		assertFalse(t.getTrailPoint(pNew.getID()).getConnections().contains(pOld.getID()));
+		
+		assertTrue("Trail did not contain pOld",t.hasPoint(pOld));
+		assertTrue("Trail did not contain pNew",t.hasPoint(pNew));
+		
 	}
 	
 	public void testRemovePointFromTrail() {

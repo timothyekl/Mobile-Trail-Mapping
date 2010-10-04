@@ -160,6 +160,7 @@ public class ShowMap extends MapActivity {
 		}
 		return true;
 	}
+	
 	/**
 	 * Initialize the Location.  This happens when the app starts from cold or if
 	 * the user does not have save location
@@ -186,7 +187,16 @@ public class ShowMap extends MapActivity {
 	private void drawFakeDot(GeoPoint p) {
 		mapView.getOverlays().clear();
 		Trail t = new Trail("Heritage");
-		t.addPoint(new TrailPoint(0, p, new HashSet<Integer>()));
+		TrailPoint myPoint = new TrailPoint(0, p, new HashSet<TrailPoint>());
+		t.addPoint(myPoint);
+		GeoPoint p2 = new GeoPoint(p.getLatitudeE6()+200, p.getLongitudeE6()+200);
+		t.addPoint(new TrailPoint(1, p2, new HashSet<TrailPoint>()), myPoint);
+		
+		GeoPoint p3 = new GeoPoint(p.getLatitudeE6()-300, p.getLongitudeE6()+500);
+		TrailPoint myPoint2 = new TrailPoint(2, p3, new HashSet<TrailPoint>());
+		t.addPoint(myPoint2, myPoint);
+		GeoPoint p4 = new GeoPoint(p.getLatitudeE6()-600, p.getLongitudeE6()-800);
+		t.addPoint(new TrailPoint(3, p4, new HashSet<TrailPoint>()), myPoint2);
 		mapView.getOverlays().addAll(t.getTrailPoints());
 	}
 	/**

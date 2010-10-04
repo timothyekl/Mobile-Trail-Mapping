@@ -3,13 +3,14 @@ package com.brousalis;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 
 
-public class InterestPoint extends Overlay {
+public class InterestPoint extends Overlay implements Overlay.Snappable {
 	private int _ID;
 	private GeoPoint _location;
 	private String _category;
@@ -37,7 +38,7 @@ public class InterestPoint extends Overlay {
 	}
 	
 	@Override
-    public boolean draw(Canvas canvas, MapView mapView, boolean shadow, long when) 
+    public void draw(Canvas canvas, MapView mapView, boolean shadow) 
     {
         super.draw(canvas, mapView, shadow);                   
 
@@ -45,8 +46,15 @@ public class InterestPoint extends Overlay {
         mapView.getProjection().toPixels(_location, screenPts);
 
 		canvas.drawCircle(screenPts.x, screenPts.y, 5, _color );
-        return true;
     }
+	
+	
+	
+	@Override
+	public boolean onTap(GeoPoint p, MapView mapView) {
+		Log.w("MTM", "MTM: Tap On Overlay: " + this._title);
+		return super.onTap(p, mapView);
+	}
 	
 	public void setID(int id) {
 		_ID = id;
@@ -81,5 +89,17 @@ public class InterestPoint extends Overlay {
 	}
 	public String getTitle() {
 		return _title;
+	}
+	
+	public void setColor(int A, int R, int G, int B) {
+		_color.setARGB(A, R, G, B);
+	}
+	public Paint getColor() {
+		return _color;
+	}
+
+	@Override
+	public boolean onSnapToItem(int x, int y, Point snapPoint, MapView mapView) {
+		return false;
 	}
 }

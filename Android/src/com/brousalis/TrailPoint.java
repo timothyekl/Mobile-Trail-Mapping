@@ -2,32 +2,57 @@ package com.brousalis;
 
 import java.util.Set;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Point;
+
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapView;
 
 
 public class TrailPoint extends InterestPoint {
 	
 	private String _trail;
-	private Set<Integer> _connections;
+	private Set<TrailPoint> _connections;
 	
 	
-	public TrailPoint(int id, int latitude, int longitude, String category, String summary, String title, String trail, Set<Integer> connections) {
+	public TrailPoint(int id, int latitude, int longitude, String category, String summary, String title, String trail, Set<TrailPoint> connections) {
 		super(id, new GeoPoint(latitude, longitude), category, title, summary);
 		_connections = connections;
 		_trail = trail;
 	}
 	
-	public TrailPoint(int id, GeoPoint p, String category, String summary, String title, String trail, Set<Integer> connections) {
+	public TrailPoint(int id, GeoPoint p, String category, String summary, String title, String trail, Set<TrailPoint> connections) {
 		super(id, p, category, title, summary);
 		_connections = connections;
 		_trail = trail;
 	}
-	public TrailPoint(int id, GeoPoint p, Set<Integer> connections) {
+	public TrailPoint(int id, GeoPoint p, Set<TrailPoint> connections) {
 		super(id, p, "", "", "");
 		_connections = connections;
 		_trail = "";
 	}
 	
+	@Override
+	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
+		// TODO Auto-generated method stub
+		super.draw(canvas, mapView, shadow);
+		Point screenPts = new Point();
+        mapView.getProjection().toPixels(getLocation(), screenPts);
+
+		canvas.drawCircle(screenPts.x, screenPts.y, 5, getColor());
+		
+		for(TrailPoint p : _connections) {
+			Point newPt = new Point();
+			mapView.getProjection().toPixels(p.getLocation(), newPt);
+			Paint newP = new Paint();
+			newP.setARGB(255, 255, 0, 0);
+			newP.setStrokeWidth(3);
+			newP.setFlags(Paint.ANTI_ALIAS_FLAG);
+			canvas.drawLine(screenPts.x, screenPts.y, newPt.x, newPt.y, newP);
+		}
+	}
+
 	public void setTrail(String trail) {
 		_trail = trail;
 	}
@@ -39,14 +64,14 @@ public class TrailPoint extends InterestPoint {
 	 * Set the connections set to a new set
 	 * @param connections The new connection set
 	 */
-	public void setConnections(Set<Integer> connections) {
+	public void setConnections(Set<TrailPoint> connections) {
 		_connections = connections;
 	}
 	/**
 	 * Gets the connections 
 	 * @return The current Set of connections
 	 */
-	public Set<Integer> getConnections() {
+	public Set<TrailPoint> getConnections() {
 		return _connections;
 	}
 	/**
@@ -55,7 +80,7 @@ public class TrailPoint extends InterestPoint {
 	 * @return True if a connection was added, False if it already existed
 	 */
 	public boolean addConnection(TrailPoint connection) {
-		return (connection == null) ? false :_connections.add(connection.getID());
+		return (connection == null) ? false :_connections.add(connection);
 	}
 	/**
 	 * Attempts to remove a connection from this point's connections

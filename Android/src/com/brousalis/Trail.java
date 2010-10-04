@@ -130,6 +130,8 @@ public class Trail {
 	 * @return True if the Point is contained within the list
 	 */
 	public boolean hasPoint(TrailPoint point) {
+		if(point == null)
+			return false;
 		return _trailPoints.contains(getTrailPoint(point.getID()));
 	}
 }

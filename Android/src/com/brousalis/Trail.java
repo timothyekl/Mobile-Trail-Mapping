@@ -30,7 +30,29 @@ public class Trail {
 		return _name;
 	}
 
+	/**
+	 * Adds a List of TrailPoints to this trail.
+	 * It should be noted that the first point of 
+	 * this trail is NOT linked to any other point 
+	 * on this trail
+	 * @param trailPoints
+	 */
 	public void addLinkedPoints(LinkedList<TrailPoint> trailPoints) {
+		while(!trailPoints.isEmpty()) {
+			TrailPoint p = trailPoints.poll();
+			_trailPoints.add(p);
+			p.addConnection(trailPoints.peek());
+		}
+	}
+	
+	/**
+	 * Adds a List of TrailPoints to this trail.
+	 * It should be noted that the first point of 
+	 * this trail is NOT linked to any other point 
+	 * on this trail
+	 * @param trailPoints
+	 */
+	public void addLinkedPoints(LinkedList<TrailPoint> trailPoints, TrailPoint pOld) {
 		while(!trailPoints.isEmpty()) {
 			TrailPoint p = trailPoints.poll();
 			_trailPoints.add(p);
@@ -52,9 +74,13 @@ public class Trail {
 	 * @param pNew The new TrailPoint to add
 	 * @param pOld The existing TrailPoint to form the connection from
 	 */
-	public void addPoint(TrailPoint pNew, TrailPoint pOld) {
+	public boolean addPoint(TrailPoint pNew, TrailPoint pOld) {
+		if(hasPoint(pNew))
+			return false;
 		_trailPoints.add(pNew);
-		pOld.addConnection(pNew);
+		if(hasPoint(pOld))
+			pOld.addConnection(pNew);
+		return true;
 	}
 
 	/**
@@ -73,6 +99,12 @@ public class Trail {
 		_trailPoints.remove(point);
 	}
 	
+	/**
+	 * Gets a specific TrailPoint based on an ID.
+	 * After Testing, this method will be made private
+	 * @param id The ID of the TrailPoint
+	 * @return A TrailPoint if it exists, or null
+	 */
 	public TrailPoint getTrailPoint(int id) {
 		Iterator<TrailPoint> iter = _trailPoints.iterator();
 		while(iter.hasNext()) {
@@ -84,10 +116,19 @@ public class Trail {
 		return null;
 	}
 
+	/**
+	 * Returns the Set of all TrailPoints
+	 * @return The Set of all TrailPoints
+	 */
 	public Collection<? extends Overlay> getTrailPoints() {
 		return _trailPoints;
 	}
 
+	/**
+	 * Determines if this Trail does or does not contain a specific point
+	 * @param point The TrailPoint to check the list against
+	 * @return True if the Point is contained within the list
+	 */
 	public boolean hasPoint(TrailPoint point) {
 		return _trailPoints.contains(getTrailPoint(point.getID()));
 	}

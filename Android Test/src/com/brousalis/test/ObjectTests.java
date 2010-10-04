@@ -137,7 +137,42 @@ public class ObjectTests extends TestCase {
 		
 		assertTrue("Trail did not contain pOld",t.hasPoint(pOld));
 		assertTrue("Trail did not contain pNew",t.hasPoint(pNew));
+	}
+	
+	public void testAddPointToNullPointTrail() {
+		int numOfTrailPoints = 0;
+		TrailPoint pOld = null;
+		TrailPoint pNew = new TrailPoint(1, new GeoPoint(5,5), new HashSet<Integer>());
+		Trail t = new Trail("Herritage");
 		
+		assertFalse("Trail did contain pNew",t.hasPoint(pNew));
+		
+		assertEquals(numOfTrailPoints, t.getNumberOfTrailPoints());
+		
+		t.addPoint(pNew, pOld);
+		numOfTrailPoints++;
+		assertEquals(numOfTrailPoints, t.getNumberOfTrailPoints());
+		
+		assertTrue(t.addPoint(pNew, pOld));
+		
+		assertFalse("Trail did contain pOld",t.hasPoint(pOld));
+		assertTrue("Trail did not contain pNew",t.hasPoint(pNew));
+	}
+	
+	public void testAddPointThatAlreadyExists() {
+		TrailPoint P1 = new TrailPoint(0, new GeoPoint(5,5), new HashSet<Integer>());
+		TrailPoint P2 = new TrailPoint(0, new GeoPoint(5,5), new HashSet<Integer>());
+		TrailPoint P3 = new TrailPoint(0, new GeoPoint(5,5), new HashSet<Integer>());
+		
+		Trail t = new Trail("Heritage");
+		
+		t.addPoint(P1);
+		LinkedList<TrailPoint> list = new LinkedList<TrailPoint>();
+		list.add(P2);
+		list.add(P3);
+		t.addLinkedPoints(list, P1);
+		list.add(P1);
+		assertTrue("List did not contain all the points", t.getTrailPoints().containsAll(list));
 	}
 	
 	public void testRemovePointFromTrail() {

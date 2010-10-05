@@ -1,5 +1,6 @@
 package com.brousalis;
 
+import java.util.LinkedList;
 import java.util.Set;
 
 import android.graphics.Canvas;
@@ -14,6 +15,8 @@ public class TrailPoint extends InterestPoint {
 	
 	private Trail _trail;
 	private Set<TrailPoint> _connections;
+	private LinkedList<Integer> _unresolvableLinks;
+	private boolean _hasUnresolvedLinks = false;
 	
 	
 	public TrailPoint(int id, int latitude, int longitude, String category, String summary, String title, Set<TrailPoint> connections) {
@@ -105,5 +108,26 @@ public class TrailPoint extends InterestPoint {
 //		Log.w("MTM","MTM: Added Point!");
 //		return super.onTap(p, mapView);
 //	}
+
+	public void addConnectionByID(int _currentConnection) {
+		_unresolvableLinks.add(_currentConnection);
+		_hasUnresolvedLinks	= true;
+	}
 	
+	/**
+	 * Returns a list of all connections that this point knows about, but has not
+	 * actually made yet
+	 * @return A list of TrailPoint IDs in Integer form
+	 */
+	public LinkedList<Integer> getUnresolvedLinks() {
+		_hasUnresolvedLinks = false;
+		LinkedList<Integer> returnList = new LinkedList<Integer>(_unresolvableLinks);
+		_unresolvableLinks.clear();
+		return returnList;
+	}
+	
+	
+	public boolean hasUnresolvedLinks() {
+		return _hasUnresolvedLinks;
+	}
 }

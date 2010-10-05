@@ -134,4 +134,24 @@ public class Trail {
 			return false;
 		return _trailPoints.contains(point);
 	}
+	
+	/**
+	 * Corrects any unresolved Links.  Unresolved links can occur when
+	 * importing data from XML.  This function takes the list of Integers
+	 * and parses them properly.  That list is then cleared out.
+	 */
+	public void resolveConnections() {
+		for(TrailPoint p : _trailPoints) {
+			if(p.hasUnresolvedLinks()) {
+				for(Integer i : p.getUnresolvedLinks()) {
+					p.addConnection(this.getTrailPoint(i));
+				}
+			}
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return "Trail: "+_name + " (" + _trailPoints.size() + " TrailPoints)";
+	}
 }

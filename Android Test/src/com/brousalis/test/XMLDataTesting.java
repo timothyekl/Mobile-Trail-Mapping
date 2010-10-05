@@ -39,7 +39,7 @@ public class XMLDataTesting extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals("Trail: Heritage(6 TrailPoints)", handler.getParsedTrail(0));
+		assertEquals("Trail: FernFerret (8 TrailPoints)", handler.getParsedTrail(0));
 	}
 
 }

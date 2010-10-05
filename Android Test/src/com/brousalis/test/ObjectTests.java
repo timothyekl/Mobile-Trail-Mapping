@@ -111,6 +111,7 @@ public class ObjectTests extends TestCase {
 		assertTrue("Trail did not contain P1",t.hasPoint(p1));
 		assertTrue("Trail did not contain P2",t.hasPoint(p2));
 		assertTrue("Trail did not contain P3",t.hasPoint(p3));
+		assertEquals("Trail: Herritage (3 TrailPoints)", t.toString());
 	}
 	
 	public void testAddPointToTrail() {

@@ -1,7 +1,6 @@
 package com.brousalis;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.HashSet;
 
 import javax.xml.parsers.SAXParser;

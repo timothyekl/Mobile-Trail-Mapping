@@ -1,8 +1,5 @@
 package com.brousalis;
 
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -25,7 +22,9 @@ public class DataHandler extends DefaultHandler {
 	/**
 	 * Empty Constructor, Currently does nothing.
 	 */
-	public DataHandler() {}
+	public DataHandler() {
+		_trails = new HashSet<Trail>();
+	}
 	
 	@Override
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
@@ -61,7 +60,7 @@ public class DataHandler extends DefaultHandler {
 		Iterator<Trail> iter = _trails.iterator();
 		while(iter.hasNext()) {
 			Trail current = iter.next();
-			if (current.getName() == trail) {
+			if (current.getName().equals(trail)) {
 				return current;
 			}
 		}

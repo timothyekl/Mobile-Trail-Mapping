@@ -7,6 +7,7 @@ import java.util.Set;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
@@ -119,7 +120,8 @@ public class TrailPoint extends InterestPoint {
 	 * @return True if the connection's ID is in the Set, False if it is not
 	 */
 	public boolean hasConnection(TrailPoint connection) {
-		return (connection == null) ? false :_connections.contains(connection.getID());
+		Log.w("MTM", this._connections + " : " + connection + " = " + ((connection == null) ? false :this._connections.contains(connection)));
+		return (connection == null) ? false :this._connections.contains(connection);
 	}
 
 	/**

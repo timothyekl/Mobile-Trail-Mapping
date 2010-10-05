@@ -16,7 +16,7 @@ import com.brousalis.DataHandler;
 
 public class XMLDataTesting extends TestCase {
 	
-	public static final String URL = "http://github.com/lithium3141/Mobile-Trail-Mapping/raw/AndroidMain/sampledata.xml";
+	public static final String URL = "http://fernferret.com/mtmtest.xml";
 	public static final String TRAIL_NAME = "MyTrail 1";
 	public void testBasicXML() {
 		DataHandler handler = new DataHandler();
@@ -39,7 +39,7 @@ public class XMLDataTesting extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals("Trail: FernFerret (8 TrailPoints)", handler.getParsedTrail(TRAIL_NAME).toString());
+		assertEquals("Trail: "+TRAIL_NAME+" (8 TrailPoints)", handler.getParsedTrail(TRAIL_NAME).toString());
 		handler.getParsedTrail(TRAIL_NAME).resolveConnections();
 		assertEquals(0,handler.getParsedTrail(TRAIL_NAME).getTrailPoint(0).getID());
 		assertEquals(1,handler.getParsedTrail(TRAIL_NAME).getTrailPoint(0).getConnections().size());

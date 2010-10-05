@@ -58,17 +58,17 @@ public class ObjectTests extends TestCase {
 	}
 	public void testAddPointConnection() {
 		TrailPoint p1 = new TrailPoint(0, new GeoPoint(0,0), new HashSet<TrailPoint>());
-		TrailPoint p2 = new TrailPoint(0, new GeoPoint(10,10), new HashSet<TrailPoint>());
-		p1.addConnection(p2);
-		p2.addConnection(p1);
+		TrailPoint p2 = new TrailPoint(1, new GeoPoint(10,10), new HashSet<TrailPoint>());
+		assertTrue(p1.addConnection(p2));
+		assertTrue(p2.addConnection(p1));
 		assertTrue("P1 is not connected to P2",p1.hasConnection(p2));
 		assertTrue("P2 is not connected to P1",p2.hasConnection(p1));
 	}
 	public void testAddPointConnections() {
 		TrailPoint p1 = new TrailPoint(0, new GeoPoint(0,0), new HashSet<TrailPoint>());
-		TrailPoint p2 = new TrailPoint(0, new GeoPoint(5,5), new HashSet<TrailPoint>());
-		TrailPoint p3 = new TrailPoint(0, new GeoPoint(10,10), new HashSet<TrailPoint>());
-		TrailPoint p4 = new TrailPoint(0, new GeoPoint(15,15), new HashSet<TrailPoint>());
+		TrailPoint p2 = new TrailPoint(1, new GeoPoint(5,5), new HashSet<TrailPoint>());
+		TrailPoint p3 = new TrailPoint(2, new GeoPoint(10,10), new HashSet<TrailPoint>());
+		TrailPoint p4 = new TrailPoint(3, new GeoPoint(15,15), new HashSet<TrailPoint>());
 		p1.addConnection(p2);
 		p2.addConnection(p1);
 		
@@ -87,13 +87,15 @@ public class ObjectTests extends TestCase {
 		assertTrue("P3 is not connected to P4",p3.hasConnection(p4));
 		assertTrue("P4 is not connected to P3",p4.hasConnection(p3));
 		
-		assertTrue("P1 is connected to P3",p1.hasConnection(p3));
-		assertTrue("P3 is connected to P1",p3.hasConnection(p1));
+		assertEquals(1, p1.getConnections().size());
+		
+		assertFalse("P1 is connected to P3",p1.hasConnection(p3));
+		assertFalse("P3 is connected to P1",p3.hasConnection(p1));
 	}
 	public void testAddLinkedPointsToTrail() {
 		TrailPoint p1 = new TrailPoint(0, new GeoPoint(0,0), new HashSet<TrailPoint>());
-		TrailPoint p2 = new TrailPoint(0, new GeoPoint(5,5), new HashSet<TrailPoint>());
-		TrailPoint p3 = new TrailPoint(0, new GeoPoint(10,10), new HashSet<TrailPoint>());
+		TrailPoint p2 = new TrailPoint(1, new GeoPoint(5,5), new HashSet<TrailPoint>());
+		TrailPoint p3 = new TrailPoint(2, new GeoPoint(10,10), new HashSet<TrailPoint>());
 		assertNotNull(p1);
 		assertNotNull(p2);
 		assertNotNull(p3);
@@ -131,8 +133,8 @@ public class ObjectTests extends TestCase {
 		numOfTrailPoints++;
 		assertEquals(numOfTrailPoints, t.getNumberOfTrailPoints());
 		
-		assertTrue(t.getTrailPoint(pOld.getID()).getConnections().contains(pNew.getID()));
-		assertFalse(t.getTrailPoint(pNew.getID()).getConnections().contains(pOld.getID()));
+		assertTrue(t.getTrailPoint(pOld.getID()).getConnections().contains(pNew));
+		assertFalse(t.getTrailPoint(pNew.getID()).getConnections().contains(pOld));
 		
 		assertTrue("Trail did not contain pOld",t.hasPoint(pOld));
 		assertTrue("Trail did not contain pNew",t.hasPoint(pNew));
@@ -160,8 +162,8 @@ public class ObjectTests extends TestCase {
 	
 	public void testAddPointThatAlreadyExists() {
 		TrailPoint P1 = new TrailPoint(0, new GeoPoint(5,5), new HashSet<TrailPoint>());
-		TrailPoint P2 = new TrailPoint(0, new GeoPoint(5,5), new HashSet<TrailPoint>());
-		TrailPoint P3 = new TrailPoint(0, new GeoPoint(5,5), new HashSet<TrailPoint>());
+		TrailPoint P2 = new TrailPoint(1, new GeoPoint(5,5), new HashSet<TrailPoint>());
+		TrailPoint P3 = new TrailPoint(2, new GeoPoint(5,5), new HashSet<TrailPoint>());
 		
 		Trail t = new Trail("Heritage");
 		
@@ -176,8 +178,8 @@ public class ObjectTests extends TestCase {
 	
 	public void testRemovePointFromTrail() {
 		TrailPoint p1 = new TrailPoint(0, new GeoPoint(0,0), new HashSet<TrailPoint>());
-		TrailPoint p2 = new TrailPoint(0, new GeoPoint(5,5), new HashSet<TrailPoint>());
-		TrailPoint p3 = new TrailPoint(0, new GeoPoint(10,10), new HashSet<TrailPoint>());
+		TrailPoint p2 = new TrailPoint(1, new GeoPoint(5,5), new HashSet<TrailPoint>());
+		TrailPoint p3 = new TrailPoint(2, new GeoPoint(10,10), new HashSet<TrailPoint>());
 		
 		Trail t = new Trail("Herritage");
 		LinkedList<TrailPoint> list = new LinkedList<TrailPoint>();

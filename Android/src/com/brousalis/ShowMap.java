@@ -1,6 +1,13 @@
 package com.brousalis;
 
+import java.net.URL;
 import java.util.HashSet;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -61,6 +68,8 @@ public class ShowMap extends MapActivity {
 	 */
 	private SharedPreferences _settings;
 	
+	private DataHandler _dataHandler;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +116,7 @@ public class ShowMap extends MapActivity {
     @Override
     public void onResume() {
     	super.onResume();
+    	//drawTrail();
     	Log.w("MTM", "MTM: onResume()");
     }
     
@@ -123,10 +133,33 @@ public class ShowMap extends MapActivity {
 		// By doing this, we don't force users to open up the GPS on program start.
     	// We'll also load here rather than oncreate to ensure settings are loaded.
     	initLocation();
+    	initializeParser();
+    	drawTrail();
     	Log.w("MTM", "MTM: onStart()");
     }
     
-    /**
+    private void initializeParser() {
+    	_dataHandler = new DataHandler();
+		try {
+			URL url = new URL(getString(R.string.test_url));
+			SAXParserFactory spf = SAXParserFactory.newInstance();
+			SAXParser sp = spf.newSAXParser();
+			XMLReader xr = sp.getXMLReader();
+			xr.setContentHandler(_dataHandler);
+			xr.parse(new InputSource(url.openStream()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
+    private void drawTrail() {
+    	
+		t = _dataHandler.getParsedTrail(0);
+		t.resolveConnections();
+		mapView.getOverlays().clear();
+		mapView.getOverlays().addAll(t.getTrailPoints());
+	}
+	/**
      * This method MUST be here.  Google's TOS requires it.
      * Still not sure if we have to turn this to true if we're
      * displaying custom trail routes...
@@ -140,6 +173,7 @@ public class ShowMap extends MapActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
+		
 		MenuInflater inflater = new MenuInflater(this);
 		inflater.inflate(R.menu.mainmenu, menu);
 		return true;

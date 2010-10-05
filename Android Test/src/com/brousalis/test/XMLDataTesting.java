@@ -39,7 +39,31 @@ public class XMLDataTesting extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals("Trail: FernFerret (8 TrailPoints)", handler.getParsedTrail(0));
+		assertEquals("Trail: FernFerret (8 TrailPoints)", handler.getParsedTrail(0).toString());
+		handler.getParsedTrail(0).resolveConnections();
+		assertEquals(0,handler.getParsedTrail(0).getTrailPoint(0).getID());
+		assertEquals(1,handler.getParsedTrail(0).getTrailPoint(0).getConnections().size());
+		
+		assertEquals(1,handler.getParsedTrail(0).getTrailPoint(1).getID());
+		assertEquals(2,handler.getParsedTrail(0).getTrailPoint(1).getConnections().size());
+		
+		assertEquals(2,handler.getParsedTrail(0).getTrailPoint(2).getID());
+		assertEquals(0,handler.getParsedTrail(0).getTrailPoint(2).getConnections().size());
+		
+		assertEquals(3,handler.getParsedTrail(0).getTrailPoint(3).getID());
+		assertEquals(1,handler.getParsedTrail(0).getTrailPoint(3).getConnections().size());
+		
+		assertEquals(4,handler.getParsedTrail(0).getTrailPoint(4).getID());
+		assertEquals(1,handler.getParsedTrail(0).getTrailPoint(4).getConnections().size());
+		
+		assertEquals(5,handler.getParsedTrail(0).getTrailPoint(5).getID());
+		assertEquals(1,handler.getParsedTrail(0).getTrailPoint(5).getConnections().size());
+		
+		assertEquals(6,handler.getParsedTrail(0).getTrailPoint(6).getID());
+		assertEquals(1,handler.getParsedTrail(0).getTrailPoint(6).getConnections().size());
+		
+		assertEquals(7,handler.getParsedTrail(0).getTrailPoint(7).getID());
+		assertEquals(0,handler.getParsedTrail(0).getTrailPoint(7).getConnections().size());
 	}
 
 }

@@ -18,24 +18,30 @@ public class TrailPoint extends InterestPoint {
 	private LinkedList<Integer> _unresolvableLinks;
 	private boolean _hasUnresolvedLinks = false;
 	
+	@Override
+	public String toString() {
+		return "TrailPoint " + this.getID() + ": (x=" + this.getLocation().getLatitudeE6()/1E6 + ", y=" + this.getLocation().getLongitudeE6()/1E6 + ", " + this.getConnections().size() + " Cons)";
+	}
 	
 	public TrailPoint(int id, int latitude, int longitude, String category, String summary, String title, Set<TrailPoint> connections) {
 		super(id, new GeoPoint(latitude, longitude), category, title, summary);
 		_connections = connections;
+		_unresolvableLinks = new LinkedList<Integer>();
 	}
 	
 	public TrailPoint(int id, GeoPoint p, String category, String summary, String title, Set<TrailPoint> connections) {
 		super(id, p, category, title, summary);
 		_connections = connections;
+		_unresolvableLinks = new LinkedList<Integer>();
 	}
 	public TrailPoint(int id, GeoPoint p, Set<TrailPoint> connections) {
 		super(id, p, "", "", "");
 		_connections = connections;
+		_unresolvableLinks = new LinkedList<Integer>();
 	}
 	
 	@Override
 	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
-		// TODO Auto-generated method stub
 		super.draw(canvas, mapView, shadow);
 		Point screenPts = new Point();
         mapView.getProjection().toPixels(getLocation(), screenPts);

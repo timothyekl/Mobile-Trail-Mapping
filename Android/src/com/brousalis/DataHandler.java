@@ -22,7 +22,7 @@ public class DataHandler extends DefaultHandler {
 	@Override
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 		if (localName.equals(TRAIL_CONNECTION)) {
-			this._connectionMode = true;
+			_trailPoint.addConnectionByID(Integer.parseInt(atts.getValue("id")));
 		} else if (localName.equals(TRAIL_POINT)) {
 			createNewTrailPoint(Integer.parseInt(atts.getValue("id")), Double.parseDouble(atts.getValue("lat")), Double.parseDouble(atts.getValue("long")));
 		} else if (localName.equals(TRAIL)) {
@@ -40,9 +40,10 @@ public class DataHandler extends DefaultHandler {
 
 	@Override
 	public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
-		if (localName.equals(TRAIL_CONNECTION)) {
-			this._connectionMode = false;
-		} else if (localName.equals(TRAIL_POINT)) {
+//		if (localName.equals(TRAIL_CONNECTION)) {
+//			this._connectionMode = false;
+//		} else 
+		if (localName.equals(TRAIL_POINT)) {
 			saveTrailPoint();
 		}
 	}
@@ -52,14 +53,14 @@ public class DataHandler extends DefaultHandler {
 		_trailPoint = new TrailPoint(-1, new GeoPoint(0,0), null);
 	}
 
-	@Override
-	public void characters(char ch[], int start, int length) {
-		if(_connectionMode) {
-			_currentConnection = Integer.parseInt(new String(ch, start, length));
-			_trailPoint.addConnectionByID(_currentConnection);
-		}
-			
-	}
+//	@Override
+//	public void characters(char ch[], int start, int length) {
+//		if(_connectionMode) {
+//			_currentConnection = Integer.parseInt(new String(ch, start, length));
+//			_trailPoint.addConnectionByID(_currentConnection);
+//		}
+//			
+//	}
 	
 	public Trail getParsedTrail(int index) {
 		// For now i'm only testing with 1 trail, Always pass in 0.

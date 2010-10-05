@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, ShowMap!</string>
     <string name="app_name">Trail Maps</string>
+    <string name="test_url">http://fernferret.com/mtmtest.xml</string>
 </resources>

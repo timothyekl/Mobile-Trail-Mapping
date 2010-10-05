@@ -1,6 +1,7 @@
 package com.brousalis;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import javax.xml.parsers.SAXParser;
@@ -27,8 +28,6 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 
 public class ShowMap extends MapActivity {
-	
-	Trail t;
 	
 	// SharedPreference Strings
 	public static final String SAVED_MAP_STATE = "SavedMapState";
@@ -80,7 +79,6 @@ public class ShowMap extends MapActivity {
 		mapController = mapView.getController();
 		
 		locMgr = (LocationManager) getSystemService(LOCATION_SERVICE);
-		t = new Trail("Heritage");
 		Log.w("MTM", "MTM: onCreate()");
     }
     @Override
@@ -138,6 +136,9 @@ public class ShowMap extends MapActivity {
     	Log.w("MTM", "MTM: onStart()");
     }
     
+    /**
+     * Initialize the XML Parser and Parse the data from the url.
+     */
     private void initializeParser() {
     	_dataHandler = new DataHandler();
 		try {
@@ -152,13 +153,18 @@ public class ShowMap extends MapActivity {
 		}
     }
     
+    /**
+     * Resolves all connections for all trails pulled down
+     */
     private void drawTrail() {
-    	
-		t = _dataHandler.getParsedTrail(0);
-		t.resolveConnections();
-		mapView.getOverlays().clear();
-		mapView.getOverlays().addAll(t.getTrailPoints());
+    	HashSet<Trail> trails = _dataHandler.getParsedTrails();
+    	mapView.getOverlays().clear();
+    	for(Trail t : trails) {
+    		t.resolveConnections();
+    		mapView.getOverlays().addAll(t.getTrailPoints());
+    	}
 	}
+    
 	/**
      * This method MUST be here.  Google's TOS requires it.
      * Still not sure if we have to turn this to true if we're
@@ -220,21 +226,6 @@ public class ShowMap extends MapActivity {
 			centerMapOnCurrentLocation(false);
 		}
 	}
-	private void drawFakeDot(GeoPoint p) {
-		mapView.getOverlays().clear();
-		//t = new Trail("Heritage");
-		TrailPoint myPoint = new TrailPoint(0, p, new HashSet<TrailPoint>());
-		t.addPoint(myPoint);
-		GeoPoint p2 = new GeoPoint(p.getLatitudeE6()+200, p.getLongitudeE6()+200);
-		t.addPoint(new TrailPoint(1, p2, new HashSet<TrailPoint>()), myPoint);
-		
-		GeoPoint p3 = new GeoPoint(p.getLatitudeE6()-300, p.getLongitudeE6()+500);
-		TrailPoint myPoint2 = new TrailPoint(2, p3, new HashSet<TrailPoint>());
-		t.addPoint(myPoint2, myPoint);
-		GeoPoint p4 = new GeoPoint(p.getLatitudeE6()-600, p.getLongitudeE6()-800);
-		t.addPoint(new TrailPoint(3, p4, new HashSet<TrailPoint>()), myPoint2);
-		mapView.getOverlays().addAll(t.getTrailPoints());
-	}
 	
 	@Override
 	public boolean dispatchTouchEvent(android.view.MotionEvent ev) {
@@ -252,8 +243,6 @@ public class ShowMap extends MapActivity {
 		Location networkLoc = locMgr.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		Location gpsLoc = locMgr.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 		Location recentLoc = (gpsLoc != null)?gpsLoc:networkLoc;
-		
-		
 		// CSN01
 		// We can't just pull this from prefs, as this function is shared
 		// It's sometimes called by the initializer, not the "center me" button.
@@ -263,7 +252,6 @@ public class ShowMap extends MapActivity {
 		
 		if(recentLoc != null) {
 			p = new GeoPoint((int) (recentLoc.getLatitude() * 1E6), (int) (recentLoc.getLongitude() * 1E6));
-			drawFakeDot(p);
 			mapController.animateTo(p);
 			mapView.setSatellite(true);
 			mapView.invalidate();

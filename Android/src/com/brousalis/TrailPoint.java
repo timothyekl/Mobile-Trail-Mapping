@@ -1,5 +1,6 @@
 package com.brousalis;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
@@ -23,20 +24,32 @@ public class TrailPoint extends InterestPoint {
 		return "TrailPoint " + this.getID() + ": (x=" + this.getLocation().getLatitudeE6()/1E6 + ", y=" + this.getLocation().getLongitudeE6()/1E6 + ", " + this.getConnections().size() + " Cons)";
 	}
 	
-	public TrailPoint(int id, int latitude, int longitude, String category, String summary, String title, Set<TrailPoint> connections) {
-		super(id, new GeoPoint(latitude, longitude), category, title, summary);
-		_connections = connections;
-		_unresolvableLinks = new LinkedList<Integer>();
-	}
-	
+	/**
+	 * Constructs a new TrailPoint with the given parameters
+	 * @param id The ID of this TrailPoint
+	 * @param p The location of this TrailPoint
+	 * @param category What category this TrailPoint belongs to
+	 * @param summary A brief summary about this trail point
+	 * @param title The title of this TrailPoint 
+	 * @param connections A list of TrailPoints that this one is connected to
+	 */
 	public TrailPoint(int id, GeoPoint p, String category, String summary, String title, Set<TrailPoint> connections) {
 		super(id, p, category, title, summary);
 		_connections = connections;
 		_unresolvableLinks = new LinkedList<Integer>();
 	}
+	
+	/**
+	 * Constructs a new TrailPoint with the given parameters
+	 * @param id The ID of this TrailPoint
+	 * @param p The location of this TrailPoint
+	 * @param connections A list of TrailPoints that this one is connected to
+	 */
 	public TrailPoint(int id, GeoPoint p, Set<TrailPoint> connections) {
 		super(id, p, "", "", "");
 		_connections = connections;
+		if(connections == null)
+			_connections = new HashSet<TrailPoint>();
 		_unresolvableLinks = new LinkedList<Integer>();
 	}
 	
@@ -73,6 +86,7 @@ public class TrailPoint extends InterestPoint {
 	public void setConnections(Set<TrailPoint> connections) {
 		_connections = connections;
 	}
+	
 	/**
 	 * Gets the connections 
 	 * @return The current Set of connections
@@ -80,6 +94,7 @@ public class TrailPoint extends InterestPoint {
 	public Set<TrailPoint> getConnections() {
 		return _connections;
 	}
+	
 	/**
 	 * Attempts to add a new connection to this point's connections
 	 * @param connection The TrailPoint to add a connection to
@@ -88,6 +103,7 @@ public class TrailPoint extends InterestPoint {
 	public boolean addConnection(TrailPoint connection) {
 		return (connection == null) ? false :_connections.add(connection);
 	}
+	
 	/**
 	 * Attempts to remove a connection from this point's connections
 	 * @param connection The ID of a connection to delete
@@ -105,16 +121,13 @@ public class TrailPoint extends InterestPoint {
 	public boolean hasConnection(TrailPoint connection) {
 		return (connection == null) ? false :_connections.contains(connection.getID());
 	}
-//	private TrailPoint _recentPoint;
-//	@Override
-//	public boolean onTap(GeoPoint p, MapView mapView) {
-//		TrailPoint added = new TrailPoint(0, this.getTrail(), p, new HashSet<TrailPoint>());
-//		this.getTrail().addPoint(added, _recentPoint);
-//		_recentPoint = added;
-//		Log.w("MTM","MTM: Added Point!");
-//		return super.onTap(p, mapView);
-//	}
 
+	/**
+	 * Adds a TrailPoint's ID to the unresolvedLinks list.  This also flags _hasUnresolvedLinks
+	 * the method on this point's trail, resolveLinks will need to be called before this
+	 * point will have valid connections to these unresolved links.
+	 * @param _currentConnection The TrailPoint ID that this point should be connected to
+	 */
 	public void addConnectionByID(int _currentConnection) {
 		_unresolvableLinks.add(_currentConnection);
 		_hasUnresolvedLinks	= true;
@@ -132,7 +145,12 @@ public class TrailPoint extends InterestPoint {
 		return returnList;
 	}
 	
-	
+	/**
+	 * Returns true if this point has links that are not valid
+	 * and need to be refreshed.  This can be done by calling this
+	 * trail's resolveConnections method.
+	 * @return True if there are Unresolved Links false if this point is good to go.
+	 */
 	public boolean hasUnresolvedLinks() {
 		return _hasUnresolvedLinks;
 	}

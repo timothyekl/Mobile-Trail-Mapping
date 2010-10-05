@@ -1,6 +1,10 @@
 package com.brousalis;
 
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -10,15 +14,19 @@ import com.google.android.maps.GeoPoint;
 
 public class DataHandler extends DefaultHandler {
 
-	private boolean _connectionMode = false;
 	private Trail _t;
+	private HashSet<Trail> _trails;
 	private TrailPoint _trailPoint;
-	private int _currentConnection;
 	
 	private static final String TRAIL = "trail";
 	private static final String TRAIL_POINT = "trailpoint";
 	private static final String TRAIL_CONNECTION = "connection";
 
+	/**
+	 * Empty Constructor, Currently does nothing.
+	 */
+	public DataHandler() {}
+	
 	@Override
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 		if (localName.equals(TRAIL_CONNECTION)) {
@@ -30,41 +38,75 @@ public class DataHandler extends DefaultHandler {
 		}
 	}
 	
+	@Override
+	public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
+		if (localName.equals(TRAIL_POINT)) {
+			saveTrailPoint();
+		} else if(localName.equals(TRAIL)) {
+			saveTrail();
+		}
+	}
+	
+	@Override
+	public void characters(char ch[], int start, int length) {
+//		String str = new String(ch, start, length);
+	}
+	
+	/**
+	 * Returns a single Trail
+	 * @param trail The name of the trail to get.
+	 * @return A Trail who's name was given by trail
+	 */
+	public Trail getParsedTrail(String trail) {
+		Iterator<Trail> iter = _trails.iterator();
+		while(iter.hasNext()) {
+			Trail current = iter.next();
+			if (current.getName() == trail) {
+				return current;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Returns all the parsed trails
+	 * @return A Dictionary<String, Trail> of all the parsed trails.
+	 */
+	public HashSet<Trail> getParsedTrails() {
+		return _trails;
+	}
+	
+	/**
+	 * Sets the current working TrailPoint.  This point will be added to the current trail
+	 * once all of it's information has been read.
+	 * @param id ID of the TrailPoint
+	 * @param lat Latitude in double format (ex. 14.1328)
+	 * @param lon Longitude in double format (ex. 12.2334)
+	 */
 	private void createNewTrailPoint(int id, double lat, double lon) {
 		_trailPoint = new TrailPoint(id, new GeoPoint((int)(lat*1E6), (int)(lon*1E6)),new HashSet<TrailPoint>());
 	}
 
+	/**
+	 * Creates a new trail
+	 * @param trailName The name of the Trail
+	 */
 	private void createTrail(String trailName) {
 		_t = new Trail(trailName);
 	}
-
-	@Override
-	public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
-//		if (localName.equals(TRAIL_CONNECTION)) {
-//			this._connectionMode = false;
-//		} else 
-		if (localName.equals(TRAIL_POINT)) {
-			saveTrailPoint();
-		}
-	}
-
+	
+	/**
+	 * Saves a TrailPoint to the current trail.
+	 */
 	private void saveTrailPoint() {
 		_t.addPoint(_trailPoint);
 		_trailPoint = new TrailPoint(-1, new GeoPoint(0,0), null);
 	}
-
-//	@Override
-//	public void characters(char ch[], int start, int length) {
-//		if(_connectionMode) {
-//			_currentConnection = Integer.parseInt(new String(ch, start, length));
-//			_trailPoint.addConnectionByID(_currentConnection);
-//		}
-//			
-//	}
 	
-	public Trail getParsedTrail(int index) {
-		// For now i'm only testing with 1 trail, Always pass in 0.
-		return _t;
+	/**
+	 * Saves the current Trail to the Trail Dictionary
+	 */
+	private void saveTrail() {
+		_trails.add(_t);
 	}
-
 }

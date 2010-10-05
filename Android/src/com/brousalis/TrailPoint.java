@@ -36,8 +36,8 @@ public class TrailPoint extends InterestPoint {
 	 */
 	public TrailPoint(int id, GeoPoint p, String category, String summary, String title, Set<TrailPoint> connections) {
 		super(id, p, category, title, summary);
-		_connections = connections;
-		_unresolvableLinks = new LinkedList<Integer>();
+		this._connections = connections;
+		this._unresolvableLinks = new LinkedList<Integer>();
 	}
 	
 	/**
@@ -48,10 +48,10 @@ public class TrailPoint extends InterestPoint {
 	 */
 	public TrailPoint(int id, GeoPoint p, Set<TrailPoint> connections) {
 		super(id, p, "", "", "");
-		_connections = connections;
+		this._connections = connections;
 		if(connections == null)
-			_connections = new HashSet<TrailPoint>();
-		_unresolvableLinks = new LinkedList<Integer>();
+			this._connections = new HashSet<TrailPoint>();
+		this._unresolvableLinks = new LinkedList<Integer>();
 	}
 	
 	@Override
@@ -62,7 +62,7 @@ public class TrailPoint extends InterestPoint {
 
 		canvas.drawCircle(screenPts.x, screenPts.y, 5, getColor());
 		
-		for(TrailPoint p : _connections) {
+		for(TrailPoint p : this._connections) {
 			Point newPt = new Point();
 			mapView.getProjection().toPixels(p.getLocation(), newPt);
 			Paint newP = new Paint();
@@ -74,10 +74,10 @@ public class TrailPoint extends InterestPoint {
 	}
 
 	public void setTrail(Trail trail) {
-		_trail = trail;
+		this._trail = trail;
 	}
 	public Trail getTrail() {
-		return _trail;
+		return this._trail;
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class TrailPoint extends InterestPoint {
 	 * @param connections The new connection set
 	 */
 	public void setConnections(Set<TrailPoint> connections) {
-		_connections = connections;
+		this._connections = connections;
 	}
 	
 	/**
@@ -93,7 +93,7 @@ public class TrailPoint extends InterestPoint {
 	 * @return The current Set of connections
 	 */
 	public Set<TrailPoint> getConnections() {
-		return _connections;
+		return this._connections;
 	}
 	
 	/**
@@ -102,7 +102,7 @@ public class TrailPoint extends InterestPoint {
 	 * @return True if a connection was added, False if it already existed
 	 */
 	public boolean addConnection(TrailPoint connection) {
-		return (connection == null) ? false :_connections.add(connection);
+		return (connection == null) ? false :this._connections.add(connection);
 	}
 	
 	/**
@@ -111,7 +111,7 @@ public class TrailPoint extends InterestPoint {
 	 * @return True if a connection was removed, False if it did not exist
 	 */
 	public boolean removeConnection(TrailPoint connection) {
-		return (connection == null) ? false :_connections.remove(connection.getID());
+		return (connection == null) ? false :this._connections.remove(connection.getID());
 	}
 	
 	/**
@@ -131,8 +131,8 @@ public class TrailPoint extends InterestPoint {
 	 * @param _currentConnection The TrailPoint ID that this point should be connected to
 	 */
 	public void addConnectionByID(int _currentConnection) {
-		_unresolvableLinks.add(_currentConnection);
-		_hasUnresolvedLinks	= true;
+		this._unresolvableLinks.add(_currentConnection);
+		this._hasUnresolvedLinks	= true;
 	}
 	
 	/**
@@ -141,9 +141,9 @@ public class TrailPoint extends InterestPoint {
 	 * @return A list of TrailPoint IDs in Integer form
 	 */
 	public LinkedList<Integer> getUnresolvedLinks() {
-		_hasUnresolvedLinks = false;
-		LinkedList<Integer> returnList = new LinkedList<Integer>(_unresolvableLinks);
-		_unresolvableLinks.clear();
+		this._hasUnresolvedLinks = false;
+		LinkedList<Integer> returnList = new LinkedList<Integer>(this._unresolvableLinks);
+		this._unresolvableLinks.clear();
 		return returnList;
 	}
 	
@@ -154,6 +154,6 @@ public class TrailPoint extends InterestPoint {
 	 * @return True if there are Unresolved Links false if this point is good to go.
 	 */
 	public boolean hasUnresolvedLinks() {
-		return _hasUnresolvedLinks;
+		return this._hasUnresolvedLinks;
 	}
 }

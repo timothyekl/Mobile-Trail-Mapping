@@ -9,7 +9,6 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.util.Log;
 
-import com.brousalis.DataLoader;
 import com.brousalis.ShowMap;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
@@ -171,13 +170,11 @@ public class BaseTests extends ActivityInstrumentationTestCase2<ShowMap> {
 	}
 	
 	public void testNoServerResponse() {
-		DataLoader d = new DataLoader("FailServer");
-		assertFalse(d.validConnection());
+		fail("Large structure change, fix this test.");
 	}
 	
 	public void testSuccessfulServerResponse() {
-		DataLoader d = new DataLoader("http://www.google.com");
-		assertTrue(d.validConnection());
+		fail("Large structure change, fix this test.");
 	}
 	
 	public void testChangeASetting() {

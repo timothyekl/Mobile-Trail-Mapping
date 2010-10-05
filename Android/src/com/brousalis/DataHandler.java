@@ -11,13 +11,17 @@ import com.google.android.maps.GeoPoint;
 
 public class DataHandler extends DefaultHandler {
 
-	private Trail _t;
+	private Trail _trail;
 	private HashSet<Trail> _trails;
 	private TrailPoint _trailPoint;
 	
 	private static final String TRAIL = "trail";
 	private static final String TRAIL_POINT = "trailpoint";
 	private static final String TRAIL_CONNECTION = "connection";
+	private static final String ID = "id";
+	private static final String LATITUDE = "lat";
+	private static final String LONGITUDE = "long";
+	private static final String NAME = "name";
 
 	/**
 	 * Empty Constructor, Currently does nothing.
@@ -29,20 +33,20 @@ public class DataHandler extends DefaultHandler {
 	@Override
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 		if (localName.equals(TRAIL_CONNECTION)) {
-			_trailPoint.addConnectionByID(Integer.parseInt(atts.getValue("id")));
+			this._trailPoint.addConnectionByID(Integer.parseInt(atts.getValue(ID)));
 		} else if (localName.equals(TRAIL_POINT)) {
-			createNewTrailPoint(Integer.parseInt(atts.getValue("id")), Double.parseDouble(atts.getValue("lat")), Double.parseDouble(atts.getValue("long")));
+			this.createNewTrailPoint(Integer.parseInt(atts.getValue(ID)), Double.parseDouble(atts.getValue(LATITUDE)), Double.parseDouble(atts.getValue(LONGITUDE)));
 		} else if (localName.equals(TRAIL)) {
-			createTrail(atts.getValue("name"));
+			this.createTrail(atts.getValue(NAME));
 		}
 	}
 	
 	@Override
 	public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
 		if (localName.equals(TRAIL_POINT)) {
-			saveTrailPoint();
+			this.saveTrailPoint();
 		} else if(localName.equals(TRAIL)) {
-			saveTrail();
+			this.saveTrail();
 		}
 	}
 	
@@ -57,7 +61,7 @@ public class DataHandler extends DefaultHandler {
 	 * @return A Trail who's name was given by trail
 	 */
 	public Trail getParsedTrail(String trail) {
-		Iterator<Trail> iter = _trails.iterator();
+		Iterator<Trail> iter = this._trails.iterator();
 		while(iter.hasNext()) {
 			Trail current = iter.next();
 			if (current.getName().equals(trail)) {
@@ -72,7 +76,7 @@ public class DataHandler extends DefaultHandler {
 	 * @return A Dictionary<String, Trail> of all the parsed trails.
 	 */
 	public HashSet<Trail> getParsedTrails() {
-		return _trails;
+		return this._trails;
 	}
 	
 	/**
@@ -83,7 +87,7 @@ public class DataHandler extends DefaultHandler {
 	 * @param lon Longitude in double format (ex. 12.2334)
 	 */
 	private void createNewTrailPoint(int id, double lat, double lon) {
-		_trailPoint = new TrailPoint(id, new GeoPoint((int)(lat*1E6), (int)(lon*1E6)),new HashSet<TrailPoint>());
+		this._trailPoint = new TrailPoint(id, new GeoPoint((int)(lat*1E6), (int)(lon*1E6)),new HashSet<TrailPoint>());
 	}
 
 	/**
@@ -91,21 +95,21 @@ public class DataHandler extends DefaultHandler {
 	 * @param trailName The name of the Trail
 	 */
 	private void createTrail(String trailName) {
-		_t = new Trail(trailName);
+		this._trail = new Trail(trailName);
 	}
 	
 	/**
 	 * Saves a TrailPoint to the current trail.
 	 */
 	private void saveTrailPoint() {
-		_t.addPoint(_trailPoint);
-		_trailPoint = new TrailPoint(-1, new GeoPoint(0,0), null);
+		this._trail.addPoint(this._trailPoint);
+		this._trailPoint = new TrailPoint(-1, new GeoPoint(0,0), null);
 	}
 	
 	/**
 	 * Saves the current Trail to the Trail Dictionary
 	 */
 	private void saveTrail() {
-		_trails.add(_t);
+		this._trails.add(this._trail);
 	}
 }

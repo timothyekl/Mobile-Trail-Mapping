@@ -10,8 +10,8 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 
-
 public class InterestPoint extends Overlay implements Overlay.Snappable {
+	
 	private static final double METERS_PER_MILE = 1609.344;
 	
 	private int _ID;
@@ -30,29 +30,31 @@ public class InterestPoint extends Overlay implements Overlay.Snappable {
 	 * @param summary A brief summary or description of the point.  This can be "".
 	 */
 	public InterestPoint(int id, GeoPoint p, String category, String title, String summary) {
-		_ID = id;
-		_location = p;
-		_category = category;
-		_summary = summary;
-		_title = title;
-		_color = new Paint();
-		_color.setARGB(255, 0, 0, 255);
-		_color.setAntiAlias(true);
+		this._ID = id;
+		this._location = p;
+		this._category = category;
+		this._summary = summary;
+		this._title = title;
+		this._color = new Paint();
+		this._color.setARGB(255, 0, 0, 255);
+		this._color.setAntiAlias(true);
 	}
 	
+	/**
+	 * Draws this InterestPoint on the screen.
+	 */
 	@Override
     public void draw(Canvas canvas, MapView mapView, boolean shadow) 
     {
         super.draw(canvas, mapView, shadow);                   
-
         Point screenPts = new Point();
-        mapView.getProjection().toPixels(_location, screenPts);
-
+        mapView.getProjection().toPixels(this._location, screenPts);
 		canvas.drawCircle(screenPts.x, screenPts.y, 5, _color );
     }
 	
-	
-	
+	/**
+	 * Fires when a user taps on the screen.  Not currently Implemented.
+	 */
 	@Override
 	public boolean onTap(GeoPoint p, MapView mapView) {
 		Log.w("MTM", "MTM: Tap On Overlay: " + this._title);
@@ -60,45 +62,55 @@ public class InterestPoint extends Overlay implements Overlay.Snappable {
 	}
 	
 	public void setID(int id) {
-		_ID = id;
+		this._ID = id;
 	}
 	public int getID() {
-		return _ID;
+		return this._ID;
 	}
 	
+	/**
+	 * Sets this InterestPoint's Location to a specialized GeoPoint.
+	 * @param latitude The latitude of this InterestPoint.
+	 * @param longitude The longitude of this InterestPoint.
+	 */
 	public void setLocation(int latitude, int longitude) {
-		_location = new GeoPoint(latitude, longitude);
+		this._location = new GeoPoint(latitude, longitude);
 	}
+	
+	/**
+	 * Returns the location as a GeoPoint.
+	 * @return A GeoPoint of the Location.
+	 */
 	public GeoPoint getLocation() {
-		return _location;
+		return this._location;
 	}
 	
 	public void setCategory(String category) {
-		_category = category;
+		this._category = category;
 	}
 	public String getCategory() {
-		return _category;
+		return this._category;
 	}
 	
 	public void setSummary(String summary) {
-		_summary = summary;
+		this._summary = summary;
 	}
 	public String getSummary() {
-		return _summary;
+		return this._summary;
 	}
 
 	public void setTitle(String title) {
-		_title = title;
+		this._title = title;
 	}
 	public String getTitle() {
-		return _title;
+		return this._title;
 	}
 	
 	public void setColor(int A, int R, int G, int B) {
-		_color.setARGB(A, R, G, B);
+		this._color.setARGB(A, R, G, B);
 	}
 	public Paint getColor() {
-		return _color;
+		return this._color;
 	}
 	
 	/**
@@ -113,23 +125,31 @@ public class InterestPoint extends Overlay implements Overlay.Snappable {
 	
 	/**
 	 * Returns the distance to the specified point.
-	 * @param check The point to check the distance to
-	 * @return The distance from this point to check
+	 * @param check The point to check the distance to.
+	 * @return The distance from this point to check.
 	 */
 	public double distanceTo(InterestPoint check) {
-		Location start = new Location(convertGeoPoint(_location));
-		Location end = new Location(convertGeoPoint(check.getLocation()));
+		Location start = new Location(this.convertGeoPointToLocation(this._location));
+		Location end = new Location(this.convertGeoPointToLocation(check.getLocation()));
 		
 		return start.distanceTo(end)/METERS_PER_MILE;
 	}
 	
-	private Location convertGeoPoint(GeoPoint p) {
+	/**
+	 * Converts a GeoPoint to a Location
+	 * @param p GeoPoint to convert
+	 * @return A Location with the same coordinates as the GeoPoint p
+	 */
+	private Location convertGeoPointToLocation(GeoPoint p) {
 		Location dest = new Location("");
 		dest.setLatitude(p.getLatitudeE6() / 1E6);
 		dest.setLongitude(p.getLongitudeE6() / 1E6);
 		return dest;
 	}
 	
+	/**
+	 * Not yet Implemented.
+	 */
 	@Override
 	public boolean onSnapToItem(int x, int y, Point snapPoint, MapView mapView) {
 		return false;

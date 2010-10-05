@@ -16,18 +16,18 @@ public class Trail {
 	private HashSet<TrailPoint> _trailPoints;
 	
 	public Trail(String name) {
-		_linePaint = new Paint();
-		_linePaint.setAntiAlias(true);
-		_linePaint.setARGB(255, 0, 255, 0);
-		_name = name;
-		_trailPoints = new HashSet<TrailPoint>();
+		this._linePaint = new Paint();
+		this._linePaint.setAntiAlias(true);
+		this._linePaint.setARGB(255, 0, 255, 0);
+		this._name = name;
+		this._trailPoints = new HashSet<TrailPoint>();
 	}
 	
 	public void setName(String name) {
-		_name = name;
+		this._name = name;
 	}
 	public String getName() {
-		return _name;
+		return this._name;
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class Trail {
 	public void addLinkedPoints(LinkedList<TrailPoint> trailPoints) {
 		while(!trailPoints.isEmpty()) {
 			TrailPoint p = trailPoints.poll();
-			_trailPoints.add(p);
+			this._trailPoints.add(p);
 			p.addConnection(trailPoints.peek());
 		}
 	}
@@ -55,7 +55,7 @@ public class Trail {
 	public void addLinkedPoints(LinkedList<TrailPoint> trailPoints, TrailPoint pOld) {
 		while(!trailPoints.isEmpty()) {
 			TrailPoint p = trailPoints.poll();
-			_trailPoints.add(p);
+			this._trailPoints.add(p);
 			p.addConnection(trailPoints.peek());
 		}
 	}
@@ -65,7 +65,7 @@ public class Trail {
 	 * @return The number of points in this trail
 	 */
 	public int getNumberOfTrailPoints() {
-		return _trailPoints.size();
+		return this._trailPoints.size();
 	}
 
 	/**
@@ -75,10 +75,10 @@ public class Trail {
 	 * @param pOld The existing TrailPoint to form the connection from
 	 */
 	public boolean addPoint(TrailPoint pNew, TrailPoint pOld) {
-		if(hasPoint(pNew))
+		if(this.hasPoint(pNew))
 			return false;
-		_trailPoints.add(pNew);
-		if(hasPoint(pOld))
+		this._trailPoints.add(pNew);
+		if(this.hasPoint(pOld))
 			pOld.addConnection(pNew);
 		return true;
 	}
@@ -88,7 +88,7 @@ public class Trail {
 	 * @param point The new TrailPoint to add
 	 */
 	public void addPoint(TrailPoint point) {
-		_trailPoints.add(point);
+		this._trailPoints.add(point);
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class Trail {
 	 * @param point The TrailPoint to remove
 	 */
 	public void removePoint(TrailPoint point) {
-		_trailPoints.remove(point);
+		this._trailPoints.remove(point);
 	}
 	
 	/**
@@ -121,7 +121,7 @@ public class Trail {
 	 * @return The Set of all TrailPoints
 	 */
 	public Collection<? extends Overlay> getTrailPoints() {
-		return _trailPoints;
+		return this._trailPoints;
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class Trail {
 	public boolean hasPoint(TrailPoint point) {
 		if(point == null)
 			return false;
-		return _trailPoints.contains(point);
+		return this._trailPoints.contains(point);
 	}
 	
 	/**
@@ -141,7 +141,7 @@ public class Trail {
 	 * and parses them properly.  That list is then cleared out.
 	 */
 	public void resolveConnections() {
-		for(TrailPoint p : _trailPoints) {
+		for(TrailPoint p : this._trailPoints) {
 			if(p.hasUnresolvedLinks()) {
 				for(Integer i : p.getUnresolvedLinks()) {
 					p.addConnection(this.getTrailPoint(i));
@@ -152,6 +152,6 @@ public class Trail {
 	
 	@Override
 	public String toString() {
-		return "Trail: "+_name + " (" + _trailPoints.size() + " TrailPoints)";
+		return "Trail: " + this._name + " (" + this._trailPoints.size() + " TrailPoints)";
 	}
 }

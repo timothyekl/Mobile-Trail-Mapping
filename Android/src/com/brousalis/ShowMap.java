@@ -47,18 +47,18 @@ public class ShowMap extends MapActivity {
 	/**
 	 * The Standard Location manager for an Android Device
 	 */
-	private LocationManager locMgr;
+	private LocationManager _locMgr;
 	
 	/**
 	 * The Map controller that allows us to retrieve or send
-	 * information to our mapView
+	 * information to our _mapView
 	 */
-	private MapController mapController;
+	private MapController _mapController;
 	
 	/**
 	 * MapView which will display trails to users
 	 */
-	private MapView mapView;
+	private MapView _mapView;
 	
 	/**
 	 * The settings object where both custom settings are stored
@@ -71,13 +71,13 @@ public class ShowMap extends MapActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        mapView = (MapView) findViewById(R.id.mapView);
-		mapView.setBuiltInZoomControls(true);
+        this.setContentView(R.layout.main);
+        this._mapView = (MapView) findViewById(R.id.mapView);
+        this._mapView.setBuiltInZoomControls(true);
 
-		mapController = mapView.getController();
+        this._mapController = this._mapView.getController();
 		
-		locMgr = (LocationManager) getSystemService(LOCATION_SERVICE);
+        this._locMgr = (LocationManager) getSystemService(LOCATION_SERVICE);
 		Log.w("MTM", "MTM: onCreate()");
     }
     @Override
@@ -96,10 +96,10 @@ public class ShowMap extends MapActivity {
     public void onStop() {
     	super.onStop();
     	// Always save the location, regardless if the user wants to go here
-		SharedPreferences.Editor editor = _settings.edit();
-		editor.putInt(SAVED_MAP_LAT, mapView.getMapCenter().getLatitudeE6());
-		editor.putInt(SAVED_MAP_LONG, mapView.getMapCenter().getLongitudeE6());
-		editor.putInt(SAVED_MAP_ZOOM, mapView.getZoomLevel());
+		SharedPreferences.Editor editor = this._settings.edit();
+		editor.putInt(SAVED_MAP_LAT, this._mapView.getMapCenter().getLatitudeE6());
+		editor.putInt(SAVED_MAP_LONG, this._mapView.getMapCenter().getLongitudeE6());
+		editor.putInt(SAVED_MAP_ZOOM, this._mapView.getZoomLevel());
 		editor.commit();
     	Log.w("MTM", "MTM: onStop()");
     }
@@ -129,9 +129,9 @@ public class ShowMap extends MapActivity {
     	// Get the GPS Location if it's available, otherwise use the network Location.
 		// By doing this, we don't force users to open up the GPS on program start.
     	// We'll also load here rather than oncreate to ensure settings are loaded.
-    	initLocation();
-    	initializeParser();
-    	drawTrail();
+    	this.initLocation();
+    	this.initializeParser();
+    	this.drawTrail();
     	Log.w("MTM", "MTM: onStart()");
     }
     
@@ -139,7 +139,7 @@ public class ShowMap extends MapActivity {
      * Initialize the XML Parser and Parse the data from the url.
      */
     private void initializeParser() {
-    	_dataHandler = new DataHandler();
+    	this._dataHandler = new DataHandler();
 		try {
 			URL url = new URL(getString(R.string.test_url));
 			SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -156,11 +156,11 @@ public class ShowMap extends MapActivity {
      * Resolves all connections for all trails pulled down
      */
     private void drawTrail() {
-    	HashSet<Trail> trails = _dataHandler.getParsedTrails();
-    	mapView.getOverlays().clear();
+    	HashSet<Trail> trails = this._dataHandler.getParsedTrails();
+    	this._mapView.getOverlays().clear();
     	for(Trail t : trails) {
     		t.resolveConnections();
-    		mapView.getOverlays().addAll(t.getTrailPoints());
+    		this._mapView.getOverlays().addAll(t.getTrailPoints());
     	}
 	}
     
@@ -193,10 +193,10 @@ public class ShowMap extends MapActivity {
 			break;
 		case R.id.menu_settings:
 			Intent settings = new Intent(this, TrailPrefs.class);
-			startActivity(settings);
+			this.startActivity(settings);
 			break;
 		case R.id.menu_center:
-			centerMapOnCurrentLocation(_settings.getBoolean(SAVED_ZOOM_ON_CENTER, true));
+			this.centerMapOnCurrentLocation(_settings.getBoolean(SAVED_ZOOM_ON_CENTER, true));
 			break;
 		}
 		return true;
@@ -208,21 +208,21 @@ public class ShowMap extends MapActivity {
 	 */
 	private void initLocation() {
 		GeoPoint p;
-		_settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		this._settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		
-		if(_settings.getBoolean(SAVED_MAP_STATE, false)) {
-			p = new GeoPoint(_settings.getInt(SAVED_MAP_LAT, DEFAULT_MAP_LAT), _settings.getInt(SAVED_MAP_LONG, DEFAULT_MAP_LONG));
+		if(this._settings.getBoolean(SAVED_MAP_STATE, false)) {
+			p = new GeoPoint(this._settings.getInt(SAVED_MAP_LAT, DEFAULT_MAP_LAT), this._settings.getInt(SAVED_MAP_LONG, DEFAULT_MAP_LONG));
 			
 			
-			mapController.animateTo(p);
+			this._mapController.animateTo(p);
 			// Zoom to the Saved Map zoom.  If none is present, get the Saved Default zoom from the prefs.  
 			// If that's not there, Use the DefaultMapZoom.  That last one should NEVER happen
-			mapController.setZoom(_settings.getInt(SAVED_MAP_ZOOM, Integer.parseInt(_settings.getString(SAVED_DEFAULT_ZOOM, DEFAULT_MAP_ZOOM + ""))));
-			mapView.setSatellite(true);
-			mapView.invalidate();
+			this._mapController.setZoom(this._settings.getInt(SAVED_MAP_ZOOM, Integer.parseInt(this._settings.getString(SAVED_DEFAULT_ZOOM, Integer.toString(DEFAULT_MAP_ZOOM)))));
+			this._mapView.setSatellite(true);
+			this._mapView.invalidate();
 		}
 		else {
-			centerMapOnCurrentLocation(false);
+			this.centerMapOnCurrentLocation(false);
 		}
 	}
 	
@@ -239,24 +239,21 @@ public class ShowMap extends MapActivity {
 	 */
 	private void centerMapOnCurrentLocation(boolean zoomOnCenter) {
 		GeoPoint p;
-		Location networkLoc = locMgr.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-		Location gpsLoc = locMgr.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		Location networkLoc = _locMgr.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		Location gpsLoc = _locMgr.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 		Location recentLoc = (gpsLoc != null)?gpsLoc:networkLoc;
 		// CSN01
 		// We can't just pull this from prefs, as this function is shared
 		// It's sometimes called by the initializer, not the "center me" button.
 		if(zoomOnCenter) {
-			mapController.setZoom(Integer.parseInt(_settings.getString(SAVED_DEFAULT_ZOOM, DEFAULT_MAP_ZOOM + "")));
+			this._mapController.setZoom(Integer.parseInt(_settings.getString(SAVED_DEFAULT_ZOOM, DEFAULT_MAP_ZOOM + "")));
 		}
 		
 		if(recentLoc != null) {
 			p = new GeoPoint((int) (recentLoc.getLatitude() * 1E6), (int) (recentLoc.getLongitude() * 1E6));
-			mapController.animateTo(p);
-			mapView.setSatellite(true);
-			mapView.invalidate();
-		}
-		else {
-			
+			this._mapController.animateTo(p);
+			this._mapView.setSatellite(true);
+			this._mapView.invalidate();
 		}
 	}
 }

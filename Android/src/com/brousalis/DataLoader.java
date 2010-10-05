@@ -47,6 +47,12 @@ public class DataLoader {
 		return "";
 	}
 	
+	public Trail getTrail(String trailName) {
+		Trail t = new Trail(trailName);
+		
+		return t;
+	}
+	
 	/**
 	 * Determines whether or not we have a valid Connection to post to.
 	 * @return

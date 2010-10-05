@@ -21,6 +21,8 @@ import com.google.android.maps.MapView;
 
 public class ShowMap extends MapActivity {
 	
+	Trail t;
+	
 	// SharedPreference Strings
 	public static final String SAVED_MAP_STATE = "SavedMapState";
 	public static final String SAVED_MAP_LAT = "SavedMapLat";
@@ -69,7 +71,7 @@ public class ShowMap extends MapActivity {
 		mapController = mapView.getController();
 		
 		locMgr = (LocationManager) getSystemService(LOCATION_SERVICE);
-		
+		t = new Trail("Heritage");
 		Log.w("MTM", "MTM: onCreate()");
     }
     @Override
@@ -186,7 +188,7 @@ public class ShowMap extends MapActivity {
 	}
 	private void drawFakeDot(GeoPoint p) {
 		mapView.getOverlays().clear();
-		Trail t = new Trail("Heritage");
+		//t = new Trail("Heritage");
 		TrailPoint myPoint = new TrailPoint(0, p, new HashSet<TrailPoint>());
 		t.addPoint(myPoint);
 		GeoPoint p2 = new GeoPoint(p.getLatitudeE6()+200, p.getLongitudeE6()+200);
@@ -199,6 +201,14 @@ public class ShowMap extends MapActivity {
 		t.addPoint(new TrailPoint(3, p4, new HashSet<TrailPoint>()), myPoint2);
 		mapView.getOverlays().addAll(t.getTrailPoints());
 	}
+	
+	@Override
+	public boolean dispatchTouchEvent(android.view.MotionEvent ev) {
+		super.dispatchTouchEvent(ev);
+		
+		return true;
+	};
+	
 	/**
 	 * Centers the map on the current location (GPS, Cell or WiFi, whichever is more accurate and present)
 	 * @param zoomOnCenter Should the zoom level be changed to what is defined in prefs

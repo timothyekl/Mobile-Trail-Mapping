@@ -32,18 +32,16 @@ public class ObjectTests extends TestCase {
 	}
 	
 	public void testCreateTrailPoint() {
-		TrailPoint p = new TrailPoint(0, new GeoPoint(0,0), "Bathroom", "New Bathroom", "A Bathroom", "Heritage", new HashSet<TrailPoint>());
+		TrailPoint p = new TrailPoint(0, new GeoPoint(0,0), "Bathroom", "New Bathroom", "A Bathroom", new HashSet<TrailPoint>());
 		assertNotNull(p);
 	}
 	
 	public void testModifyTrailPoint() {
-		TrailPoint p = new TrailPoint(0, new GeoPoint(0,0), "Bathroom", "New Bathroom", "A Bathroom", "Heritage", new HashSet<TrailPoint>());
+		TrailPoint p = new TrailPoint(0, new GeoPoint(0,0), "Bathroom", "New Bathroom", "A Bathroom", new HashSet<TrailPoint>());
 		assertNotNull(p);
 		
 		// Test the methods in the subclass
-		String trail = p.getTrail();
-		p.setTrail("Sac and Fox");
-		assertFalse("Trail did not get changed", trail.equals(p.getTrail()));
+		// TODO: Make this test assert something better
 	}
 	
 	public void testCreateTrail() {
@@ -192,5 +190,24 @@ public class ObjectTests extends TestCase {
 		t.removePoint(p2);
 		size--;
 		assertEquals(size, t.getNumberOfTrailPoints());
+	}
+	
+	public void testMilesRadiusFunction() {
+		GeoPoint p = new GeoPoint((int)(39.4867*1E6),(int)(-87.3153*1E6));
+		TrailPoint tp = new TrailPoint(0, p, null);
+		
+		GeoPoint p2 = new GeoPoint((int)(39.4866*1E6),(int)(-87.3142*1E6));
+		assertTrue(tp.isPointNotThisFarAway(p2, 20));
+		assertFalse(tp.isPointNotThisFarAway(p2, .01));
+	}
+	
+	public void testMilesRadiusFunction2() {
+		GeoPoint p = new GeoPoint((int)(39.4704*1E6),(int)(-87.3696*1E6));
+		TrailPoint tp = new TrailPoint(0, p, null);
+		
+		GeoPoint p2 = new GeoPoint((int)(39.4700*1E6),(int)(-87.3525*1E6));
+		assertTrue(tp.isPointNotThisFarAway(p2, 1));
+		assertFalse(tp.isPointNotThisFarAway(p2, .5));
+		assertFalse(tp.isPointNotThisFarAway(p2, .75));
 	}
 }

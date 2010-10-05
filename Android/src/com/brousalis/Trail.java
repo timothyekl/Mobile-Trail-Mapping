@@ -132,6 +132,6 @@ public class Trail {
 	public boolean hasPoint(TrailPoint point) {
 		if(point == null)
 			return false;
-		return _trailPoints.contains(getTrailPoint(point.getID()));
+		return _trailPoints.contains(point);
 	}
 }

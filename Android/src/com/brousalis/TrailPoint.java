@@ -12,25 +12,22 @@ import com.google.android.maps.MapView;
 
 public class TrailPoint extends InterestPoint {
 	
-	private String _trail;
+	private Trail _trail;
 	private Set<TrailPoint> _connections;
 	
 	
-	public TrailPoint(int id, int latitude, int longitude, String category, String summary, String title, String trail, Set<TrailPoint> connections) {
+	public TrailPoint(int id, int latitude, int longitude, String category, String summary, String title, Set<TrailPoint> connections) {
 		super(id, new GeoPoint(latitude, longitude), category, title, summary);
 		_connections = connections;
-		_trail = trail;
 	}
 	
-	public TrailPoint(int id, GeoPoint p, String category, String summary, String title, String trail, Set<TrailPoint> connections) {
+	public TrailPoint(int id, GeoPoint p, String category, String summary, String title, Set<TrailPoint> connections) {
 		super(id, p, category, title, summary);
 		_connections = connections;
-		_trail = trail;
 	}
 	public TrailPoint(int id, GeoPoint p, Set<TrailPoint> connections) {
 		super(id, p, "", "", "");
 		_connections = connections;
-		_trail = "";
 	}
 	
 	@Override
@@ -53,10 +50,10 @@ public class TrailPoint extends InterestPoint {
 		}
 	}
 
-	public void setTrail(String trail) {
+	public void setTrail(Trail trail) {
 		_trail = trail;
 	}
-	public String getTrail() {
+	public Trail getTrail() {
 		return _trail;
 	}
 	
@@ -90,6 +87,7 @@ public class TrailPoint extends InterestPoint {
 	public boolean removeConnection(TrailPoint connection) {
 		return (connection == null) ? false :_connections.remove(connection.getID());
 	}
+	
 	/**
 	 * Checks to see if this TrailPoint has a connection to the passed in TrailPoint
 	 * @param connection The TrailPoint to check the Set against
@@ -98,4 +96,14 @@ public class TrailPoint extends InterestPoint {
 	public boolean hasConnection(TrailPoint connection) {
 		return (connection == null) ? false :_connections.contains(connection.getID());
 	}
+//	private TrailPoint _recentPoint;
+//	@Override
+//	public boolean onTap(GeoPoint p, MapView mapView) {
+//		TrailPoint added = new TrailPoint(0, this.getTrail(), p, new HashSet<TrailPoint>());
+//		this.getTrail().addPoint(added, _recentPoint);
+//		_recentPoint = added;
+//		Log.w("MTM","MTM: Added Point!");
+//		return super.onTap(p, mapView);
+//	}
+	
 }

@@ -3,6 +3,7 @@ package com.brousalis;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.location.Location;
 import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
@@ -11,6 +12,8 @@ import com.google.android.maps.Overlay;
 
 
 public class InterestPoint extends Overlay implements Overlay.Snappable {
+	private static final double METERS_PER_MILE = 1609.344;
+	
 	private int _ID;
 	private GeoPoint _location;
 	private String _category;
@@ -97,7 +100,36 @@ public class InterestPoint extends Overlay implements Overlay.Snappable {
 	public Paint getColor() {
 		return _color;
 	}
-
+	
+	/**
+	 * Returns True if the Points are within miles radius of each other.
+	 * @param check Point to check against.
+	 * @param miles Miles to check against.
+	 * @return True if the point is within the circle, false if it is not.
+	 */
+	public boolean isPointNotThisFarAway(GeoPoint check, double miles) {
+		return distanceTo(check) < miles;
+	}
+	
+	/**
+	 * Returns the distance to the specified point.
+	 * @param check The point to check the distance to
+	 * @return The distance from this point to check
+	 */
+	public double distanceTo(GeoPoint check) {
+		Location start = new Location(convertGeoPoint(_location));
+		Location end = new Location(convertGeoPoint(check));
+		
+		return start.distanceTo(end)/METERS_PER_MILE;
+	}
+	
+	private Location convertGeoPoint(GeoPoint p) {
+		Location dest = new Location("");
+		dest.setLatitude(p.getLatitudeE6() / 1E6);
+		dest.setLongitude(p.getLongitudeE6() / 1E6);
+		return dest;
+	}
+	
 	@Override
 	public boolean onSnapToItem(int x, int y, Point snapPoint, MapView mapView) {
 		return false;

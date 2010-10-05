@@ -4,22 +4,22 @@
     <connection>1</connection>
   </trailpoint>
   <trailpoint id="1" lat="39.4856" long="-87.3009">
-      <connection>2</connection>
-      <connection>3</connection>
+    <connection>2</connection>
+    <connection>3</connection>
   </trailpoint>
   <trailpoint id="2" lat="39.4868" long="-87.3009">
   </trailpoint>
   <trailpoint id="3" lat="39.4868" long="-87.3183">
-      <connection>4</connection>
+    <connection>4</connection>
   </trailpoint>
   <trailpoint id="4" lat="39.4863" long="-87.3233">
-      <connection>5</connection>
+    <connection>5</connection>
   </trailpoint>
   <trailpoint id="5" lat="39.4812" long="-87.3536">
-      <connection>6</connection>
+    <connection>6</connection>
   </trailpoint>
   <trailpoint id="6" lat="39.4811" long="-87.3539">
-      <connection>7</connection>
+    <connection>7</connection>
   </trailpoint>
   <trailpoint id="7" lat="39.4775" long="-87.3539">
   </trailpoint>

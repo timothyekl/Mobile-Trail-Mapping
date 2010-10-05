@@ -1,42 +1,26 @@
 <?xml version="1.0"?>
 <trail name="FernFerret">
   <trailpoint id="0" lat="39.4852" long="-87.2955">
-    <connections>
-      <connection>1</connection>
-    </connections>
+    <connection>1</connection>
   </trailpoint>
   <trailpoint id="1" lat="39.4856" long="-87.3009">
-    <connections>
       <connection>2</connection>
       <connection>3</connection>
-    </connections>
   </trailpoint>
   <trailpoint id="2" lat="39.4868" long="-87.3009">
-    <connections>
-    </connections>
   </trailpoint>
   <trailpoint id="3" lat="39.4868" long="-87.3183">
-    <connections>
       <connection>4</connection>
-    </connections>
   </trailpoint>
   <trailpoint id="4" lat="39.4863" long="-87.3233">
-    <connections>
       <connection>5</connection>
-    </connections>
   </trailpoint>
   <trailpoint id="5" lat="39.4812" long="-87.3536">
-    <connections>
       <connection>6</connection>
-    </connections>
   </trailpoint>
   <trailpoint id="6" lat="39.4811" long="-87.3539">
-    <connections>
       <connection>7</connection>
-    </connections>
   </trailpoint>
   <trailpoint id="7" lat="39.4775" long="-87.3539">
-    <connections>
-    </connections>
   </trailpoint>
 </trail>

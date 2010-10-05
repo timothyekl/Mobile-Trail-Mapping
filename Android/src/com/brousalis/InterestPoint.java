@@ -107,7 +107,7 @@ public class InterestPoint extends Overlay implements Overlay.Snappable {
 	 * @param miles Miles to check against.
 	 * @return True if the point is within the circle, false if it is not.
 	 */
-	public boolean isPointNotThisFarAway(GeoPoint check, double miles) {
+	public boolean isPointNotThisFarAway(InterestPoint check, double miles) {
 		return distanceTo(check) < miles;
 	}
 	
@@ -116,9 +116,9 @@ public class InterestPoint extends Overlay implements Overlay.Snappable {
 	 * @param check The point to check the distance to
 	 * @return The distance from this point to check
 	 */
-	public double distanceTo(GeoPoint check) {
+	public double distanceTo(InterestPoint check) {
 		Location start = new Location(convertGeoPoint(_location));
-		Location end = new Location(convertGeoPoint(check));
+		Location end = new Location(convertGeoPoint(check.getLocation()));
 		
 		return start.distanceTo(end)/METERS_PER_MILE;
 	}

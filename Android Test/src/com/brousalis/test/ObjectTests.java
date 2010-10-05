@@ -197,8 +197,10 @@ public class ObjectTests extends TestCase {
 		TrailPoint tp = new TrailPoint(0, p, null);
 		
 		GeoPoint p2 = new GeoPoint((int)(39.4866*1E6),(int)(-87.3142*1E6));
-		assertTrue(tp.isPointNotThisFarAway(p2, 20));
-		assertFalse(tp.isPointNotThisFarAway(p2, .01));
+		TrailPoint tp2 = new TrailPoint(1, p2, null);
+		
+		assertTrue(tp.isPointNotThisFarAway(tp2, 20));
+		assertFalse(tp.isPointNotThisFarAway(tp2, .01));
 	}
 	
 	public void testMilesRadiusFunction2() {
@@ -206,8 +208,10 @@ public class ObjectTests extends TestCase {
 		TrailPoint tp = new TrailPoint(0, p, null);
 		
 		GeoPoint p2 = new GeoPoint((int)(39.4700*1E6),(int)(-87.3525*1E6));
-		assertTrue(tp.isPointNotThisFarAway(p2, 1));
-		assertFalse(tp.isPointNotThisFarAway(p2, .5));
-		assertFalse(tp.isPointNotThisFarAway(p2, .75));
+		TrailPoint tp2 = new TrailPoint(1, p2, null);
+		
+		assertTrue(tp.isPointNotThisFarAway(tp2, 1));
+		assertFalse(tp.isPointNotThisFarAway(tp2, .5));
+		assertFalse(tp.isPointNotThisFarAway(tp2, .75));
 	}
 }

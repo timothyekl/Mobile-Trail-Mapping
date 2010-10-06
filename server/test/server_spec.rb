@@ -8,7 +8,7 @@ describe "Server Tests" do
   end
 
   before :all do
-    @objects = ['user', 'point', 'trail', 'condition', 'catagory']
+    @objects = ['user', 'point', 'trail', 'condition', 'category']
     @base_response = 'Welcome to mobile trail mapping application'
     @api_key = 5500
     @test_user = "test@brousalis.com"
@@ -48,14 +48,14 @@ describe "Server Tests" do
                 :long => 5,
                 :connections => "",
                 :condition => 'fair',
-                :catagory => 'test',
+                :category => 'test',
                 :trail => 'test',
                 :api_key => @api_key,
                 :desc => 'test'}
 
       post "/point/add", params
       last_response.body.should == "Added Point 4, 5"
-      Point.first(:lat => 4, :long => 5).catagory.name.should == 'test'
+      Point.first(:lat => 4, :long => 5).category.name.should == 'test'
     end
 
     it "should catch an invalid user" do
@@ -88,27 +88,27 @@ describe "Server Tests" do
     end
   end
 
-  describe "Catagory Actions" do
-    it "should add a catagory" do
-      catagoryName = 'catagory'
+  describe "Category Actions" do
+    it "should add a category" do
+      categoryName = 'category'
 
-      params = {:catagory => catagoryName,
+      params = {:category => categoryName,
                 :api_key => @api_key,
                 :user => @test_user,
                 :pwhash => @test_pw }
 
-      post '/catagory/add', params
-      last_response.body.should == "Added Catagory #{catagoryName}"
-      Catagory.first(:name => catagoryName).name.should == catagoryName
+      post '/category/add', params
+      last_response.body.should == "Added Category #{categoryName}"
+      Category.first(:name => categoryName).name.should == categoryName
     end
 
     it "should error for an invalid user" do
-      params = {:catagory => 'catagory',
+      params = {:category => 'category',
                 :api_key => @api_key,
                 :user => @invalid_user,
                 :pwhash => @test_pw }
 
-      post '/catagory/add', params
+      post '/category/add', params
       last_response.body.should == "Invalid username or password"   
     end
   end

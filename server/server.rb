@@ -4,7 +4,7 @@ require 'config/init'
 
 configure do
   API_KEY = 5500
-  OBJECTS = ['user', 'point', 'trail', 'condition', 'catagory']
+  OBJECTS = ['user', 'point', 'trail', 'condition', 'category']
   User.first_or_create(:email => 'test@brousalis.com', :pwhash => Digest::SHA1.hexdigest('password'))
 
   set :logging, true
@@ -14,9 +14,9 @@ end
 before do
   OBJECTS.each do |object|
     if request.path_info.split('/').include?(object)
-      #halt 'Invalid API Key' if params[:api_key].to_i != API_KEY
+      halt 'Invalid API Key' if params[:api_key].to_i != API_KEY
 
-      #halt "Invalid username or password" if password_matches_user?(params[:user], params[:pwhash])
+      halt "Invalid username or password" if password_matches_user?(params[:user], params[:pwhash])
     end
   end
 end
@@ -35,10 +35,10 @@ end
 post '/point/add' do
   point = Point.first_or_create(:lat => params[:lat], :long => params[:long], :desc => params[:desc])
   #not sure why you have to set these to variables first, but you do
-  cat = Catagory.first_or_create(:name => params[:catagory])
+  cat = Category.first_or_create(:name => params[:category])
   cond = Condition.first_or_create(:desc => params[:condition])
   trail = Trail.first_or_create(:name => params[:trail])
-  point.catagory = cat
+  point.category = cat
   point.condition = cond
   point.trail = trail
 
@@ -56,15 +56,17 @@ end
 
 get '/condition/get' do
   content_type 'application/xml', :charset => 'utf-8'
-
   @conditions = Condition.all
-
   builder :condition
 end
 
-post '/catagory/add' do
-  catagory = Catagory.first_or_create(:name => params[:catagory])
-  "Added Catagory #{catagory.name}"
+post '/category/add' do
+  category = Category.first_or_create(:name => params[:category])
+  "Added Category #{category.name}"
+end
+
+get '/category/get' do
+
 end
 
 post '/trail/add' do

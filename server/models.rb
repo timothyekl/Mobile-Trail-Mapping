@@ -1,4 +1,4 @@
-class Catagory
+class Category
   include DataMapper::Resource
 
   property :id,   Serial
@@ -43,13 +43,13 @@ class Point
   property :long, Integer, :required => true
   property :desc, Text
 
-  belongs_to  :catagory
+  belongs_to  :category
   belongs_to  :condition
   belongs_to  :trail
   has n, :photos
 
-  #has n, :connections, :child_key => [ :source_id ]
-  #has n, :connected_points, self, :through => :connections, :via => :target
+  has n, :connections, :child_key => [ :source_id ]
+  has n, :connected_points, self, :through => :connections, :via => :target
 end
 
 class Connection

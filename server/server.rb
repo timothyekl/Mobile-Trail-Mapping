@@ -24,12 +24,6 @@ before do
 end
 
 get '/' do
-  #point = Point.new(:lat => 1, :long => 1, :desc => 'adf')
-  #point.catagory = Catagory.create(:name => 'test')
-  #point.condition = Condition.create(:desc => 'test')
-  #point.trail = Trail.create(:name => 'test')
-  #point.save
-
   "Welcome to mobile trail mapping application"
 end
 
@@ -50,7 +44,7 @@ post '/point/add' do
   point.condition = cond
   point.trail = trail
 
-  #params[:connections].split(',').each { |p| point.connections << Point.get(p.to_i)}
+  params[:connections].split(',').each { |p| point.connections << Point.get(p.to_i)}
 
   point.save
 

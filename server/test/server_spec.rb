@@ -54,7 +54,7 @@ describe "Server Tests" do
 
       post "/point/add", params
       last_response.body.should == "Added Point 4, 5"
-      Point.first(:lat => 4, :long => 5).catagory.should == 'test'
+      Point.first(:lat => 4, :long => 5).catagory.name.should == 'test'
     end
 
     it "should catch an invalid user" do

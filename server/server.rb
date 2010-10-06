@@ -8,6 +8,9 @@ configure do
   API_KEY = 5500
   OBJECTS = ['user', 'point', 'trail', 'condition', 'catagory']
   User.first_or_create(:email => 'test@brousalis.com', :pwhash => Digest::SHA1.hexdigest('password'))
+
+  set :logging, true
+  DataMapper::Logger.new(STDOUT, :debug) 
 end
 
 before do
@@ -21,11 +24,11 @@ before do
 end
 
 get '/' do
-  Point.new(:lat => 1,
-            :long => 1,
-            :desc => 'test',
-            :catagory => Catagory.first,
-            :trail => Trail.first)
+  #point = Point.new(:lat => 1, :long => 1, :desc => 'adf')
+  #point.catagory = Catagory.create(:name => 'test')
+  #point.condition = Condition.create(:desc => 'test')
+  #point.trail = Trail.create(:name => 'test')
+  #point.save
 
   "Welcome to mobile trail mapping application"
 end
@@ -38,13 +41,18 @@ end
 
 #Point Routes
 post '/point/add' do
-  point = Point.first_or_create(:lat => params[:lat],
-                                :long => params[:long],
-                                :desc => params[:desc],
-                                :catagory => Catagory.first_or_create(:name => params[:catagory]),
-                                :trail => Trail.first_or_create(:name => params[:trail]))
+  point = Point.first_or_create(:lat => params[:lat], :long => params[:long], :desc => params[:desc])
+  #not sure why you have to set these to variables first, but you do
+  cat = Catagory.first_or_create(:name => params[:catagory])
+  cond = Condition.first_or_create(:desc => params[:condition])
+  trail = Trail.first_or_create(:name => params[:trail])
+  point.catagory = cat
+  point.condition = cond
+  point.trail = trail
 
-  params[:connections].split(',').each { |p| point.connections << Point.get(p.to_i)}
+  #params[:connections].split(',').each { |p| point.connections << Point.get(p.to_i)}
+
+  point.save
 
   "Added Point #{point.lat}, #{point.long}"
 end

@@ -6,9 +6,9 @@ configure :development do
   DataMapper.setup(:default, 'sqlite://' + Dir.pwd + '/tmp/development.db' )
 end
 
-#configure :test do
-#  DataMapper.setup(:default, 'sqlite::memory:')
-#end
+configure :test do
+  DataMapper.setup(:default, 'sqlite::memory:')
+end
 
 require 'models'
 

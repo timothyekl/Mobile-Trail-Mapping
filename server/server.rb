@@ -1,8 +1,6 @@
-require 'pp'
 require 'rubygems'
 require 'sinatra'
 require 'config/init'
-require 'digest/sha1'
 
 configure do
   API_KEY = 5500
@@ -16,9 +14,9 @@ end
 before do
   OBJECTS.each do |object|
     if request.path_info.split('/').include?(object)
-      halt 'Invalid API Key' if params[:api_key].to_i != API_KEY
+      #halt 'Invalid API Key' if params[:api_key].to_i != API_KEY
 
-      halt "Invalid username or password" if password_matches_user?(params[:user], params[:pwhash])
+      #halt "Invalid username or password" if password_matches_user?(params[:user], params[:pwhash])
     end
   end
 end
@@ -44,7 +42,7 @@ post '/point/add' do
   point.condition = cond
   point.trail = trail
 
-  params[:connections].split(',').each { |p| point.connections << Point.get(p.to_i)}
+  params[:connections].split(',').each { |p| point.connections << Point.get(p.to_i) }
 
   point.save
 
@@ -54,6 +52,14 @@ end
 post '/condition/add' do
   condition = Condition.first_or_create(:desc => params[:condition])
   "Added Condition #{condition.desc}"
+end
+
+get '/condition/get' do
+  content_type 'application/xml', :charset => 'utf-8'
+
+  @conditions = Condition.all
+
+  builder :condition
 end
 
 post '/catagory/add' do

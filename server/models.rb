@@ -48,8 +48,8 @@ class Point
   belongs_to  :trail
   has n, :photos
 
-  has n, :connections, :child_key => [ :source_id ]
-  has n, :connected_points, self, :through => :connections, :via => :target
+  #has n, :connections, :child_key => [ :source_id ]
+  #has n, :connected_points, self, :through => :connections, :via => :target
 end
 
 class Connection

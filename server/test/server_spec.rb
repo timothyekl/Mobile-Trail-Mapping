@@ -47,6 +47,7 @@ describe "Server Tests" do
                 :lat => 4,
                 :long => 5,
                 :connections => "",
+                :condition => 'fair',
                 :catagory => 'test',
                 :trail => 'test',
                 :api_key => @api_key,

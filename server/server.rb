@@ -20,6 +20,14 @@ before do
   end
 end
 
+helpers do
+  def password_matches_user?(user, pass)
+    User.all(:email => user, :pwhash => pass).empty?
+  end  
+end
+
 get '/' do
   "Welcome to mobile trail mapping application"
 end
+
+

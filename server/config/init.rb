@@ -17,8 +17,4 @@ require 'models'
 DataMapper.finalize
 DataMapper.auto_upgrade!
 
-helpers do
-  def password_matches_user?(user, pass)
-    User.all(:email => user, :pwhash => pass).empty?
-  end  
-end
+

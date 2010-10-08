@@ -8,22 +8,12 @@ describe "Server Tests" do
   end
 
   before :all do
+    @objects = ['user', 'point', 'trail', 'condition', 'category']
     @base_response = 'Welcome to mobile trail mapping application'
-    @base_url = "/5500"
+    @api_key = 5500
     @test_user = "test@brousalis.com"
     @test_pw = Digest::SHA1.hexdigest('password')
     @invalid_user = "invalid@brousalis.com"
-  end
-
-  before :each do
-    User.new(:email => 'test@brousalis.com', :pwhash => Digest::SHA1.hexdigest('password')).save
-  end
-
-  after :each do
-    User.destroy
-    Point.destroy
-    Catagory.destroy
-    Trail.destroy
   end
 
   describe "base actions" do
@@ -33,8 +23,8 @@ describe "Server Tests" do
     end
 
     it "should error for an invalid api key" do
-      ['user', 'point'].each do |object|
-        post "/12345/#{object}/add"
+      @objects.each do |object|
+        post "/#{object}/add", {:api_key => 12345}
         last_response.body.should == 'Invalid API Key'
       end
     end
@@ -42,7 +32,12 @@ describe "Server Tests" do
 
   describe "Point Actions" do
     it "should return a test point" do
-      get @base_url + "/point/get"
+      pending("haven't decided xml structure yet")
+      params = {:api_key => @api_key,
+                :user => @test_user,
+                :pwhash => @test_pw }
+
+      get "/point/get", params
       last_response.body.should == 'test point'
     end
 
@@ -52,41 +47,105 @@ describe "Server Tests" do
                 :lat => 4,
                 :long => 5,
                 :connections => "",
-                :catagory => 'test',
+                :condition => 'fair',
+                :category => 'test',
                 :trail => 'test',
+                :api_key => @api_key,
                 :desc => 'test'}
 
-      post @base_url + "/point/add", params
-      last_response.body.should == "added point 4, 5"
+      post "/point/add", params
+      last_response.body.should == "Added Point 4, 5"
+      Point.first(:lat => 4, :long => 5).category.name.should == 'test'
     end
 
     it "should catch an invalid user" do
-      post @base_url + '/point/add', {:user => @invalid_user, :pwhash => @test_pw}
+      post '/point/add', {:user => @invalid_user, :pwhash => @test_pw, :api_key => @api_key}
       last_response.body.should == 'Invalid username or password'
     end
   end
 
   describe "Trail Actions" do
     it "should add a trail" do
-      pending('Add a Trail')
       trailname = 'trail'
-      params = {:name => trailname,
+      params = {:trail => trailname,
+                :api_key => @api_key,
                 :user => @test_user,
-                :pshash => @test_pw }
+                :pwhash => @test_pw }
 
-      post @base_url + '/trail/add', params
-      Trail.first(:name => trail).name.should == trailname
-      last_response.body.should == "added trail #{trailname}"
+      post '/trail/add', params
+      last_response.body.should == "Added Trail #{trailname}"
+      Trail.first(:name => trailname).name.should == trailname
     end
 
     it "should error for an invalid user" do
-      pending('Add a trail with an invalid user')
-      params = {:name => 'trail',
+      params = {:trail => 'trail',
+                :api_key => @api_key,
                 :user => @invalid_user,
-                :pshash => @test_pw }
+                :pwhash => @test_pw }
 
-      post @base_url + '/trail/add', params
+      post '/trail/add', params
       last_response.body.should == "Invalid username or password"   
+    end
+  end
+
+  describe "Category Actions" do
+    it "should add a category" do
+      categoryName = 'category'
+
+      params = {:category => categoryName,
+                :api_key => @api_key,
+                :user => @test_user,
+                :pwhash => @test_pw }
+
+      post '/category/add', params
+      last_response.body.should == "Added Category #{categoryName}"
+      Category.first(:name => categoryName).name.should == categoryName
+    end
+
+    it "should error for an invalid user" do
+      params = {:category => 'category',
+                :api_key => @api_key,
+                :user => @invalid_user,
+                :pwhash => @test_pw }
+
+      post '/category/add', params
+      last_response.body.should == "Invalid username or password"   
+    end
+  end
+
+  describe "Condition Actions" do
+    it "should add a condition" do
+      condition = 'condition'
+      params = {:condition => condition,
+                :api_key => @api_key,
+                :user => @test_user,
+                :pwhash => @test_pw }
+
+      post '/condition/add', params
+      last_response.body.should == "Added Condition #{condition}"
+      Condition.first(:desc => condition).desc.should == condition
+    end
+
+    it "should error for an invalid user" do
+      params = {:name => 'condition',
+                :api_key => @api_key,
+                :user => @invalid_user,
+                :pwhash => @test_pw }
+
+      post '/condition/add', params
+      last_response.body.should == "Invalid username or password"   
+    end
+
+    it "should get a condition" do
+      pending("haven't decided on xml structure yet")
+      Condition.first_or_create(:desc => 'condition')
+
+      params = {:api_key => @api_key,
+                :user => @test_user,
+                :pwhash => @test_pw }
+
+      get '/condition/get', params
+      last_response.body.should == "condition"
     end
   end
 end

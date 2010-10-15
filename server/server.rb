@@ -13,7 +13,6 @@ before do
   OBJECTS.each do |object|
     if request.path_info.split('/').include?(object)
       halt 'Invalid API Key' if params[:api_key].to_i != API_KEY
-
       halt "Invalid username or password" if password_matches_user?(params[:user], params[:pwhash])
     end
   end

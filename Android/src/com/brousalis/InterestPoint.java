@@ -52,15 +52,6 @@ public class InterestPoint extends Overlay implements Overlay.Snappable {
 		canvas.drawCircle(screenPts.x, screenPts.y, 5, _color );
     }
 	
-	/**
-	 * Fires when a user taps on the screen.  Not currently Implemented.
-	 */
-	@Override
-	public boolean onTap(GeoPoint p, MapView mapView) {
-		Log.w("MTM", "MTM: Tap On Overlay: " + this._title);
-		return super.onTap(p, mapView);
-	}
-	
 	public void setID(int id) {
 		this._ID = id;
 	}
@@ -148,10 +139,35 @@ public class InterestPoint extends Overlay implements Overlay.Snappable {
 	}
 	
 	/**
-	 * Not yet Implemented.
+	 * Fires when a user taps on the screen.  Not currently Implemented.
 	 */
 	@Override
+	public boolean onTap(GeoPoint p, MapView mapView) {
+		Log.w("MTM", "MTM: Tap On Overlay #" + this._ID + ": " + this._title);
+		
+		return super.onTap(p, mapView);
+	}
+//	@Override
+//    public boolean onTap(GeoPoint point, MapView view) {
+//        checkTolerance(view);
+//
+//        // entry here?
+//        Entry e = finder.find(point.getLatitudeE6(), point.getLongitudeE6());
+//        if (e != null) {
+//            
+//            // OK, they picked an entry; show them the popup.
+//            visitor.setEntry(e);
+//            popup.setVisibility(View.VISIBLE);
+//            TextView text = (TextView) container.findViewById(R.id.title);
+//            text.setText(e.title());
+//        }
+//    
+//        return super.onTap(point, view);
+//    }
+
+	@Override
 	public boolean onSnapToItem(int x, int y, Point snapPoint, MapView mapView) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }

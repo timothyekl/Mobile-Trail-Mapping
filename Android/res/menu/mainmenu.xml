@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
-  xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/menu_center" android:icon="@drawable/ic_menu_center" android:titleCondensed="Center" android:title="Center"></item>
-<item android:id="@+id/menu_settings" android:titleCondensed="Settings" android:title="Settings" android:icon="@drawable/ic_menu_settings" android:visible="true" android:enabled="true"></item>
-<item android:visible="true" android:enabled="true" android:id="@+id/menu_quit" android:checkable="true" android:titleCondensed="Quit" android:title="Quit" android:icon="@drawable/ic_menu_exit"></item>
-
-
-
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:id="@+id/menu_center"
+		android:icon="@drawable/ic_menu_center"
+		android:titleCondensed="@string/center_name"
+		android:title="@string/center_name">
+	</item>
+	<item
+		android:id="@+id/menu_settings"
+		android:titleCondensed="@string/settings_name"
+		android:title="@string/settings_name"
+		android:icon="@drawable/ic_menu_settings"
+		android:visible="true"
+		android:enabled="true">
+	</item>
+	<item
+		android:visible="true"
+		android:enabled="true"
+		android:id="@+id/menu_quit"
+		android:checkable="true"
+		android:titleCondensed="@string/quit_name"
+		android:title="@string/quit_name"
+		android:icon="@drawable/ic_menu_exit">
+	</item>
 </menu>

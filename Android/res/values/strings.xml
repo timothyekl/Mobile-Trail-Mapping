@@ -3,4 +3,8 @@
     <string name="hello">Hello World, ShowMap!</string>
     <string name="app_name">Trail Maps</string>
     <string name="test_url">http://fernferret.com/mtmtest.xml</string>
+    
+    <string name="settings_name">Settings</string>
+    <string name="quit_name">Quit</string>
+    <string name="center_name">Center</string>
 </resources>

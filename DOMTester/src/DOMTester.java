@@ -15,27 +15,23 @@ import org.xml.sax.InputSource;
 
 public class DOMTester {
 
-	static String SCHEMA_LANGUAGE = "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
-	static String XML_SCHEMA = "http://www.w3.org/2001/XMLSchema";
-	static String SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
+	static String XML_FILE = "http://www.fernferret.com/samplexml.xml";
+	static String XML_SCHEMA = "http://www.fernferret.com/mtmSchema.xsd";
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		StreamSource xmlSource = new StreamSource("http://www.fernferret.com/samplexml.xml");
+		StreamSource xmlSource = new StreamSource(XML_FILE);
 		//factory.setNamespaceAware(true);
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		//factory.setValidating(true);
 		DocumentBuilder builder = null;
 		
-		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
-
-		
+		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);		
 		try {
-			URL schemaDoc = new URL("http://www.fernferret.com/mtmSchema.xsd");
-			URL xmlDoc = new URL("http://www.fernferret.com/samplexml.xml");
+			URL schemaDoc = new URL(XML_SCHEMA);
+			URL xmlDoc = new URL(XML_FILE);
 			Schema schema = schemaFactory.newSchema(schemaDoc);
 			factory.setSchema(schema);
 			Validator validator = schema.newValidator();

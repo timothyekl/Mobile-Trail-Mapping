@@ -5,7 +5,9 @@
       <points>
         <point id="0">
           <title>Point Title</title>
-          <category id="0">Category</category>
+          <category id="0">
+            <name>Category</name>
+          </category>
           <description>
             This is the description
           </description>
@@ -23,7 +25,9 @@
       <points>
         <point id="4">
           <title>Point Title</title>
-          <category id="0">Category</category>
+          <category id="0">
+            <name>Category</name>
+          </category>
           <description>
             This is the description
           </description>
@@ -41,7 +45,9 @@
   <misc>
     <point id="5">
       <title>Point Title</title>
-      <category id="0">Category</category>
+      <category id="0">
+        <name>Category</name>
+      </category>
       <description>
         This is the description
       </description>

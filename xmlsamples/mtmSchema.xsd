@@ -34,19 +34,16 @@ elementFormDefault="qualified">
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
-
   <xs:complexType name="pointType">
     <xs:sequence>
       <xs:element name="title" type="xs:string"/>
       <xs:element name="description" type="xs:string"/>
       <xs:element name="category">
         <xs:complexType>
-          <xs:simpleContent>
-            <xs:extension base="xs:string">
-              <xs:attribute name="id" type="xs:integer"/>
-            </xs:extension>
-          </xs:simpleContent>
+          <xs:sequence>
+            <xs:element name="name" type="xs:string" />
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:integer"/>
         </xs:complexType>
       </xs:element>
       <xs:element name="condition">
@@ -84,5 +81,4 @@ elementFormDefault="qualified">
     </xs:sequence>
     <xs:attribute name="id" type="xs:integer"/>
   </xs:complexType>
-  
 </xs:schema>

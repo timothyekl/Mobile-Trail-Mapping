@@ -1,34 +1,32 @@
 require 'rubygems'
 require 'sinatra'
 require 'config/init'
-require 'digest/sha1'
+Dir['routes/*'].each { |obj| require obj }
 
 configure do
   API_KEY = 5500
-  OPT_DELIMITER = '|'
-  #User.new(:email => 'test@brousalis.com', :pwhash => Digest::SHA1.hexdigest('password'))
+  OBJECTS = ['user', 'point', 'trail', 'condition', 'category']
+  User.first_or_create(:email => 'test@brousalis.com', :pwhash => Digest::SHA1.hexdigest('password'))
+end
+
+before do
+  OBJECTS.each do |object|
+    if request.path_info.split('/').include?(object)
+      halt 'Invalid API Key' if params[:api_key].to_i != API_KEY
+
+      halt "Invalid username or password" if password_matches_user?(params[:user], params[:pwhash])
+    end
+  end
+end
+
+helpers do
+  def password_matches_user?(user, pass)
+    User.all(:email => user, :pwhash => pass).empty?
+  end  
 end
 
 get '/' do
   "Welcome to mobile trail mapping application"
 end
 
-get '/:api_key/point/get' do
-  return 'Invalid API Key' if params[:api_key].to_i != API_KEY
 
-  'test point'
-end
-
-post '/:api_key/user/add' do
-  return 'Invalid API KEY' if params[:api_key].to_i != API_KEY
-
-  user = User.new(:email => params[:email], :pwhash => params[:pwhash]).save
-  return "Added user #{user.email}"
-end
-
-post '/:api_key/point/add' do
-  return 'Invalid username or password' if password_matches_user?(params[:user], params[:pwhash])
-  return 'Invalid API Key' if params[:api_key].to_i != API_KEY
-
-  'added point'
-end

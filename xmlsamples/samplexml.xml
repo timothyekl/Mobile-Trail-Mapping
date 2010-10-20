@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<data>
+  <trails>
+    <trail id="0">
+      <points>
+        <point id="0">
+          <title>Point Title</title>
+          <category id="0">Category</category>
+          <description>
+            This is the description
+          </description>
+          <condition>Open</condition>
+          <latitude>0.000000</latitude>
+          <longitude>0.000000</longitude>
+          <connections>
+            <connection id="1" />
+            <connection id="2" />
+          </connections>
+        </point>
+      </points>
+    </trail>
+    <trail id="7">
+      <points>
+        <point id="4">
+          <title>Point Title</title>
+          <category id="0">Category</category>
+          <description>
+            This is the description
+          </description>
+          <condition>Open</condition>
+          <latitude>0.000000</latitude>
+          <longitude>0.000000</longitude>
+          <connections>
+            <connection id="1" />
+            <connection id="2" />
+          </connections>
+        </point>
+      </points>
+    </trail>
+  </trails>
+  <misc>
+    <point id="5">
+      <title>Point Title</title>
+      <category id="0">Category</category>
+      <description>
+        This is the description
+      </description>
+      <condition>Open</condition>
+      <latitude>0.000000</latitude>
+      <longitude>0.000000</longitude>
+      <connections>
+        <connection id="1" />
+        <connection id="2" />
+      </connections>
+    </point>
+  </misc>
+</data>

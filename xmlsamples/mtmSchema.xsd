@@ -4,10 +4,10 @@ elementFormDefault="qualified">
   <xs:element name="data">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="trails" maxOccurs="unbounded">
+        <xs:element name="trails">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="trail" >
+              <xs:element name="trail" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="points">
@@ -40,10 +40,11 @@ elementFormDefault="qualified">
       <xs:element name="description" type="xs:string"/>
       <xs:element name="category">
         <xs:complexType>
-          <xs:sequence>
-            <xs:element name="name" type="xs:string" />
-          </xs:sequence>
-          <xs:attribute name="id" type="xs:integer"/>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="id" type="xs:integer"/>
+            </xs:extension>
+          </xs:simpleContent>
         </xs:complexType>
       </xs:element>
       <xs:element name="condition">

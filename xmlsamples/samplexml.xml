@@ -5,18 +5,18 @@
       <points>
         <point id="0">
           <title>Point Title</title>
-          <category id="0">
-            <name>Category</name>
-          </category>
           <description>
             This is the description
           </description>
+          <category id="0">
+            Category
+          </category>
           <condition>Open</condition>
           <latitude>0.000000</latitude>
           <longitude>0.000000</longitude>
           <connections>
-            <connection id="1" />
-            <connection id="2" />
+            <connection>1</connection>
+            <connection>2</connection>
           </connections>
         </point>
       </points>
@@ -25,18 +25,18 @@
       <points>
         <point id="4">
           <title>Point Title</title>
-          <category id="0">
-            <name>Category</name>
-          </category>
           <description>
             This is the description
           </description>
+          <category id="0">
+            Category
+          </category>
           <condition>Open</condition>
           <latitude>0.000000</latitude>
           <longitude>0.000000</longitude>
           <connections>
-            <connection id="1" />
-            <connection id="2" />
+            <connection>1</connection>
+            <connection>2</connection>
           </connections>
         </point>
       </points>
@@ -45,18 +45,18 @@
   <misc>
     <point id="5">
       <title>Point Title</title>
-      <category id="0">
-        <name>Category</name>
-      </category>
       <description>
         This is the description
       </description>
+      <category id="0">
+        Category
+      </category>
       <condition>Open</condition>
       <latitude>0.000000</latitude>
       <longitude>0.000000</longitude>
       <connections>
-        <connection id="1" />
-        <connection id="2" />
+        <connection>1</connection>
+        <connection>2</connection>
       </connections>
     </point>
   </misc>

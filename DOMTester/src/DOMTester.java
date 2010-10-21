@@ -31,9 +31,9 @@ public class DOMTester {
 			URL schemaDoc = new URL(XML_SCHEMA);
 			URL xmlDoc = new URL(XML_FILE);
 			Schema schema = schemaFactory.newSchema(schemaDoc);
-			factory.setSchema(schema);
-			Validator validator = schema.newValidator();
-			validator.validate(xmlSource);
+			//factory.setSchema(schema);
+			//Validator validator = schema.newValidator();
+			//validator.validate(xmlSource);
 
 			builder = factory.newDocumentBuilder();
 			doc = builder.parse(new InputSource(xmlDoc.openStream()));
@@ -48,7 +48,7 @@ public class DOMTester {
 		Node currentNode = itemList.item(0);
 		while (currentNode != null) {
 			if(currentNode.getNodeType() == Node.ELEMENT_NODE) {
-				System.out.println("Trail: ");
+				System.out.println("Trail: "+currentNode.getAttributes().getNamedItem("name"));
 				extractTrail(currentNode);
 			}
 			currentNode = currentNode.getNextSibling();
@@ -75,7 +75,13 @@ public class DOMTester {
 		localPoint = point.getFirstChild().getNextSibling();
 		while(localPoint != null) {
 			if(localPoint.getNodeType() == Node.ELEMENT_NODE && localPoint.getNodeName() != "connections") {
-				System.out.println(localPoint.getNodeName() + " : " + localPoint.getTextContent());
+				System.out.print(localPoint.getNodeName() + " : " + localPoint.getTextContent());
+				if(localPoint.getNodeName() == "category") {
+					System.out.println(" - ID: " + localPoint.getAttributes().getNamedItem("id").getTextContent());
+				}
+				else {
+					System.out.println();
+				}
 			}
 			if(localPoint.getNodeName() == "connections") {
 				localPoint = localPoint.getFirstChild();

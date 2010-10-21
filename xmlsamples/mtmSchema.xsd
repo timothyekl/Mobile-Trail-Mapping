@@ -81,5 +81,6 @@ elementFormDefault="qualified">
       </xs:element>
     </xs:sequence>
     <xs:attribute name="id" type="xs:integer"/>
+    <xs:attribute name="name" type="xs:string"/>
   </xs:complexType>
 </xs:schema>

@@ -28,9 +28,7 @@
           <description>
             This is the description
           </description>
-          <category id="0">
-            Category
-          </category>
+          <category id="0">Category</category>
           <condition>Open</condition>
           <latitude>0.000000</latitude>
           <longitude>0.000000</longitude>

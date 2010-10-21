@@ -55,6 +55,7 @@ public class DOMTester {
 		Node currentNode = l.item(i);
 		NodeList points = null;
 		Node point = null;
+		Node localPoint = null;
 		while (currentNode != null) {
 
 			System.out.println("Node Name : " + currentNode.getNodeName());
@@ -71,22 +72,22 @@ public class DOMTester {
 					System.out.println("Point       : "
 							+ point.getNodeName());
 					System.out.println("Point ID    : "
-							+ point.getAttributes().getNamedItem("id")
-									.getNodeValue());
+							+ point.getAttributes().getNamedItem("id").getNodeValue());
 					// while(point != null) {
 
 					// }
-					System.out.println("First Child : "
-							+ point.getFirstChild().getNextSibling()
-									.getNodeName());
-					System.out.println("First Value : "
-							+ point.getFirstChild().getNextSibling()
-									.getTextContent());
-					System.out.println("Second Child : "
-							+ point.getFirstChild().getNextSibling()
-									.getNextSibling().getNextSibling()
-									.getNodeName());
-					System.out.println();
+					localPoint = point.getFirstChild().getNextSibling();
+					while(localPoint != null) {
+						if(localPoint.getNodeType() == Node.ELEMENT_NODE && localPoint.getNodeName() != "connections") {
+							System.out.println(localPoint.getNodeName() + " : " + localPoint.getTextContent());
+						}
+						if(localPoint.getNodeName() == "connections") {
+							localPoint = localPoint.getFirstChild();
+						}
+						else {
+							localPoint = localPoint.getNextSibling();
+						}
+					}
 				}
 				j++;
 				point = points.item(j);

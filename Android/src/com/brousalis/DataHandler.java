@@ -1,9 +1,18 @@
 package com.brousalis;
 
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import org.jdom.input.DOMBuilder;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
+import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 
@@ -13,41 +22,101 @@ public class DataHandler {
 	private HashSet<Trail> _trails;
 	private TrailPoint _trailPoint;
 	
-	private static final String TRAIL = "trail";
-	private static final String TRAIL_POINT = "trailpoint";
-	private static final String TRAIL_CONNECTION = "connection";
-	private static final String ID = "id";
-	private static final String LATITUDE = "lat";
-	private static final String LONGITUDE = "long";
-	private static final String NAME = "name";
 	static String XML_FILE = "http://www.fernferret.com/samplexml.xml";
 	static String XML_SCHEMA = "http://www.fernferret.com/mtmSchema.xsd";
 
+	private DocumentBuilderFactory _factory;
+	private DocumentBuilder _builder;
+	private URL _xmlFile;
+	private Document _doc;
+	
 	/**
-	 * Empty Constructor, Currently does nothing.
+	 * Initializes the DataHandler values
 	 */
 	public DataHandler() {
 		_trails = new HashSet<Trail>();
-		DOMBuilder builder = new DOMBuilder();
-		//StreamSource xmlSource = new StreamSource(XML_FILE);
-	/*	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = null;
-		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-		Document doc = null;
+		_factory = DocumentBuilderFactory.newInstance();
 		try {
-			URL schemaDoc = new URL(XML_SCHEMA);
-			URL xmlDoc = new URL(XML_FILE);
-			Schema schema = schemaFactory.newSchema(schemaDoc);
-			//factory.setSchema(schema);
-			javax.xml.validation.Validator validator = schema.newValidator();
-			validator.validate(xmlSource);
-
-			builder = factory.newDocumentBuilder();
-			doc = builder.parse(new InputSource(xmlDoc.openStream()));
+			_xmlFile = new URL(XML_FILE);
+			_builder = _factory.newDocumentBuilder();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
-		//extractTrails(doc);
+		}
+	}
+	
+	/**
+	 * Parses the document into trails and points.
+	 */
+	public void parseDocument() {
+		try {
+			_doc = _builder.parse(new InputSource(_xmlFile.openStream()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		extractTrails(_doc);
+	}
+	
+	/**
+	 * Extracts trail information from the DOM.  This will retrieve all trails currently
+	 * @param doc
+	 */
+	private void extractTrails(Document doc) {
+		NodeList itemList = doc.getElementsByTagName("trail");
+		Node currentNode = itemList.item(0);
+		while (currentNode != null) {
+			if(currentNode.getNodeType() == Node.ELEMENT_NODE) {
+				Log.w("MTM", "MTM: Trail ID   : " + currentNode.getAttributes().getNamedItem("id").getNodeValue());
+				Log.w("MTM", "MTM: Trail Name : " + currentNode.getAttributes().getNamedItem("name").getNodeValue());
+				extractTrail(currentNode);
+			}
+			currentNode = currentNode.getNextSibling();
+		}
+	}
+	
+	/**
+	 * Iterates through a single trail
+	 * @param currentNode
+	 */
+	private void extractTrail(Node currentNode) {
+		Node point = null;
+		point = currentNode.getFirstChild().getNextSibling().getFirstChild().getNextSibling();
+		while (point != null) {
+			if (point.getNodeType() == Node.ELEMENT_NODE) {
+				getPointInfo(point);
+			}
+			point = point.getNextSibling();
+		}
+	}
+	
+	private void getPointInfo(Node point) {
+		Node localPoint = null;
+		Log.w("MTM", "MTM: Point         : " + point.getNodeName());
+		Log.w("MTM", "MTM: Point ID      : " + point.getAttributes().getNamedItem("id").getNodeValue());
+		Log.w("MTM", "MTM: Point Content : " + point.getNodeValue());
+		localPoint = point.getFirstChild().getNextSibling();
+		while(localPoint != null) {
+			if(localPoint.getNodeType() == Node.ELEMENT_NODE && localPoint.getNodeName() != "connections") {
+				Log.w("MTM", "MTM Value: " + localPoint.getNodeName() + " : " + localPoint.getFirstChild().getNodeValue());// + //localPoint.getTextContent());
+				if(localPoint.getNodeName() == "category") {
+					Log.w("MTM", " - ID: " + localPoint.getAttributes().getNamedItem("id").getNodeValue());
+				}
+			}
+			if(localPoint.getNodeName() == "connections") {
+				localPoint = localPoint.getFirstChild();
+				Log.w("MTM","Found the connections node");
+			}
+			else {
+				localPoint = localPoint.getNextSibling();
+			}
+		}
+	}
+	
+	/**
+	 * Performs validation on the document
+	 * This is not yet implemented
+	 */
+	public boolean validateDocument() {
+		return false;
 	}
 	
 	/**

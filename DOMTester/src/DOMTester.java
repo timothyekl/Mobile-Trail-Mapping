@@ -48,7 +48,7 @@ public class DOMTester {
 	public void parse() {
 		extractTrails(_doc);
 	}
-	private static void extractTrails(Document doc) {
+	private void extractTrails(Document doc) {
 		NodeList itemList = doc.getElementsByTagName("trail");
 		Node currentNode = itemList.item(0);
 		while (currentNode != null) {
@@ -60,7 +60,7 @@ public class DOMTester {
 		}
 	}
 
-	private static void extractTrail(Node currentNode) {
+	private void extractTrail(Node currentNode) {
 		Node point = null;
 		point = currentNode.getFirstChild().getNextSibling().getFirstChild().getNextSibling();
 		while (point != null) {
@@ -72,7 +72,7 @@ public class DOMTester {
 		System.out.println();
 	}
 
-	private static void getPointInfo(Node point) {
+	private void getPointInfo(Node point) {
 		Node localPoint = null;
 		System.out.println("Point       : " + point.getNodeName());
 		System.out.println("Point ID    : " + point.getAttributes().getNamedItem("id").getNodeValue());

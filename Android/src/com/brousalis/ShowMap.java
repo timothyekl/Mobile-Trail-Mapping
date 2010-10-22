@@ -1,13 +1,6 @@
 package com.brousalis;
 
-import java.net.URL;
 import java.util.HashSet;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.InputSource;
-import org.xml.sax.XMLReader;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -140,16 +133,7 @@ public class ShowMap extends MapActivity {
      */
     private void initializeParser() {
     	this._dataHandler = new DataHandler();
-		try {
-			URL url = new URL(getString(R.string.test_url));
-			SAXParserFactory spf = SAXParserFactory.newInstance();
-			SAXParser sp = spf.newSAXParser();
-			XMLReader xr = sp.getXMLReader();
-			//xr.setContentHandler(_dataHandler);
-			//xr.parse(new InputSource(url.openStream()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+    	this._dataHandler.parseDocument();
     }
     
     /**

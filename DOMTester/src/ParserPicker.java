@@ -7,8 +7,10 @@ public class ParserPicker {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		DOMTester dTest = new DOMTester(XML_FILE, XML_SCHEMA);
-		dTest.parse();
+		//DOMTester dTest = new DOMTester(XML_FILE, XML_SCHEMA);
+		//dTest.parse();
+		JDOMTester jTest = new JDOMTester(XML_FILE, XML_SCHEMA);
+		
 	}
 
 }

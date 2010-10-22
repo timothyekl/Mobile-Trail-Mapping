@@ -19,21 +19,17 @@ public class DOMTester {
 	static String XML_SCHEMA = "http://www.fernferret.com/mtmSchema.xsd";
 	public static void main(String[] args) {
 		StreamSource xmlSource = new StreamSource(XML_FILE);
-
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-
 		DocumentBuilder builder = null;
-		
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-		
 		Document doc = null;
 		try {
 			URL schemaDoc = new URL(XML_SCHEMA);
 			URL xmlDoc = new URL(XML_FILE);
 			Schema schema = schemaFactory.newSchema(schemaDoc);
 			//factory.setSchema(schema);
-			//Validator validator = schema.newValidator();
-			//validator.validate(xmlSource);
+			Validator validator = schema.newValidator();
+			validator.validate(xmlSource);
 
 			builder = factory.newDocumentBuilder();
 			doc = builder.parse(new InputSource(xmlDoc.openStream()));

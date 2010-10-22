@@ -3,13 +3,11 @@ package com.brousalis;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
+import org.jdom.input.DOMBuilder;
 
 import com.google.android.maps.GeoPoint;
 
-public class DataHandler extends DefaultHandler {
+public class DataHandler {
 
 	private Trail _trail;
 	private HashSet<Trail> _trails;
@@ -22,37 +20,34 @@ public class DataHandler extends DefaultHandler {
 	private static final String LATITUDE = "lat";
 	private static final String LONGITUDE = "long";
 	private static final String NAME = "name";
+	static String XML_FILE = "http://www.fernferret.com/samplexml.xml";
+	static String XML_SCHEMA = "http://www.fernferret.com/mtmSchema.xsd";
 
 	/**
 	 * Empty Constructor, Currently does nothing.
 	 */
 	public DataHandler() {
 		_trails = new HashSet<Trail>();
-	}
-	
-	@Override
-	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
-		if (localName.equals(TRAIL_CONNECTION)) {
-			this._trailPoint.addConnectionByID(Integer.parseInt(atts.getValue(ID)));
-		} else if (localName.equals(TRAIL_POINT)) {
-			this.createNewTrailPoint(Integer.parseInt(atts.getValue(ID)), Double.parseDouble(atts.getValue(LATITUDE)), Double.parseDouble(atts.getValue(LONGITUDE)));
-		} else if (localName.equals(TRAIL)) {
-			this.createTrail(atts.getValue(NAME));
-		}
-	}
-	
-	@Override
-	public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
-		if (localName.equals(TRAIL_POINT)) {
-			this.saveTrailPoint();
-		} else if(localName.equals(TRAIL)) {
-			this.saveTrail();
-		}
-	}
-	
-	@Override
-	public void characters(char ch[], int start, int length) {
-//		String str = new String(ch, start, length);
+		DOMBuilder builder = new DOMBuilder();
+		//StreamSource xmlSource = new StreamSource(XML_FILE);
+	/*	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = null;
+		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		Document doc = null;
+		try {
+			URL schemaDoc = new URL(XML_SCHEMA);
+			URL xmlDoc = new URL(XML_FILE);
+			Schema schema = schemaFactory.newSchema(schemaDoc);
+			//factory.setSchema(schema);
+			javax.xml.validation.Validator validator = schema.newValidator();
+			validator.validate(xmlSource);
+
+			builder = factory.newDocumentBuilder();
+			doc = builder.parse(new InputSource(xmlDoc.openStream()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+		//extractTrails(doc);
 	}
 	
 	/**

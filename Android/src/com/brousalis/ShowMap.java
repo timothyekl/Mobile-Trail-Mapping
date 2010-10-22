@@ -145,8 +145,8 @@ public class ShowMap extends MapActivity {
 			SAXParserFactory spf = SAXParserFactory.newInstance();
 			SAXParser sp = spf.newSAXParser();
 			XMLReader xr = sp.getXMLReader();
-			xr.setContentHandler(_dataHandler);
-			xr.parse(new InputSource(url.openStream()));
+			//xr.setContentHandler(_dataHandler);
+			//xr.parse(new InputSource(url.openStream()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

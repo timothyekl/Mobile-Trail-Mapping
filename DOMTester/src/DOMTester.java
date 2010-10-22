@@ -14,31 +14,40 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 public class DOMTester {
-
-	static String XML_FILE = "http://www.fernferret.com/samplexml.xml";
-	static String XML_SCHEMA = "http://www.fernferret.com/mtmSchema.xsd";
-	public static void main(String[] args) {
-		StreamSource xmlSource = new StreamSource(XML_FILE);
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = null;
-		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-		Document doc = null;
+	
+	private String _xmlFile;
+	private String _xmlSchema;
+	private StreamSource _xmlSource;
+	private DocumentBuilderFactory _factory;
+	private DocumentBuilder _builder;
+	private SchemaFactory _schemaFactory;
+	private Document _doc;
+	
+	public DOMTester(String xmlFile, String xmlSchema) {
+		_xmlFile = xmlFile;
+		_xmlSchema = xmlSchema;
+		_xmlSource = new StreamSource(_xmlFile);
+		_factory = DocumentBuilderFactory.newInstance();
+		_builder = null;
+		_schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		_doc = null;
 		try {
-			URL schemaDoc = new URL(XML_SCHEMA);
-			URL xmlDoc = new URL(XML_FILE);
-			Schema schema = schemaFactory.newSchema(schemaDoc);
-			//factory.setSchema(schema);
-			Validator validator = schema.newValidator();
-			validator.validate(xmlSource);
+			URL schemaDoc = new URL(_xmlSchema);
+			URL xmlDoc = new URL(_xmlFile);
+			Schema schema = _schemaFactory.newSchema(schemaDoc);
 
-			builder = factory.newDocumentBuilder();
-			doc = builder.parse(new InputSource(xmlDoc.openStream()));
+			Validator validator = schema.newValidator();
+			validator.validate(_xmlSource);
+
+			_builder = _factory.newDocumentBuilder();
+			_doc = _builder.parse(new InputSource(xmlDoc.openStream()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		extractTrails(doc);
 	}
-
+	public void parse() {
+		extractTrails(_doc);
+	}
 	private static void extractTrails(Document doc) {
 		NodeList itemList = doc.getElementsByTagName("trail");
 		Node currentNode = itemList.item(0);

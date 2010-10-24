@@ -13,6 +13,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TrailPrefs"
+        	android:label="Trail Map Options"></activity>
         <uses-library android:name="com.google.android.maps" 
         			  android:required="true"></uses-library>
     </application>

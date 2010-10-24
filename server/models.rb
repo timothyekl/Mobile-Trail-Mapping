@@ -42,6 +42,7 @@ class Point
   property :lat,  Integer, :required => true
   property :long, Integer, :required => true
   property :desc, Text
+  property :title, String
 
   belongs_to  :category
   belongs_to  :condition

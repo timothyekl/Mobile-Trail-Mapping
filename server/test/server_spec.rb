@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/spec_helper'
+require 'libxml'
 
 describe "Server Tests" do
   include Rack::Test::Methods
@@ -14,6 +15,7 @@ describe "Server Tests" do
     @test_user = "test@brousalis.com"
     @test_pw = Digest::SHA1.hexdigest('password')
     @invalid_user = "invalid@brousalis.com"
+    @schema = LibXML::XML::Schema.new(File.direname(__FILE__) + '../schema.xsd')
   end
 
   describe "base actions" do
@@ -32,13 +34,13 @@ describe "Server Tests" do
 
   describe "Point Actions" do
     it "should return a test point" do
-      pending("haven't decided xml structure yet")
       params = {:api_key => @api_key,
                 :user => @test_user,
                 :pwhash => @test_pw }
 
       get "/point/get", params
-      last_response.body.should == 'test point'
+      doc = LibXML::XML::Document.string(last_response.body)
+      doc.validate_schema(@schema).should == true
     end
 
     it "should add a point" do

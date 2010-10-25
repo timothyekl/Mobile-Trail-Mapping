@@ -98,7 +98,7 @@ public class DataHandler {
 			if(localPoint.getNodeType() == Node.ELEMENT_NODE && localPoint.getNodeName() != "connections") {
 				Log.w("MTM", "MTM Value: " + localPoint.getNodeName() + " : " + localPoint.getFirstChild().getNodeValue());// + //localPoint.getTextContent());
 				if(localPoint.getNodeName() == "category") {
-					Log.w("MTM", " - ID: " + localPoint.getAttributes().getNamedItem("id").getNodeValue());
+					Log.w("MTM", "MTM: - ID: " + localPoint.getAttributes().getNamedItem("id").getNodeValue());
 				}
 			}
 			if(localPoint.getNodeName() == "connections") {

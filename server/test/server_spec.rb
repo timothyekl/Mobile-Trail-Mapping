@@ -15,7 +15,7 @@ describe "Server Tests" do
     @test_user = "test@brousalis.com"
     @test_pw = Digest::SHA1.hexdigest('password')
     @invalid_user = "invalid@brousalis.com"
-    @schema = LibXML::XML::Schema.new(File.direname(__FILE__) + '../schema.xsd')
+    @schema = LibXML::XML::Schema.new(File.dirname(__FILE__) + '/../schema.xsd')
   end
 
   describe "base actions" do
@@ -46,12 +46,13 @@ describe "Server Tests" do
     it "should add a point" do
       params = {:user => @test_user,
                 :pwhash => @test_pw,
+                :title => 'trail_point',
                 :lat => 4,
                 :long => 5,
-                :connections => "",
+                :connections => "1,2,3",
                 :condition => 'fair',
                 :category => 'test',
-                :trail => 'test',
+                :trail => 'trail',
                 :api_key => @api_key,
                 :desc => 'test'}
 

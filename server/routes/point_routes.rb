@@ -1,6 +1,10 @@
+require 'pp'
+
 get '/point/get' do
   @trails = Trail.all 
   @misc = Point.all(Point.trail.id => -1)
+  
+  builder :point
 end
 
 post '/point/add' do
@@ -13,7 +17,9 @@ post '/point/add' do
   point.condition = cond
   point.trail = trail
 
-  params[:connections].split(',').each { |p| point.connections << Point.get(p.to_i) }
+  params[:connections].split(',').each do |conn|
+    point.connections << Connection.first_or_create(:point_id => conn.to_i)
+  end
 
   point.save
 

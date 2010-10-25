@@ -35,8 +35,8 @@ describe "Server Tests" do
   describe "Point Actions" do
     it "should return a test point" do
       params = {:api_key => @api_key,
-                :user => @test_user,
-                :pwhash => @test_pw }
+        :user => @test_user,
+        :pwhash => @test_pw }
 
       get "/point/get", params
       doc = LibXML::XML::Document.string(last_response.body)
@@ -45,16 +45,16 @@ describe "Server Tests" do
 
     it "should add a point" do
       params = {:user => @test_user,
-                :pwhash => @test_pw,
-                :title => 'trail_point',
-                :lat => 4,
-                :long => 5,
-                :connections => "1,2,3",
-                :condition => 'fair',
-                :category => 'test',
-                :trail => 'trail',
-                :api_key => @api_key,
-                :desc => 'test'}
+        :pwhash => @test_pw,
+        :title => 'trail_point',
+        :lat => 4,
+        :long => 5,
+        :connections => "1,2,3",
+        :condition => 'Open',
+        :category => 'test',
+        :trail => 'trail',
+        :api_key => @api_key,
+        :desc => 'test'}
 
       post "/point/add", params
       last_response.body.should == "Added Point 4, 5"
@@ -71,9 +71,9 @@ describe "Server Tests" do
     it "should add a trail" do
       trailname = 'trail'
       params = {:trail => trailname,
-                :api_key => @api_key,
-                :user => @test_user,
-                :pwhash => @test_pw }
+        :api_key => @api_key,
+        :user => @test_user,
+        :pwhash => @test_pw }
 
       post '/trail/add', params
       last_response.body.should == "Added Trail #{trailname}"
@@ -82,9 +82,9 @@ describe "Server Tests" do
 
     it "should error for an invalid user" do
       params = {:trail => 'trail',
-                :api_key => @api_key,
-                :user => @invalid_user,
-                :pwhash => @test_pw }
+        :api_key => @api_key,
+        :user => @invalid_user,
+        :pwhash => @test_pw }
 
       post '/trail/add', params
       last_response.body.should == "Invalid username or password"   
@@ -96,9 +96,9 @@ describe "Server Tests" do
       categoryName = 'category'
 
       params = {:category => categoryName,
-                :api_key => @api_key,
-                :user => @test_user,
-                :pwhash => @test_pw }
+        :api_key => @api_key,
+        :user => @test_user,
+        :pwhash => @test_pw }
 
       post '/category/add', params
       last_response.body.should == "Added Category #{categoryName}"
@@ -107,9 +107,9 @@ describe "Server Tests" do
 
     it "should error for an invalid user" do
       params = {:category => 'category',
-                :api_key => @api_key,
-                :user => @invalid_user,
-                :pwhash => @test_pw }
+        :api_key => @api_key,
+        :user => @invalid_user,
+        :pwhash => @test_pw }
 
       post '/category/add', params
       last_response.body.should == "Invalid username or password"   
@@ -120,9 +120,9 @@ describe "Server Tests" do
     it "should add a condition" do
       condition = 'condition'
       params = {:condition => condition,
-                :api_key => @api_key,
-                :user => @test_user,
-                :pwhash => @test_pw }
+        :api_key => @api_key,
+        :user => @test_user,
+        :pwhash => @test_pw }
 
       post '/condition/add', params
       last_response.body.should == "Added Condition #{condition}"
@@ -131,24 +131,12 @@ describe "Server Tests" do
 
     it "should error for an invalid user" do
       params = {:name => 'condition',
-                :api_key => @api_key,
-                :user => @invalid_user,
-                :pwhash => @test_pw }
+        :api_key => @api_key,
+        :user => @invalid_user,
+        :pwhash => @test_pw }
 
       post '/condition/add', params
       last_response.body.should == "Invalid username or password"   
-    end
-
-    it "should get a condition" do
-      pending("haven't decided on xml structure yet")
-      Condition.first_or_create(:desc => 'condition')
-
-      params = {:api_key => @api_key,
-                :user => @test_user,
-                :pwhash => @test_pw }
-
-      get '/condition/get', params
-      last_response.body.should == "condition"
     end
   end
 end

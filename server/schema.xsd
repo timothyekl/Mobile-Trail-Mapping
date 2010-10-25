@@ -18,7 +18,8 @@ elementFormDefault="qualified">
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
-                  <xs:attribute name="id" type="xs:integer"/>
+                  <xs:attribute name="id" type="xs:integer" use="required"/>
+                  <xs:attribute name="name" type="xs:string" use="required"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -27,7 +28,7 @@ elementFormDefault="qualified">
         <xs:element name="misc">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="point" type="pointType" maxOccurs="unbounded"/>
+              <xs:element name="point" type="pointType" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -42,7 +43,7 @@ elementFormDefault="qualified">
         <xs:complexType>
           <xs:simpleContent>
             <xs:extension base="xs:string">
-              <xs:attribute name="id" type="xs:integer"/>
+              <xs:attribute name="id" type="xs:integer" use="required"/>
             </xs:extension>
           </xs:simpleContent>
         </xs:complexType>
@@ -80,7 +81,6 @@ elementFormDefault="qualified">
         </xs:complexType>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name="id" type="xs:integer"/>
-    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 </xs:schema>

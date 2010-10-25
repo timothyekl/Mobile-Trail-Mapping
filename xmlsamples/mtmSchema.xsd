@@ -28,7 +28,7 @@ elementFormDefault="qualified">
         <xs:element name="misc">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="point" type="pointType" maxOccurs="unbounded"/>
+              <xs:element name="point" type="pointType" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

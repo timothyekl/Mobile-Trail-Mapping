@@ -2,16 +2,13 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.jdom.*;
-import org.jdom.input.*;
-import org.jdom.output.*;
-import org.jdom.adapters.*;
+
 import org.w3c.dom.Document;
 import org.apache.xerces.parsers.*;
 
 
 public class JDOMTester {
-	private URL _xmlFile;
+/*	private URL _xmlFile;
 	private URL _xmlSchema;
 	//private StreamSource _xmlSource;
 	private SAXBuilder _builder;
@@ -36,6 +33,6 @@ public class JDOMTester {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 }

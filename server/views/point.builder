@@ -14,7 +14,7 @@ xml.data do
               xml.longitude point[:long]
               xml.connections do
                 point.connections.each do |conn|
-                  xml.connection conn[:point_id]
+                  xml.connection conn[:connection]
                 end
               end
             end
@@ -33,7 +33,7 @@ xml.data do
       xml.latitude point[:lat]
       xml.longitude point[:long]
       point.connections.each do |conn|
-        xml.connection conn[:point_id]
+        xml.connection conn[:connection]
       end
     end
   end

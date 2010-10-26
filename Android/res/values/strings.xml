@@ -15,4 +15,7 @@
     <string name="center_name">Center</string>
     
     <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="submit">Submit</string>
+    <string name="enter">Enter</string>
 </resources>

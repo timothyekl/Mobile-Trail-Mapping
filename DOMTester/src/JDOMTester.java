@@ -4,7 +4,7 @@ import java.net.URL;
 
 
 import org.w3c.dom.Document;
-import org.apache.xerces.parsers.*;
+//import org.apache.xerces.parsers.*;
 
 
 public class JDOMTester {

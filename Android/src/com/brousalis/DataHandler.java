@@ -83,15 +83,34 @@ public class DataHandler {
 	 */
 	private void extractTrail(Node currentNode) {
 		Node point = null;
-		point = currentNode.getFirstChild().getNextSibling().getFirstChild().getNextSibling();
+		point = getPointNode(currentNode);
+		//point = currentNode.getFirstChild().getNextSibling().getFirstChild().getNextSibling();
+		
 		while (point != null) {
-			if (point.getNodeType() == Node.ELEMENT_NODE) {
+			if (point.getNodeType() == Node.ELEMENT_NODE && point.getNodeName().equals("point")) {
 				getPointInfo(point);
 			}
 			point = point.getNextSibling();
 		}
 	}
 	
+	/**
+	 * Iterates through xml in a whitespace independent manner
+	 * @param currentNode The node to 
+	 * @return
+	 */
+	private Node getPointNode(Node currentNode) {
+		Node myNode = currentNode.getFirstChild();
+		while(myNode.getNodeType() != Node.ELEMENT_NODE && !myNode.getNodeName().equals("points")) {
+			myNode = myNode.getNextSibling();
+		}
+		myNode = myNode.getFirstChild();
+		while(myNode.getNodeType() != Node.ELEMENT_NODE && !myNode.getNodeName().equals("point")) {
+			myNode = myNode.getNextSibling();
+		}
+		return myNode;
+	}
+
 	private void getPointInfo(Node point) {
 		Node localPoint = null;
 		Log.w("MTM", "MTM: Point         : " + point.getNodeName());

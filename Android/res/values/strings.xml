@@ -2,7 +2,12 @@
 <resources>
     <string name="hello">Hello World, ShowMap!</string>
     <string name="app_name">Trail Maps</string>
+    
     <string name="test_url">http://fernferret.com/mtmtest.xml</string>
+    <string name="beta">true</string>
+    <string name="beta_version">0.0.1</string>
+    <string name="beta_check_url">http://fernferret.com/mtmbeta/?version=</string>
+    <string name="register_device_url">http://www.fernferret.com/mtmbeta/checkDeviceId.php?device=</string>
     
     <string name="settings_name">Settings</string>
     <string name="quit_name">Quit</string>

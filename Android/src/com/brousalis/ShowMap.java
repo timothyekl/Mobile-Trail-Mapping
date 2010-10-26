@@ -9,6 +9,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -71,6 +72,13 @@ public class ShowMap extends MapActivity {
         this._mapController = this._mapView.getController();
 		
         this._locMgr = (LocationManager) getSystemService(LOCATION_SERVICE);
+        BetaChecker.isUpToDate(Boolean.parseBoolean(this.getString(R.string.beta)), this.getString(R.string.beta_check_url) + this.getString(R.string.beta_version));
+        TelephonyManager mTelephonyMgr = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+        Boolean validUser = BetaChecker.checkUser(this.getString(R.string.register_device_url), mTelephonyMgr.getDeviceId());
+        if(!validUser) {
+        	finish();
+        }
+        
 		Log.w("MTM", "MTM: onCreate()");
     }
     @Override

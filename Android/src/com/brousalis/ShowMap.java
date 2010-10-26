@@ -2,8 +2,7 @@ package com.brousalis;
 
 import java.util.HashSet;
 
-import android.app.AlertDialog;
-import android.content.Context;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -13,12 +12,12 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
@@ -90,23 +89,20 @@ public class ShowMap extends MapActivity {
 		Log.w("MTM", "MTM: onCreate()");
     }
     private void showNewBetaUserDialog() {
-		//new AlertDialog.Builder(this).setTitle(R.string.new_beta_user_title).setItems()
-    	//AlertDialog.Builder newUser = new AlertDialog.Builder(this);
-    	AlertDialog.Builder builder;
-    	AlertDialog newUser;
-    	
-    	Context mContext = getApplicationContext();
-    	LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-    	View layout = inflater.inflate(R.layout.new_beta_user, (ViewGroup) findViewById(R.id.layout_root));
-    	
-    	TextView text = (TextView) layout.findViewById(R.id.text);
-    	text.setText("Hello, this is a custom dialog!");
-    	
-    	builder = new AlertDialog.Builder(mContext);
-    	builder.setView(layout);
-    	builder.create().show();
-    	//newUser.show();
-    	
+    	Dialog newUser = new Dialog(ShowMap.this);
+    	newUser.setContentView(R.layout.new_beta_user);
+    	newUser.setTitle("Test Title");
+    	newUser.setCancelable(true);
+    	TextView betaText = (TextView) newUser.findViewById(R.id.beta_user_text);
+    	betaText.setText("Here is some text");
+    	/*Button cancelButton = (Button) newUser.findViewById(R.id.beta_user_cancel);
+    	cancelButton.setOnClickListener(new OnClickListener() {
+    		@Override
+    		public void onClick(View v) {
+    			finish();
+    		}
+    	});*/
+    	newUser.show();
 		
 	}
 	@Override

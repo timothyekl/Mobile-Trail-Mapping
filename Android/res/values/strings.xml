@@ -13,4 +13,6 @@
     <string name="settings_name">Settings</string>
     <string name="quit_name">Quit</string>
     <string name="center_name">Center</string>
+    
+    <string name="cancel">Cancel</string>
 </resources>

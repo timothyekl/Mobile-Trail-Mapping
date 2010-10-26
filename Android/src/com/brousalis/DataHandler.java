@@ -1,6 +1,7 @@
 package com.brousalis;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -65,9 +66,12 @@ public class DataHandler {
 		Node currentNode = itemList.item(0);
 		while (currentNode != null) {
 			if(currentNode.getNodeType() == Node.ELEMENT_NODE) {
+				String trailName = currentNode.getAttributes().getNamedItem("name").getNodeValue();
 				Log.w("MTM", "MTM: Trail ID   : " + currentNode.getAttributes().getNamedItem("id").getNodeValue());
-				Log.w("MTM", "MTM: Trail Name : " + currentNode.getAttributes().getNamedItem("name").getNodeValue());
+				Log.w("MTM", "MTM: Trail Name : " + trailName);
+				createTrail(trailName);
 				extractTrail(currentNode);
+				saveTrail();
 			}
 			currentNode = currentNode.getNextSibling();
 		}
@@ -93,22 +97,41 @@ public class DataHandler {
 		Log.w("MTM", "MTM: Point         : " + point.getNodeName());
 		Log.w("MTM", "MTM: Point ID      : " + point.getAttributes().getNamedItem("id").getNodeValue());
 		Log.w("MTM", "MTM: Point Content : " + point.getNodeValue());
+		HashMap<String, Object> trailPointInfo = new HashMap<String, Object>();
+		trailPointInfo.put("id", point.getAttributes().getNamedItem("id").getNodeValue());
 		localPoint = point.getFirstChild().getNextSibling();
 		while(localPoint != null) {
-			if(localPoint.getNodeType() == Node.ELEMENT_NODE && localPoint.getNodeName() != "connections") {
-				Log.w("MTM", "MTM Value: " + localPoint.getNodeName() + " : " + localPoint.getFirstChild().getNodeValue());// + //localPoint.getTextContent());
-				if(localPoint.getNodeName() == "category") {
-					Log.w("MTM", "MTM: - ID: " + localPoint.getAttributes().getNamedItem("id").getNodeValue());
+			
+			
+			if(localPoint.getNodeType() == Node.ELEMENT_NODE && !localPoint.getNodeName().equals("connection") && !localPoint.getNodeName().equals("connections")) {
+				String name = localPoint.getNodeName();
+				String value = localPoint.getFirstChild().getNodeValue();
+				Log.w("MTM", "MTM Value: " + name + " : " + value);
+				
+				trailPointInfo.put(name, value);
+				
+				if(localPoint.getNodeName().equals("category")) {
+					Log.w("MTM", "MTM: - I FOUND TEH CATEGORIEZZZZZZZZZZZZZZZ");
 				}
 			}
-			if(localPoint.getNodeName() == "connections") {
+			
+			if(localPoint.getNodeName().equals("connection")) {
+				int connID = Integer.parseInt(localPoint.getFirstChild().getNodeValue());
+				_trailPoint.addConnectionByID(connID);
+				
+				Log.w("MTM","Found the connections node " + localPoint.getFirstChild().getNodeValue());
+			}
+			
+			if(localPoint.getNodeName().equals("connections")) {
 				localPoint = localPoint.getFirstChild();
+				createNewTrailPoint(Integer.parseInt((String) trailPointInfo.get("id")), Double.parseDouble((String) trailPointInfo.get("latitude")), Double.parseDouble((String) trailPointInfo.get("longitude")));
 				Log.w("MTM","Found the connections node");
 			}
 			else {
 				localPoint = localPoint.getNextSibling();
 			}
 		}
+		saveTrailPoint();
 	}
 	
 	/**

@@ -2,6 +2,8 @@ package com.brousalis;
 
 import java.util.HashSet;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -11,9 +13,13 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -29,6 +35,7 @@ public class ShowMap extends MapActivity {
 	public static final String SAVED_MAP_ZOOM = "SavedMapZoom";
 	public static final String SAVED_DEFAULT_ZOOM = "DefaultZoom";
 	public static final String SAVED_ZOOM_ON_CENTER = "ZoomOnCenter";
+	public static Boolean BETA_MODE = false;
 	
 	// Default Values
 	// DEFAULT_MAP_ZOOM moved to prefs - 9/29/10 estokes
@@ -72,16 +79,37 @@ public class ShowMap extends MapActivity {
         this._mapController = this._mapView.getController();
 		
         this._locMgr = (LocationManager) getSystemService(LOCATION_SERVICE);
-        BetaChecker.isUpToDate(Boolean.parseBoolean(this.getString(R.string.beta)), this.getString(R.string.beta_check_url) + this.getString(R.string.beta_version));
+        BETA_MODE = Boolean.parseBoolean(this.getString(R.string.beta));
+        BetaChecker.isUpToDate(BETA_MODE, this.getString(R.string.beta_check_url) + this.getString(R.string.beta_version));
         TelephonyManager mTelephonyMgr = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
         Boolean validUser = BetaChecker.checkUser(this.getString(R.string.register_device_url), mTelephonyMgr.getDeviceId());
-        if(!validUser) {
-        	finish();
+        if(!validUser && BETA_MODE) {
+        	showNewBetaUserDialog();
         }
         
 		Log.w("MTM", "MTM: onCreate()");
     }
-    @Override
+    private void showNewBetaUserDialog() {
+		//new AlertDialog.Builder(this).setTitle(R.string.new_beta_user_title).setItems()
+    	//AlertDialog.Builder newUser = new AlertDialog.Builder(this);
+    	AlertDialog.Builder builder;
+    	AlertDialog newUser;
+    	
+    	Context mContext = getApplicationContext();
+    	LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+    	View layout = inflater.inflate(R.layout.new_beta_user, (ViewGroup) findViewById(R.id.layout_root));
+    	
+    	TextView text = (TextView) layout.findViewById(R.id.text);
+    	text.setText("Hello, this is a custom dialog!");
+    	
+    	builder = new AlertDialog.Builder(mContext);
+    	builder.setView(layout);
+    	builder.create().show();
+    	//newUser.show();
+    	
+		
+	}
+	@Override
     public void onConfigurationChanged(Configuration newConfig) {
       super.onConfigurationChanged(newConfig);
       Log.w("MTM", "MTM: conFigChanged()");

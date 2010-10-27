@@ -1,5 +1,6 @@
 package com.brousalis;
 
+import java.net.URI;
 import java.util.HashSet;
 
 import android.app.Dialog;
@@ -88,10 +89,12 @@ public class ShowMap extends MapActivity {
 
 		this._locMgr = (LocationManager) getSystemService(LOCATION_SERVICE);
 		BETA_MODE = Boolean.parseBoolean(this.getString(R.string.beta));
-		BetaChecker.isUpToDate(
+		if(BetaChecker.isUpToDate(
 				BETA_MODE,
 				this.getString(R.string.beta_check_url)
-						+ this.getString(R.string.beta_version));
+						+ this.getString(R.string.beta_version))) {
+			showOutOfDateDialog();
+		}
 		TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		UNIQUE_ID = mTelephonyMgr.getDeviceId();
 
@@ -115,6 +118,36 @@ public class ShowMap extends MapActivity {
 		Log.w("MTM", "MTM: onCreate()");
 	}
 
+	private void showOutOfDateDialog() {
+		final Dialog updateNeeded = new Dialog(ShowMap.this);
+		updateNeeded.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		updateNeeded.setContentView(R.layout.banned_user);
+		updateNeeded.setCancelable(true);
+		updateNeeded.setOnCancelListener(new OnCancelListener() {
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				takeUserToNewDownload();
+			}
+		});
+		updateNeeded.setOnDismissListener(new OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				takeUserToNewDownload();
+			}
+		});
+		Button cancelButton = (Button) updateNeeded
+				.findViewById(R.id.beta_user_banned_cancel);
+		cancelButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				takeUserToNewDownload();
+			}
+		});
+		updateNeeded.show();
+	}
+	private void takeUserToNewDownload() {
+		// TODO: Write an intent to show the web browser.
+	}
 	private void showBannedUserDialog() {
 		final Dialog bannedUser = new Dialog(ShowMap.this);
 		bannedUser.requestWindowFeature(Window.FEATURE_NO_TITLE);

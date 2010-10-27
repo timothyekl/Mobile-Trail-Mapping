@@ -3,8 +3,7 @@ package com.brousalis;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-
-import android.util.Log;
+import java.net.URLEncoder;
 
 public class BetaChecker {
 
@@ -15,12 +14,13 @@ public class BetaChecker {
 		return true;
 	}
 	
-	public static void registerUser(String registerUrl, String deviceID) {
-		getHTTPData(registerUrl + deviceID);
+	public static void registerUser(String registerUrl, String deviceID, String username) {
+		getHTTPData(registerUrl + deviceID + "&user=" + URLEncoder.encode(username));
+		
 	}
 	
-	public static Boolean checkUser(String registerUrl, String deviceID) {
-		return getHTTPData(registerUrl + deviceID).equals("registered");
+	public static String checkUser(String registerUrl, String deviceID) {
+		return getHTTPData(registerUrl + deviceID);
 	}
 	
 	private static String getHTTPData(String url) {

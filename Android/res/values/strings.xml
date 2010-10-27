@@ -8,7 +8,9 @@
     <string name="beta_version">0.0.1</string>
     <string name="beta_check_url">http://fernferret.com/mtmbeta/?version=</string>
     <string name="register_device_url">http://www.fernferret.com/mtmbeta/checkDeviceId.php?device=</string>
-    <string name="beta_user_text">Welcome!</string>
+    <string name="beta_user_content">First of all, on behalf of the MTM Team, we thank you for taking time to take a look at our application. Since this is the first time you\'ve opened this application, we simply ask you to enter your name so we can figure out who\'s Android phone is associated with who. You will only have to do this once! Once you fill in your name, press the Submit button!</string>
+    <string name="beta_user_title">Welcome to the MTM BETA!</string>
+    <string name="beta_user_sample_name">John Doe</string>
     
     <string name="settings_name">Settings</string>
     <string name="quit_name">Quit</string>

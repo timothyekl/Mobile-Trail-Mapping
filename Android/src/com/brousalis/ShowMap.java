@@ -6,19 +6,23 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
+import android.view.Window;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -34,7 +38,9 @@ public class ShowMap extends MapActivity {
 	public static final String SAVED_MAP_ZOOM = "SavedMapZoom";
 	public static final String SAVED_DEFAULT_ZOOM = "DefaultZoom";
 	public static final String SAVED_ZOOM_ON_CENTER = "ZoomOnCenter";
+	public static final String REGISTERED_DEVICE = "RegisteredDevice";
 	public static Boolean BETA_MODE = false;
+	private static String UNIQUE_ID = "";
 	
 	// Default Values
 	// DEFAULT_MAP_ZOOM moved to prefs - 9/29/10 estokes
@@ -81,30 +87,71 @@ public class ShowMap extends MapActivity {
         BETA_MODE = Boolean.parseBoolean(this.getString(R.string.beta));
         BetaChecker.isUpToDate(BETA_MODE, this.getString(R.string.beta_check_url) + this.getString(R.string.beta_version));
         TelephonyManager mTelephonyMgr = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
-        Boolean validUser = BetaChecker.checkUser(this.getString(R.string.register_device_url), mTelephonyMgr.getDeviceId());
-        if(!validUser && BETA_MODE) {
-        	showNewBetaUserDialog();
-        }
+        UNIQUE_ID = mTelephonyMgr.getDeviceId();
         
+        this._settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        Log.w("MTM", "MTM Settings: "+this._settings.getBoolean(REGISTERED_DEVICE, false));
+        //if(!this._settings.getBoolean(REGISTERED_DEVICE, false)) {
+	        Boolean validUser = BetaChecker.checkUser(this.getString(R.string.register_device_url), UNIQUE_ID);
+	        if(!validUser && BETA_MODE) {
+	        	showNewBetaUserDialog(this.getString(R.string.register_device_url));
+	        }
+        //}
 		Log.w("MTM", "MTM: onCreate()");
     }
-    private void showNewBetaUserDialog() {
-    	Dialog newUser = new Dialog(ShowMap.this);
+    private void showNewBetaUserDialog(String registerUrl) {
+    	final Dialog newUser = new Dialog(ShowMap.this);
+    	final String registrationUrl = registerUrl;
+    	// Make sure to remove the window title before doing ANYTHING else, or you'll get a pretty Force Close message.
+    	newUser.requestWindowFeature(Window.FEATURE_NO_TITLE);
     	newUser.setContentView(R.layout.new_beta_user);
-    	newUser.setTitle("Test Title");
     	newUser.setCancelable(true);
-    	TextView betaText = (TextView) newUser.findViewById(R.id.beta_user_text);
-    	betaText.setText("Here is some text");
-    	/*Button cancelButton = (Button) newUser.findViewById(R.id.beta_user_cancel);
+    	final EditText name = (EditText) newUser.findViewById(R.id.beta_user_name);
+    	name.setSingleLine();
+    	Button cancelButton = (Button) newUser.findViewById(R.id.beta_user_cancel);
     	cancelButton.setOnClickListener(new OnClickListener() {
     		@Override
     		public void onClick(View v) {
     			finish();
     		}
-    	});*/
+    	});
+    	final Button submitButton = (Button) newUser.findViewById(R.id.beta_user_submit);
+    	submitButton.setEnabled(false);
+    	submitButton.setOnClickListener(new OnClickListener() {
+    		@Override
+    		public void onClick(View v) {
+    			BetaChecker.registerUser(registrationUrl, UNIQUE_ID, name.getEditableText().toString());
+    			registerDeviceLocally();
+    			newUser.dismiss();
+    		}
+    	});
+    	name.setHintTextColor(Color.LTGRAY);
+    	name.setOnKeyListener(new OnKeyListener() {
+
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if(name.getEditableText().length() > 0) {
+					submitButton.setEnabled(true);
+				}
+				else {
+					submitButton.setEnabled(false);
+				}
+				
+				return false;
+			}
+    		
+    	});
+    	
     	newUser.show();
 		
 	}
+    
+    public void registerDeviceLocally() {
+    	SharedPreferences.Editor editor = this._settings.edit();
+		editor.putBoolean( REGISTERED_DEVICE, true); 
+		editor.commit();
+    }
+    
 	@Override
     public void onConfigurationChanged(Configuration newConfig) {
       super.onConfigurationChanged(newConfig);

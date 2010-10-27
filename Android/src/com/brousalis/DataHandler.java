@@ -54,7 +54,8 @@ public class DataHandler {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		extractTrails(_doc);
+		if(_doc != null)
+			extractTrails(_doc);
 	}
 	
 	/**
@@ -73,7 +74,12 @@ public class DataHandler {
 				extractTrail(currentNode);
 				saveTrail();
 			}
+			try {
 			currentNode = currentNode.getNextSibling();
+			} catch (Exception e) {
+				Log.w("MTM", "MTM: REALLY GOOGLE?!?! REALLY?!?!");
+				currentNode = null;
+			}
 		}
 	}
 	
@@ -90,7 +96,12 @@ public class DataHandler {
 			if (point.getNodeType() == Node.ELEMENT_NODE && point.getNodeName().equals("point")) {
 				getPointInfo(point);
 			}
+			try{
 			point = point.getNextSibling();
+			}catch(Exception e) {
+				Log.w("MTM","MTM Fixed another part of the 2.1 xml parser");
+				point = null;
+			}
 		}
 	}
 	
@@ -147,7 +158,14 @@ public class DataHandler {
 				Log.w("MTM","Found the connections node");
 			}
 			else {
+				
+				try {
 				localPoint = localPoint.getNextSibling();
+				} catch (Exception e) {
+					// This is here to fix the IndexOutOfBoundsException that is present in Android 2.1
+					Log.w("MTM", "MTM I hate android 2.1-update1's parser...");
+					localPoint = null;
+				}
 			}
 		}
 		saveTrailPoint();

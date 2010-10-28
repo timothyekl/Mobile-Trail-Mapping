@@ -1,6 +1,5 @@
 package com.brousalis;
 
-import java.net.URI;
 import java.util.HashSet;
 
 import android.app.Dialog;
@@ -93,7 +92,7 @@ public class ShowMap extends MapActivity {
 				BETA_MODE,
 				this.getString(R.string.beta_check_url)
 						+ this.getString(R.string.beta_version))) {
-			showOutOfDateDialog();
+			//showOutOfDateDialog();
 		}
 		TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		UNIQUE_ID = mTelephonyMgr.getDeviceId();
@@ -121,7 +120,7 @@ public class ShowMap extends MapActivity {
 	private void showOutOfDateDialog() {
 		final Dialog updateNeeded = new Dialog(ShowMap.this);
 		updateNeeded.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		updateNeeded.setContentView(R.layout.banned_user);
+		updateNeeded.setContentView(R.layout.out_of_date);
 		updateNeeded.setCancelable(true);
 		updateNeeded.setOnCancelListener(new OnCancelListener() {
 			@Override

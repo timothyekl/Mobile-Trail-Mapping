@@ -1,12 +1,17 @@
 package com.brousalis;
 
 import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
+import java.net.*;
 
 public class BetaChecker {
 
+	/**
+	 * Static function that determines wether or not this is the most recent
+	 * beta version.
+	 * @param isInBeta Is this version in beta
+	 * @param betaCheckUrl The URL of the Beta Server
+	 * @return True if the software is up to date, false if it is an old version
+	 */
 	public static Boolean isUpToDate(Boolean isInBeta, String betaCheckUrl) {
 		if (isInBeta) {
 			return getHTTPData(betaCheckUrl).equals("up_to_date");
@@ -14,32 +19,50 @@ public class BetaChecker {
 		return true;
 	}
 	
+	/**
+	 * Registers the current device with a registration server
+	 * @param registerUrl The location of the registration URL
+	 * @param deviceID The ESN/IMEI/MEID of the device, whatever uniquely identifies it
+	 * @param username The name of the user of this device
+	 */
 	public static void registerUser(String registerUrl, String deviceID, String username) {
 		getHTTPData(registerUrl + deviceID + "&user=" + URLEncoder.encode(username));
 		
 	}
 	
+	/**
+	 * Check to see if this device is registered or banned
+	 * @param registerUrl
+	 * @param deviceID
+	 * @return "registered" if the device is in the database, 
+	 * "banned" if device has been manually removed from the database
+	 * "not_registered" if the device has not yet registered with the server
+	 */
 	public static String checkUser(String registerUrl, String deviceID) {
 		return getHTTPData(registerUrl + deviceID);
 	}
 	
+	/**
+	 * Get the return data from a specific HTTP connection.
+	 * @param url The url to request data from.
+	 * @return The resulting string from the request.
+	 */
 	private static String getHTTPData(String url) {
 		URLConnection connection;
-		String str = "";
+		String httpResult = "";
 		try {
 			connection = new URL(url).openConnection();
 			connection.connect();
-			InputStream is = connection.getInputStream();
+			InputStream inputStream = connection.getInputStream();
 			StringBuffer buffer = new StringBuffer();
 			byte[] b = new byte[4096];
-			for (int n; (n = is.read(b)) != -1;) {
+			for (int n; (n = inputStream.read(b)) != -1;) {
 				buffer.append(new String(b, 0, n));
 			}
-			str = buffer.toString();
+			httpResult = buffer.toString();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return str;
+		return httpResult;
 	}
 }

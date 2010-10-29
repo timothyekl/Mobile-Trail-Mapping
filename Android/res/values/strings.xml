@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<!-- General Application Strings -->
     <string name="hello">Hello World, ShowMap!</string>
     <string name="app_name">Trail Maps</string>
     
+    <!-- BETA Access Strings (These will be required in final build) -->
     <string name="test_url">http://fernferret.com/mtmtest.xml</string>
     <string name="beta">true</string>
+    
+    <!-- BETA Strings (Will not be required in final build) -->
     <string name="beta_version">0.0.1</string>
     <string name="beta_check_url">http://fernferret.com/mtmbeta/?version=</string>
     <string name="register_device_url">http://www.fernferret.com/mtmbeta/checkDeviceId.php?device=</string>
@@ -13,14 +17,21 @@
     <string name="beta_user_sample_name">John Doe</string>
     <string name="beta_user_banned_title">ESN Error</string>
     <string name="beta_user_banned_content">Whoops... Looks like there\'s been an issue verifying the validity of your Android Device! To continue use of the BETA, please send fernferret@gmail.com an email including your IMEI and/or MEID number.  They can be found in Settings\>About Phone\>Phone Identity </string>
+    <string name="beta_user_date_title">A new update has come out!</string>
+    <string name="beta_user_date_content">Hey there! A new BETA version of the Mobile Trail Maps software has been released.  Due to the fact that we may or may not have broken something in your current version (and the fact that we\'ve fixed bunches of other things) as a BETA user it is required that you recieve this update to continue using the software.</string>
+    <string name="beta_user_date_log">Changelog:</string>
+    <string name="beta_user_test_log">Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  Testing the update log...  </string>
     
+    <!-- Menu Item Names -->
     <string name="settings_name">Settings</string>
     <string name="quit_name">Quit</string>
     <string name="center_name">Center</string>
     
+    <!-- Common Button Actions -->
     <string name="cancel">Cancel</string>
     <string name="ok">Ok</string>
     <string name="submit">Submit</string>
     <string name="enter">Enter</string>
     <string name="close">Close</string>
+    <string name="update">Update</string>
 </resources>

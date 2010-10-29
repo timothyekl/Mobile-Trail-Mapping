@@ -113,36 +113,33 @@ public class ShowMap extends MapActivity {
 		else if (!validUser && BETA_MODE) {
 			showNewBetaUserDialog(this.getString(R.string.register_device_url));
 		}
+		//showBannedUserDialog();
+		showOutOfDateDialog();
 		// }
 		Log.w("MTM", "MTM: onCreate()");
 	}
 
 	private void showOutOfDateDialog() {
-		final Dialog updateNeeded = new Dialog(ShowMap.this);
-		updateNeeded.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		updateNeeded.setContentView(R.layout.out_of_date);
-		updateNeeded.setCancelable(true);
-		updateNeeded.setOnCancelListener(new OnCancelListener() {
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				takeUserToNewDownload();
-			}
-		});
-		updateNeeded.setOnDismissListener(new OnDismissListener() {
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				takeUserToNewDownload();
-			}
-		});
-		Button cancelButton = (Button) updateNeeded
-				.findViewById(R.id.beta_user_banned_cancel);
-		cancelButton.setOnClickListener(new OnClickListener() {
+		BetaDialog updateNeeded = new BetaDialog(ShowMap.this, R.layout.out_of_date);
+		updateNeeded.show();
+		
+		//final Dialog updateNeeded = new Dialog(ShowMap.this);
+//		updateNeeded.setOnCancelListener(new OnCancelListener() {
+//			@Override
+//			public void onCancel(DialogInterface dialog) {
+//				takeUserToNewDownload();
+//				finish();
+//			}
+//		});
+		//Button cancelButton = (Button) updateNeeded
+		//		.findViewById(R.id.beta_user_update_cancel);
+		/*cancelButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				takeUserToNewDownload();
+				updateNeeded.dismiss();
 			}
-		});
-		updateNeeded.show();
+		});*/
 	}
 	private void takeUserToNewDownload() {
 		// TODO: Write an intent to show the web browser.

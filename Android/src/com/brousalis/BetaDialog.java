@@ -2,6 +2,7 @@ package com.brousalis;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.Window;
 
 /**
@@ -12,9 +13,29 @@ import android.view.Window;
  *
  */
 public class BetaDialog extends Dialog {
+	
+	private OnCancelListener _cancelListener;
+	
 	public BetaDialog(Context context, int xmlToLoad) {
 		super(context);
+		
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		this.setContentView(xmlToLoad);
+		this.setCancelable(true);
+		
 	}
-
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		//super.onBackPressed();
+		this.cancel();
+	}
+	
+	@Override
+	public boolean onSearchRequested() {
+		// TODO Auto-generated method stub
+		return false;
+		//return super.onSearchRequested();
+	}
 }

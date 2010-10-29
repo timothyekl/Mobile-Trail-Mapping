@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content">
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:gravity="fill"
+	android:orientation="vertical">
+	<TextView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:textSize="15sp"
+		android:textStyle="bold"
+		android:text="@string/beta_user_date_title"
+		android:padding="10dip">
+	</TextView>
+	<TextView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/beta_user_date_content"
+		android:padding="10dip">
+	</TextView>
+	<TextView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/beta_user_date_log"
+		android:paddingLeft="10dip"
+		android:paddingRight="10dip">
+	</TextView>
+	<ScrollView
+		android:layout_width="fill_parent"
+		android:layout_height="200dip"
+		android:padding="5dip">
+		<TextView
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/changelog"
+			android:text="@string/beta_user_test_log">
+		</TextView>
+	</ScrollView>
+	<TableLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:padding="10dip"
+		android:stretchColumns="*">
+		<TableRow>
+		<Button android:id="@+id/beta_user_update_cancel"
+			android:text="@string/close">
+		</Button>
+		<Button android:id="@+id/beta_user_update_submit"
+			android:text="@string/update">
+		</Button>
+		</TableRow>
+	</TableLayout>
 </LinearLayout>

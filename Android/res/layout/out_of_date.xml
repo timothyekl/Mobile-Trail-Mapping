@@ -44,10 +44,10 @@
 		android:padding="10dip"
 		android:stretchColumns="*">
 		<TableRow>
-		<Button android:id="@+id/beta_user_update_cancel"
+		<Button android:id="@+id/beta_user_cancel"
 			android:text="@string/close">
 		</Button>
-		<Button android:id="@+id/beta_user_update_submit"
+		<Button android:id="@+id/beta_user_submit"
 			android:text="@string/update">
 		</Button>
 		</TableRow>

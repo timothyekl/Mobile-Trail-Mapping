@@ -120,29 +120,25 @@ public class ShowMap extends MapActivity {
 	}
 
 	private void showOutOfDateDialog() {
-		BetaDialog updateNeeded = new BetaDialog(ShowMap.this, R.layout.out_of_date);
-		updateNeeded.show();
-		
-		//final Dialog updateNeeded = new Dialog(ShowMap.this);
-//		updateNeeded.setOnCancelListener(new OnCancelListener() {
-//			@Override
-//			public void onCancel(DialogInterface dialog) {
-//				takeUserToNewDownload();
-//				finish();
-//			}
-//		});
-		//Button cancelButton = (Button) updateNeeded
-		//		.findViewById(R.id.beta_user_update_cancel);
-		/*cancelButton.setOnClickListener(new OnClickListener() {
+		final BetaDialog updateNeeded = new BetaDialog(ShowMap.this, R.layout.out_of_date);
+		updateNeeded.setOnCancelListener(new OnCancelListener() {
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				finish();
+			}
+		});
+		updateNeeded.setCancelAction(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				takeUserToNewDownload();
 				updateNeeded.dismiss();
 			}
-		});*/
+		});
+		
+		updateNeeded.show();
 	}
 	private void takeUserToNewDownload() {
-		// TODO: Write an intent to show the web browser.
+		showBannedUserDialog();
 	}
 	private void showBannedUserDialog() {
 		final Dialog bannedUser = new Dialog(ShowMap.this);

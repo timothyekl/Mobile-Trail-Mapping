@@ -25,10 +25,10 @@ public class BetaDialog extends Dialog {
 		this.setContentView(xmlToLoad);
 		this.setCancelable(true);
 		// We'll always have a cancel button
-		_cancelButton = (Button) this.findViewById(xmlToLoad);
+		_cancelButton = (Button) this.findViewById(R.id.beta_user_cancel);
 		
-		if((Button) this.findViewById(xmlToLoad) != null) {
-			_submitButton = (Button) this.findViewById(xmlToLoad);
+		if((Button) this.findViewById(R.id.beta_user_submit) != null) {
+			_submitButton = (Button) this.findViewById(R.id.beta_user_submit);
 		}
 		
 	}
@@ -41,6 +41,7 @@ public class BetaDialog extends Dialog {
 	public boolean setCancelAction(View.OnClickListener clickListener) {
 		if(_cancelButton != null) {
 			_cancelButton.setOnClickListener(clickListener);
+			
 			return true;
 		}
 		return false;

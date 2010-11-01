@@ -127,24 +127,27 @@ public class ShowMap extends MapActivity {
 				finish();
 			}
 		});
-		updateNeeded.setCancelAction(new OnClickListener() {
+		updateNeeded.setSubmitAction(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				takeUserToNewDownload();
-				updateNeeded.dismiss();
+			}
+		});
+		updateNeeded.setCancelAction(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				updateNeeded.cancel();
 			}
 		});
 		
+		
 		updateNeeded.show();
 	}
-	private void takeUserToNewDownload() {
+	public void takeUserToNewDownload() {
 		showBannedUserDialog();
 	}
 	private void showBannedUserDialog() {
-		final Dialog bannedUser = new Dialog(ShowMap.this);
-		bannedUser.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		bannedUser.setContentView(R.layout.banned_user);
-		bannedUser.setCancelable(true);
+		final BetaDialog bannedUser = new BetaDialog(ShowMap.this, R.layout.banned_user);
 		bannedUser.setOnCancelListener(new OnCancelListener() {
 			@Override
 			public void onCancel(DialogInterface dialog) {

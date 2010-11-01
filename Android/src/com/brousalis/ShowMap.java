@@ -88,22 +88,16 @@ public class ShowMap extends MapActivity {
 
 		this._locMgr = (LocationManager) getSystemService(LOCATION_SERVICE);
 		BETA_MODE = Boolean.parseBoolean(this.getString(R.string.beta));
-		if(BetaChecker.isUpToDate(
-				BETA_MODE,
-				this.getString(R.string.beta_check_url)
-						+ this.getString(R.string.beta_version))) {
-			//showOutOfDateDialog();
+		if(BetaChecker.isUpToDate( BETA_MODE, this.getString(R.string.beta_check_url) + this.getString(R.string.beta_version))) {
+			showOutOfDateDialog();
 		}
 		TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		UNIQUE_ID = mTelephonyMgr.getDeviceId();
 
 		this._settings = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());
-		Log.w("MTM",
-				"MTM Settings: "
-						+ this._settings.getBoolean(REGISTERED_DEVICE, false));
-		String idCheckResult = BetaChecker.checkUser(
-				this.getString(R.string.register_device_url), UNIQUE_ID);
+		Log.w("MTM", "MTM Settings: " + this._settings.getBoolean(REGISTERED_DEVICE, false));
+		String idCheckResult = BetaChecker.checkUser( this.getString(R.string.register_device_url), UNIQUE_ID);
 		Boolean validUser = idCheckResult.equals("registered");
 		Boolean bannedUser = idCheckResult.equals("banned");
 		if (bannedUser && BETA_MODE) {
@@ -113,8 +107,6 @@ public class ShowMap extends MapActivity {
 		else if (!validUser && BETA_MODE) {
 			showNewBetaUserDialog(this.getString(R.string.register_device_url));
 		}
-		//showBannedUserDialog();
-		showOutOfDateDialog();
 		// }
 		Log.w("MTM", "MTM: onCreate()");
 	}
@@ -139,8 +131,6 @@ public class ShowMap extends MapActivity {
 				updateNeeded.cancel();
 			}
 		});
-		
-		
 		updateNeeded.show();
 	}
 	public void takeUserToNewDownload() {
@@ -172,53 +162,39 @@ public class ShowMap extends MapActivity {
 	}
 
 	private void showNewBetaUserDialog(String registerUrl) {
-		final Dialog newUser = new Dialog(ShowMap.this);
+		final BetaDialog newUser = new BetaDialog(ShowMap.this, R.layout.new_beta_user);
 		final String registrationUrl = registerUrl;
-		// Make sure to remove the window title before doing ANYTHING else, or
-		// you'll get a pretty Force Close message.
-		newUser.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		newUser.setContentView(R.layout.new_beta_user);
-		newUser.setCancelable(false);
+		final EditText name = (EditText) newUser.findViewById(R.id.beta_user_name);
+		final Button submitButton = (Button) newUser.findViewById(R.id.beta_user_submit);
 		
-		newUser.setOnDismissListener(new OnDismissListener() {
+		newUser.setOnCancelListener(new OnCancelListener() {
 			@Override
-			public void onDismiss(DialogInterface dialog) {
+			public void onCancel(DialogInterface dialog) {
 				finish();
 			}
 		});
-		
-		final EditText name = (EditText) newUser
-				.findViewById(R.id.beta_user_name);
-		name.setSingleLine();
-		Button cancelButton = (Button) newUser
-				.findViewById(R.id.beta_user_cancel);
-		cancelButton.setOnClickListener(new OnClickListener() {
+
+		newUser.setCancelAction(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				finish();
 			}
 		});
-		final Button submitButton = (Button) newUser
-				.findViewById(R.id.beta_user_submit);
+		
 		submitButton.setEnabled(false);
 		submitButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BetaChecker.registerUser(registrationUrl, UNIQUE_ID, name
-						.getEditableText().toString());
+				BetaChecker.registerUser(registrationUrl, UNIQUE_ID, name.getEditableText().toString());
 				registerDeviceLocally();
-				newUser.setOnDismissListener(new OnDismissListener() {
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						
-					}
-				});
 				newUser.dismiss();
 			}
 		});
+		
+		name.setSingleLine();
 		name.setHintTextColor(Color.LTGRAY);
 		name.setOnKeyListener(new OnKeyListener() {
-
+			// If there is no text in the box, disable the submit button
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				if (name.getEditableText().length() > 0) {
@@ -226,14 +202,10 @@ public class ShowMap extends MapActivity {
 				} else {
 					submitButton.setEnabled(false);
 				}
-
 				return false;
 			}
-
 		});
-
 		newUser.show();
-
 	}
 
 	public void registerDeviceLocally() {

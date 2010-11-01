@@ -2,6 +2,7 @@ package com.brousalis;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -17,6 +18,7 @@ public class BetaDialog extends Dialog {
 	
 	private Button _cancelButton;
 	private Button _submitButton;
+	private Context _context;
 	
 	public BetaDialog(Context context, int xmlToLoad) {
 		super(context);
@@ -32,8 +34,15 @@ public class BetaDialog extends Dialog {
 			_submitButton = (Button) this.findViewById(R.id.beta_user_submit);
 		}
 		
+		this.setOnCancelListener(new OnCancelListener() {
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				((ShowMap) _context).finish();
+			}
+		});
+		
 	}
-	
+
 	/**
 	 * Set the click listener of the Cancel Button
 	 * @param clickListener This will become the click listener of the cancel button

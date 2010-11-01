@@ -1,8 +1,8 @@
 package com.brousalis;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
@@ -23,7 +23,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -88,7 +87,7 @@ public class ShowMap extends MapActivity {
 
 		this._locMgr = (LocationManager) getSystemService(LOCATION_SERVICE);
 		BETA_MODE = Boolean.parseBoolean(this.getString(R.string.beta));
-		if(BetaChecker.isUpToDate( BETA_MODE, this.getString(R.string.beta_check_url) + this.getString(R.string.beta_version))) {
+		if(!BetaChecker.isUpToDate( BETA_MODE, this.getString(R.string.beta_check_url) + this.getString(R.string.beta_version))) {
 			showOutOfDateDialog();
 		}
 		TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
@@ -113,12 +112,6 @@ public class ShowMap extends MapActivity {
 
 	private void showOutOfDateDialog() {
 		final BetaDialog updateNeeded = new BetaDialog(ShowMap.this, R.layout.out_of_date);
-		updateNeeded.setOnCancelListener(new OnCancelListener() {
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				finish();
-			}
-		});
 		updateNeeded.setSubmitAction(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -138,23 +131,9 @@ public class ShowMap extends MapActivity {
 	}
 	private void showBannedUserDialog() {
 		final BetaDialog bannedUser = new BetaDialog(ShowMap.this, R.layout.banned_user);
-		bannedUser.setOnCancelListener(new OnCancelListener() {
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				finish();
-			}
-		});
 		bannedUser.setOnDismissListener(new OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface dialog) {
-				finish();
-			}
-		});
-		Button cancelButton = (Button) bannedUser
-				.findViewById(R.id.beta_user_banned_cancel);
-		cancelButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
 				finish();
 			}
 		});
@@ -165,14 +144,8 @@ public class ShowMap extends MapActivity {
 		final BetaDialog newUser = new BetaDialog(ShowMap.this, R.layout.new_beta_user);
 		final String registrationUrl = registerUrl;
 		final EditText name = (EditText) newUser.findViewById(R.id.beta_user_name);
+		final EditText network = (EditText) newUser.findViewById(R.id.beta_network);
 		final Button submitButton = (Button) newUser.findViewById(R.id.beta_user_submit);
-		
-		newUser.setOnCancelListener(new OnCancelListener() {
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				finish();
-			}
-		});
 
 		newUser.setCancelAction(new OnClickListener() {
 			@Override
@@ -192,7 +165,10 @@ public class ShowMap extends MapActivity {
 		});
 		
 		name.setSingleLine();
+		network.setSingleLine();
 		name.setHintTextColor(Color.LTGRAY);
+		network.setHintTextColor(Color.LTGRAY);
+		
 		name.setOnKeyListener(new OnKeyListener() {
 			// If there is no text in the box, disable the submit button
 			@Override
@@ -207,7 +183,16 @@ public class ShowMap extends MapActivity {
 		});
 		newUser.show();
 	}
-
+	
+	private final boolean areAllBetaFieldsFilledOut(ArrayList<EditText> fields) {
+		for(EditText field : fields) {
+			if(field.getEditableText().length() <= 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public void registerDeviceLocally() {
 		SharedPreferences.Editor editor = this._settings.edit();
 		editor.putBoolean(REGISTERED_DEVICE, true);

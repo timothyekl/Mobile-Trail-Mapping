@@ -24,7 +24,15 @@
 		android:id="@+id/beta_user_name"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:hint="@string/beta_user_sample_name">
+		android:hint="@string/beta_user_sample_name"
+		android:padding="10dip">
+	</EditText>
+	<EditText
+		android:id="@+id/beta_network"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:hint="@string/beta_user_sample_network"
+		android:padding="10dip">
 	</EditText>
 	<TableLayout
 		android:layout_width="fill_parent"

@@ -48,7 +48,6 @@ public class ShowMap extends MapActivity {
 	public static final String REGISTERED_DEVICE = "RegisteredDevice";
 	public static Boolean BETA_MODE = false;
 	private static String UNIQUE_ID = "";
-	private static String ANDROID_VERSION = "";
 
 	// Default Values
 	// DEFAULT_MAP_ZOOM moved to prefs - 9/29/10 estokes
@@ -98,7 +97,6 @@ public class ShowMap extends MapActivity {
 		}
 		TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		UNIQUE_ID = mTelephonyMgr.getDeviceId();
-		ANDROID_VERSION = mTelephonyMgr.getDeviceSoftwareVersion();
 
 		this._settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		Log.w("MTM", "MTM Settings: " + this._settings.getBoolean(REGISTERED_DEVICE, false));
@@ -178,6 +176,7 @@ public class ShowMap extends MapActivity {
 	private void showNewBetaUserDialog(String registerUrl) {
 		final BetaDialog newUser = new BetaDialog(ShowMap.this, R.layout.new_beta_user);
 		final String registrationUrl = registerUrl;
+		final String betaVersion = this.getString(R.string.beta_version);
 		final EditText name = (EditText) newUser.findViewById(R.id.beta_user_name);
 		final EditText network = (EditText) newUser.findViewById(R.id.beta_network);
 		final Button submitButton = (Button) newUser.findViewById(R.id.beta_user_submit);
@@ -198,7 +197,7 @@ public class ShowMap extends MapActivity {
 		submitButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BetaChecker.registerUser(registrationUrl, UNIQUE_ID, name.getEditableText().toString(), android.os.Build.VERSION.RELEASE, network.getEditableText().toString(), android.os.Build.BRAND, android.os.Build.DEVICE, android.os.Build.MANUFACTURER);
+				BetaChecker.registerUser(registrationUrl, UNIQUE_ID, name.getEditableText().toString(), android.os.Build.VERSION.RELEASE, network.getEditableText().toString(), android.os.Build.BRAND, android.os.Build.DEVICE, android.os.Build.MANUFACTURER, betaVersion);
 				registerDeviceLocally();
 				newUser.dismiss();
 			}

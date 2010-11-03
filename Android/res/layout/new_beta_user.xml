@@ -5,47 +5,54 @@
 	android:layout_height="fill_parent"
 	android:gravity="fill"
 	android:orientation="vertical">
-	<TextView
+	<ScrollView
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center"
-		android:textSize="15sp"
-		android:textStyle="bold"
-		android:text="@string/beta_user_title"
-		android:padding="10dip">
-	</TextView>
-	<TextView
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:text="@string/beta_user_content"
-		android:padding="10dip">
-	</TextView>
-	<EditText
-		android:id="@+id/beta_user_name"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:hint="@string/beta_user_sample_name"
-		android:padding="10dip">
-	</EditText>
-	<EditText
-		android:id="@+id/beta_network"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:hint="@string/beta_user_sample_network"
-		android:padding="10dip">
-	</EditText>
-	<TableLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:padding="10dip"
-		android:stretchColumns="*">
-		<TableRow>
-		<Button android:id="@+id/beta_user_cancel"
-			android:text="@string/cancel">
-		</Button>
-		<Button android:id="@+id/beta_user_submit"
-			android:text="@string/submit">
-		</Button>
-		</TableRow>
-	</TableLayout>
+		android:layout_height="fill_parent">
+		<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:gravity="fill"
+			android:orientation="vertical"
+			android:padding="10dip">
+			<TextView
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:textSize="15sp"
+				android:textStyle="bold"
+				android:text="@string/beta_user_title">
+			</TextView>
+			<TextView
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/beta_user_content">
+			</TextView>
+			<EditText
+				android:id="@+id/beta_user_name"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/beta_user_sample_name">
+			</EditText>
+			<EditText
+				android:id="@+id/beta_network"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/beta_user_sample_network">
+			</EditText>
+			<TableLayout
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:padding="10dip"
+				android:stretchColumns="*">
+				<TableRow>
+				<Button android:id="@+id/beta_user_cancel"
+					android:text="@string/cancel">
+				</Button>
+				<Button android:id="@+id/beta_user_submit"
+					android:text="@string/submit">
+				</Button>
+				</TableRow>
+			</TableLayout>
+		</LinearLayout>
+	</ScrollView>
 </LinearLayout>

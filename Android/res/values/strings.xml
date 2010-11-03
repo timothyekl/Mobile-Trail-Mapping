@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!-- General Application Strings -->
-    <string name="hello">Hello World, ShowMap!</string>
     <string name="app_name">Trail Maps</string>
     
     <!-- BETA Access Strings (These will be required in final build) -->

@@ -1,7 +1,2 @@
 *.DS_Store
 IconStaging/
-jdom.jar
-resolver.jar
-serializer.jar
-xercesImpl.jar
-xml-apis.jar

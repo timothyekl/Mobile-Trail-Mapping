@@ -19,7 +19,7 @@
 		android:text="@string/beta_user_banned_content"
 		android:padding="10dip">
 	</TextView>
-	<Button android:id="@+id/beta_user_banned_cancel"
+	<Button android:id="@+id/beta_user_cancel"
 			android:text="@string/close"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content">

@@ -37,7 +37,14 @@ public class BetaDialog extends Dialog {
 		this.setOnCancelListener(new OnCancelListener() {
 			@Override
 			public void onCancel(DialogInterface dialog) {
-				((ShowMap) _context).finish();
+				
+			}
+		});
+
+		this.setCancelAction(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				cancel();
 			}
 		});
 		

@@ -23,8 +23,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -33,6 +36,7 @@ import com.google.android.maps.MapView;
 
 public class ShowMap extends MapActivity {
 
+	private static final int HTC_SENSE_ENTER = 0;
 	// SharedPreference Strings
 	public static final String SAVED_MAP_STATE = "SavedMapState";
 	public static final String SAVED_MAP_LAT = "SavedMapLat";
@@ -104,9 +108,10 @@ public class ShowMap extends MapActivity {
 		}
 		// if(!this._settings.getBoolean(REGISTERED_DEVICE, false)) {
 		else if (!validUser && BETA_MODE) {
-			showNewBetaUserDialog(this.getString(R.string.register_device_url));
+			//showNewBetaUserDialog(this.getString(R.string.register_device_url));
 		}
 		// }
+		showNewBetaUserDialog(this.getString(R.string.register_device_url));
 		Log.w("MTM", "MTM: onCreate()");
 	}
 
@@ -146,11 +151,16 @@ public class ShowMap extends MapActivity {
 		final EditText name = (EditText) newUser.findViewById(R.id.beta_user_name);
 		final EditText network = (EditText) newUser.findViewById(R.id.beta_network);
 		final Button submitButton = (Button) newUser.findViewById(R.id.beta_user_submit);
-
+		newUser.setOnCancelListener(new OnCancelListener() {
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				finish();
+			}
+		});
 		newUser.setCancelAction(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				finish();
+				newUser.cancel();
 			}
 		});
 		
@@ -163,33 +173,62 @@ public class ShowMap extends MapActivity {
 				newUser.dismiss();
 			}
 		});
-		
+		final ArrayList<EditText> textFields = new ArrayList<EditText>();
 		name.setSingleLine();
 		network.setSingleLine();
+		
 		name.setHintTextColor(Color.LTGRAY);
 		network.setHintTextColor(Color.LTGRAY);
 		
+		textFields.add(name);
+		textFields.add(network);
+		
 		name.setOnKeyListener(new OnKeyListener() {
-			// If there is no text in the box, disable the submit button
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				if (name.getEditableText().length() > 0) {
-					submitButton.setEnabled(true);
-				} else {
-					submitButton.setEnabled(false);
-				}
+				areAllBetaFieldsFilledOut(textFields, submitButton);
 				return false;
 			}
 		});
+		network.setOnKeyListener(new OnKeyListener() {
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				areAllBetaFieldsFilledOut(textFields, submitButton);
+				return false;
+			}
+		});
+		network.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+	        @Override
+	        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+	            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == HTC_SENSE_ENTER) {
+	            	InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+	            	areAllBetaFieldsFilledOut(textFields, submitButton);
+	            	imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+	                return true;
+	            }
+	            else {
+	            	Log.w("MTM", "MTM: actionId:" + actionId );
+	            }
+	            return false;
+	        }
+	    });
 		newUser.show();
 	}
 	
-	private final boolean areAllBetaFieldsFilledOut(ArrayList<EditText> fields) {
+	/**
+	 * Check to make sure all fields are filled out, if they are, enable the Submit Button passed in
+	 * @param fields The Fields to analyze
+	 * @param submitButton The button to enable/disable
+	 * @return Returns true if all fields are filled out, False if they are not
+	 */
+	private final boolean areAllBetaFieldsFilledOut(ArrayList<EditText> fields, Button submitButton) {
 		for(EditText field : fields) {
 			if(field.getEditableText().length() <= 0) {
+				submitButton.setEnabled(false);
 				return false;
 			}
 		}
+		submitButton.setEnabled(true);
 		return true;
 	}
 	

@@ -164,6 +164,20 @@ public class InterestPoint extends Overlay implements Overlay.Snappable {
 //    
 //        return super.onTap(point, view);
 //    }
+//	@Override
+//    public boolean onTouchEvent(MotionEvent event, MapView mapView) 
+//    {   
+//        //---when user lifts his finger---
+//        if (event.getAction() == 1) {                
+//            GeoPoint p = mapView.getProjection().fromPixels(
+//                (int) event.getX(),
+//                (int) event.getY());
+//                Log.w("MTM", "MTM Location: " + 
+//                    p.getLatitudeE6() / 1E6 + "," + 
+//                    p.getLongitudeE6() /1E6 );
+//        }                            
+//        return false;
+//    } 
 
 	@Override
 	public boolean onSnapToItem(int x, int y, Point snapPoint, MapView mapView) {

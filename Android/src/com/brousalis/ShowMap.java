@@ -101,8 +101,7 @@ public class ShowMap extends MapActivity {
 		UNIQUE_ID = mTelephonyMgr.getDeviceId();
 		ANDROID_VERSION = mTelephonyMgr.getDeviceSoftwareVersion();
 
-		this._settings = PreferenceManager
-				.getDefaultSharedPreferences(getBaseContext());
+		this._settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		Log.w("MTM", "MTM Settings: " + this._settings.getBoolean(REGISTERED_DEVICE, false));
 		String idCheckResult = BetaChecker.checkUser( this.getString(R.string.register_device_url), UNIQUE_ID);
 		Boolean validUser = idCheckResult.equals("registered");
@@ -123,6 +122,8 @@ public class ShowMap extends MapActivity {
 
 	private void showOutOfDateDialog() {
 		final BetaDialog updateNeeded = new BetaDialog(ShowMap.this, R.layout.out_of_date);
+		TextView changelog = (TextView)updateNeeded.findViewById(R.id.changelog);
+		changelog.setText(BetaChecker.getHTTPData(this.getString(R.string.beta_user_log_url)));
 		updateNeeded.setSubmitAction(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

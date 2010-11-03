@@ -47,7 +47,7 @@ public class BetaChecker {
 	 * @param url The url to request data from.
 	 * @return The resulting string from the request.
 	 */
-	private static String getHTTPData(String url) {
+	public static String getHTTPData(String url) {
 		URLConnection connection;
 		String httpResult = "";
 		try {

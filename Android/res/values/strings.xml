@@ -25,6 +25,7 @@
     <string name="beta_download_url">http://www.fernferret.com/mtmbeta/downloads/mtmBETA.</string>
     <string name="beta_user_update_title">Your download has started!</string>
     <string name="beta_user_update_content">Thanks for downloading the newest version of the Mobile Trail Maps beta! You should see the download starting above in your notifications bar! Simply drag that down, and click on the mtmBETA file to install the new version!</string>
+    <string name="beta_user_log_url">http://www.fernferret.com/mtmbeta/downloads/latest.txt</string>
     
     <!-- Menu Item Names -->
     <string name="settings_name">Settings</string>

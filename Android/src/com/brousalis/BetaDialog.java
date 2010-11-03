@@ -18,7 +18,6 @@ public class BetaDialog extends Dialog {
 	
 	private Button _cancelButton;
 	private Button _submitButton;
-	private Context _context;
 	
 	public BetaDialog(Context context, int xmlToLoad) {
 		super(context);

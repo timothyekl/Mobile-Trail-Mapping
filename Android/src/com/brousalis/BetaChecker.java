@@ -25,8 +25,14 @@ public class BetaChecker {
 	 * @param deviceID The ESN/IMEI/MEID of the device, whatever uniquely identifies it
 	 * @param username The name of the user of this device
 	 */
-	public static void registerUser(String registerUrl, String deviceID, String username, String androidVersion) {
-		getHTTPData(registerUrl + deviceID + "&user=" + URLEncoder.encode(username) + "&android=" + URLEncoder.encode(androidVersion));
+	public static void registerUser(String registerUrl, String deviceID, String username, String androidVersion, String network, String brand, String device, String manuf) {
+		getHTTPData(registerUrl + deviceID 
+				+ "&user=" + URLEncoder.encode(username) 
+				+ "&android=" + URLEncoder.encode(androidVersion) 
+				+ "&network=" + URLEncoder.encode(network) 
+				+ "&brand=" + URLEncoder.encode(brand)
+				+ "&hardware=" + URLEncoder.encode(device)
+				+ "&manuf=" + URLEncoder.encode(manuf) );
 		
 	}
 	

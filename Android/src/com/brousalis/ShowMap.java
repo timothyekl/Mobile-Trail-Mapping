@@ -3,7 +3,6 @@ package com.brousalis;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import android.bluetooth.BluetoothClass.Device;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
@@ -162,7 +161,7 @@ public class ShowMap extends MapActivity {
 	 * Download the newest version from the internet, then change the view
 	 */
 	public void takeUserToNewDownload() {
-		Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse(this.getString(R.string.beta_download_url) + this.getString(R.string.beta_version) + ".apk"));  
+		Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse(this.getString(R.string.beta_download_url) + this.getString(R.string.beta_user_latest_version) + ".apk"));  
 		startActivity(viewIntent);
 	}
 	private void showBannedUserDialog() {
@@ -199,7 +198,7 @@ public class ShowMap extends MapActivity {
 		submitButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BetaChecker.registerUser(registrationUrl, UNIQUE_ID, name.getEditableText().toString(), ANDROID_VERSION);
+				BetaChecker.registerUser(registrationUrl, UNIQUE_ID, name.getEditableText().toString(), android.os.Build.VERSION.RELEASE, network.getEditableText().toString(), android.os.Build.BRAND, android.os.Build.DEVICE, android.os.Build.MANUFACTURER);
 				registerDeviceLocally();
 				newUser.dismiss();
 			}

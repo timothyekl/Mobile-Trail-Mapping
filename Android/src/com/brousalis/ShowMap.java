@@ -3,6 +3,7 @@ package com.brousalis;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import android.bluetooth.BluetoothClass.Device;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
@@ -12,6 +13,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
@@ -47,6 +49,7 @@ public class ShowMap extends MapActivity {
 	public static final String REGISTERED_DEVICE = "RegisteredDevice";
 	public static Boolean BETA_MODE = false;
 	private static String UNIQUE_ID = "";
+	private static String ANDROID_VERSION = "";
 
 	// Default Values
 	// DEFAULT_MAP_ZOOM moved to prefs - 9/29/10 estokes
@@ -96,6 +99,7 @@ public class ShowMap extends MapActivity {
 		}
 		TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		UNIQUE_ID = mTelephonyMgr.getDeviceId();
+		ANDROID_VERSION = mTelephonyMgr.getDeviceSoftwareVersion();
 
 		this._settings = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());
@@ -108,10 +112,12 @@ public class ShowMap extends MapActivity {
 		}
 		// if(!this._settings.getBoolean(REGISTERED_DEVICE, false)) {
 		else if (!validUser && BETA_MODE) {
-			//showNewBetaUserDialog(this.getString(R.string.register_device_url));
+			showNewBetaUserDialog(this.getString(R.string.register_device_url));
 		}
 		// }
-		showNewBetaUserDialog(this.getString(R.string.register_device_url));
+		//showNewBetaUserDialog(this.getString(R.string.register_device_url));
+		//showOutOfDateDialog();
+		//showBannedUserDialog();
 		Log.w("MTM", "MTM: onCreate()");
 	}
 
@@ -121,6 +127,25 @@ public class ShowMap extends MapActivity {
 			@Override
 			public void onClick(View v) {
 				takeUserToNewDownload();
+				updateNeeded.setContentView(R.layout.install_version);
+				Button cancel = (Button)updateNeeded.findViewById(R.id.beta_user_cancel);
+				cancel.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						updateNeeded.cancel();
+					}});
+				updateNeeded.setOnDismissListener(new OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						finish();
+					}
+				});
+			}
+		});
+		updateNeeded.setOnCancelListener(new OnCancelListener() {
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				finish();
 			}
 		});
 		updateNeeded.setCancelAction(new OnClickListener() {
@@ -131,8 +156,13 @@ public class ShowMap extends MapActivity {
 		});
 		updateNeeded.show();
 	}
+	
+	/**
+	 * Download the newest version from the internet, then change the view
+	 */
 	public void takeUserToNewDownload() {
-		showBannedUserDialog();
+		Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse(this.getString(R.string.beta_download_url) + this.getString(R.string.beta_version) + ".apk"));  
+		startActivity(viewIntent);
 	}
 	private void showBannedUserDialog() {
 		final BetaDialog bannedUser = new BetaDialog(ShowMap.this, R.layout.banned_user);
@@ -168,7 +198,7 @@ public class ShowMap extends MapActivity {
 		submitButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BetaChecker.registerUser(registrationUrl, UNIQUE_ID, name.getEditableText().toString());
+				BetaChecker.registerUser(registrationUrl, UNIQUE_ID, name.getEditableText().toString(), ANDROID_VERSION);
 				registerDeviceLocally();
 				newUser.dismiss();
 			}
@@ -205,9 +235,6 @@ public class ShowMap extends MapActivity {
 	            	areAllBetaFieldsFilledOut(textFields, submitButton);
 	            	imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 	                return true;
-	            }
-	            else {
-	            	Log.w("MTM", "MTM: actionId:" + actionId );
 	            }
 	            return false;
 	        }

@@ -159,7 +159,7 @@ public class ShowMap extends MapActivity {
 	 * Download the newest version from the internet, then change the view
 	 */
 	public void takeUserToNewDownload() {
-		Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse(this.getString(R.string.beta_download_url) + this.getString(R.string.beta_user_latest_version) + ".apk"));  
+		Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse(this.getString(R.string.beta_download_url) + BetaChecker.getHTTPData(this.getString(R.string.beta_user_latest_version)) + ".apk"));  
 		startActivity(viewIntent);
 	}
 	private void showBannedUserDialog() {

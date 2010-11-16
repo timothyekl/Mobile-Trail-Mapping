@@ -142,6 +142,7 @@ public class Trail {
 	 * and parses them properly.  That list is then cleared out.
 	 */
 	public void resolveConnections() {
+		Log.w("MTM", "MTM: Pre  " + this.toStringList());
 		for(TrailPoint p : this._trailPoints) {
 			if(p.hasUnresolvedLinks()) {
 				for(Integer i : p.getUnresolvedLinks()) {
@@ -149,7 +150,7 @@ public class Trail {
 				}
 			}
 		}
-		Log.w("MTM", "MTM: " + this.toStringList());
+		Log.w("MTM", "MTM: Post " + this.toStringList());
 	}
 	
 	@Override

@@ -106,14 +106,13 @@ public class ShowMap extends MapActivity {
 		if (bannedUser && BETA_MODE) {
 			showBannedUserDialog();
 		}
+		// This next line is commented out for the early beta, this allows caching of items, but will negate
+		// the ability to ban people
 		// if(!this._settings.getBoolean(REGISTERED_DEVICE, false)) {
 		else if (!validUser && BETA_MODE) {
 			showNewBetaUserDialog(this.getString(R.string.register_device_url));
 		}
 		// }
-		//showNewBetaUserDialog(this.getString(R.string.register_device_url));
-		//showOutOfDateDialog();
-		//showBannedUserDialog();
 		Log.w("MTM", "MTM: onCreate()");
 	}
 
@@ -354,6 +353,9 @@ public class ShowMap extends MapActivity {
 		return false;
 	}
 
+	/**
+	 * Fired when the options menu is created
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
@@ -363,6 +365,9 @@ public class ShowMap extends MapActivity {
 		return true;
 	}
 
+	/**
+	 * Fired when an options menu item is selected.
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 

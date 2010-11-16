@@ -32,13 +32,27 @@ public class DataHandler {
 	private Document _doc;
 	
 	/**
-	 * Initializes the DataHandler values
+	 * Initializes default DataHandler values
 	 */
 	public DataHandler() {
 		_trails = new HashSet<Trail>();
 		_factory = DocumentBuilderFactory.newInstance();
 		try {
 			_xmlFile = new URL(XML_FILE);
+			_builder = _factory.newDocumentBuilder();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Initializes the DataHandler values using a custom XML File
+	 */
+	public DataHandler(String XMLFILE) {
+		_trails = new HashSet<Trail>();
+		_factory = DocumentBuilderFactory.newInstance();
+		try {
+			_xmlFile = new URL(XMLFILE);
 			_builder = _factory.newDocumentBuilder();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -139,10 +153,6 @@ public class DataHandler {
 				Log.w("MTM", "MTM Value: " + name + " : " + value);
 				
 				trailPointInfo.put(name, value);
-				
-				if(localPoint.getNodeName().equals("category")) {
-					Log.w("MTM", "MTM: - I FOUND TEH CATEGORIEZZZZZZZZZZZZZZZ");
-				}
 			}
 			
 			if(localPoint.getNodeName().equals("connection")) {

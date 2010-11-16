@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import android.graphics.Paint;
+import android.util.Log;
 
 import com.google.android.maps.Overlay;
 
@@ -148,10 +149,19 @@ public class Trail {
 				}
 			}
 		}
+		Log.w("MTM", "MTM: " + this.toStringList());
 	}
 	
 	@Override
 	public String toString() {
 		return "Trail: " + this._name + " (" + this._trailPoints.size() + " TrailPoints)";
+	}
+	
+	public String toStringList() {
+		String trailList =  "Trail: " + this._name + " (";
+		for(TrailPoint p : this._trailPoints) {
+			trailList += p.getID() + ", ";
+		}
+		return trailList;
 	}
 }

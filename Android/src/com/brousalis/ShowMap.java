@@ -32,12 +32,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapActivity;
-import com.google.android.maps.MapController;
-import com.google.android.maps.MapView;
-import com.google.android.maps.Overlay;
-import com.google.android.maps.OverlayItem;
+import com.google.android.maps.*;
 
 public class ShowMap extends MapActivity {
 
@@ -66,6 +61,8 @@ public class ShowMap extends MapActivity {
 	// TODO: Figure out some good value to init these to
 	public static final int DEFAULT_MAP_LAT = 0;
 	public static final int DEFAULT_MAP_LONG = 0;
+	
+	public static Drawable bubble;
 
 	/**
 	 * The Standard Location manager for an Android Device
@@ -91,8 +88,22 @@ public class ShowMap extends MapActivity {
 
 	private DataHandler _dataHandler;
 
+	public ShowMap setupBubbleIfNeeded() {
+		if(bubble == null) {
+			bubble = this.getResources().getDrawable(R.drawable.dot);
+		}
+		return this;
+	}
+	
+	public static Drawable getBubble() {
+		return bubble;
+	}
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		
+		this.setupBubbleIfNeeded();
+		
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.main);
 		this._mapView = (MapView) findViewById(R.id.mapView);
@@ -336,20 +347,20 @@ public class ShowMap extends MapActivity {
 	}
 
 	public void drawDroids() {
-		mapOverlays = _mapView.getOverlays();
-		drawable = this.getResources().getDrawable(R.drawable.droid);
-		Trail t = new Trail("Tester Trail", drawable);
+		//mapOverlays = _mapView.getOverlays();
+		//drawable = this.getResources().getDrawable(R.drawable.droid);
 		
-		GeoPoint point = new GeoPoint(19240000,-99120000);
+		
+		//GeoPoint point = new GeoPoint(19240000,-99120000);
 		//TrailPoint overlayitem = new TrailPoint(point, "Title", "Description");
-		TrailPoint overlayitem = new TrailPoint(0, point, null);
+		//TrailPoint overlayitem = new TrailPoint(0, point, null);
 		
-		GeoPoint point2 = new GeoPoint(35410000, 139460000);
-		TrailPoint overlayitem2 = new TrailPoint(1, point2, null);
-		t.addPoint(overlayitem);
-		t.addPoint(overlayitem2);
-		mapOverlays.add(t);
-		_mapView.invalidate();
+		//GeoPoint point2 = new GeoPoint(35410000, 139460000);
+		//TrailPoint overlayitem2 = new TrailPoint(1, point2, null);
+		//t.addPoint(overlayitem);
+		//t.addPoint(overlayitem2);
+		//mapOverlays.add(t);
+		//_mapView.invalidate();
 	}
 	
 	/**
@@ -357,7 +368,7 @@ public class ShowMap extends MapActivity {
 	 */
 	private void initializeParser() {
 		this._dataHandler = new DataHandler();
-		this._dataHandler.parseDocument(this.getResources().getDrawable(R.drawable.dot));
+		this._dataHandler.parseDocument();
 	}
 
 	/**
@@ -369,6 +380,7 @@ public class ShowMap extends MapActivity {
 		for (Trail t : trails) {
 			t.resolveConnections();
 			this._mapView.getOverlays().add(t);
+			this._mapView.getOverlays().addAll(t.getTrailPoints());
 		}
 		this._mapView.invalidate();
 	}

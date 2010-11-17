@@ -2,34 +2,31 @@ package com.brousalis;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.google.android.maps.ItemizedOverlay;
-import com.google.android.maps.MapView;
-import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
-public class Trail extends ItemizedOverlay{
+public class Trail extends ItemizedOverlay {
 	
 	private Paint _linePaint;
 	private String _name;
 	private ArrayList<TrailPoint> _trailPoints;
-	//private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
+	private ArrayList<TrailPoint> _trailHeads;
 	
-	public Trail(String name, Drawable defaultIcon) {
-		super(boundCenter(defaultIcon));
+	public Trail(String name) {
+		//super(null);
+		super(boundCenter(ShowMap.bubble));
 		this._linePaint = new Paint();
 		this._linePaint.setAntiAlias(true);
 		this._linePaint.setARGB(255, 0, 255, 0);
 		this._name = name;
 		this._trailPoints = new ArrayList<TrailPoint>();
+		this._trailHeads = new ArrayList<TrailPoint>();
 	}
 	
 	public void setName(String name) {
@@ -38,11 +35,10 @@ public class Trail extends ItemizedOverlay{
 	public String getName() {
 		return this._name;
 	}
-	@Override
-	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
-		// TODO Auto-generated method stub
-		super.draw(canvas, mapView, false);
-	}
+//	@Override
+//	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
+//		super.draw(canvas, mapView, false);
+//	}
 	
 	/**
 	 * This method is DANGEROUS, it assumes each point is connected to the next.
@@ -58,7 +54,6 @@ public class Trail extends ItemizedOverlay{
 		while(!trailPoints.isEmpty()) {
 			TrailPoint p = trailPoints.poll();
 			this._trailPoints.add(p);
-			populate();
 			p.addConnection(trailPoints.peek());
 		}
 	}
@@ -74,7 +69,6 @@ public class Trail extends ItemizedOverlay{
 		while(!trailPoints.isEmpty()) {
 			TrailPoint p = trailPoints.poll();
 			this._trailPoints.add(p);
-			populate();
 			p.addConnection(trailPoints.peek());
 		}
 	}
@@ -96,10 +90,10 @@ public class Trail extends ItemizedOverlay{
 	public boolean addPoint(TrailPoint pNew, TrailPoint pOld) {
 		if(this.hasPoint(pNew))
 			return false;
-		this._trailPoints.add(pNew);
+		this.addPoint(pNew);
 		if(this.hasPoint(pOld))
 			pOld.addConnection(pNew);
-		populate();
+		
 		return true;
 	}
 
@@ -109,7 +103,11 @@ public class Trail extends ItemizedOverlay{
 	 */
 	public void addPoint(TrailPoint point) {
 		this._trailPoints.add(point);
-		populate();
+		
+		if(point.getID() == 0) {
+			this._trailHeads.add(point);
+			populate();
+		}
 	}
 
 	/**
@@ -141,7 +139,7 @@ public class Trail extends ItemizedOverlay{
 	 * Returns the Set of all TrailPoints
 	 * @return The Set of all TrailPoints
 	 */
-	public Collection<? extends OverlayItem> getTrailPoints() {
+	public Collection<TrailPoint> getTrailPoints() {
 		return this._trailPoints;
 	}
 
@@ -188,11 +186,16 @@ public class Trail extends ItemizedOverlay{
 
 	@Override
 	protected OverlayItem createItem(int i) {
-		return _trailPoints.get(i);
+		
+		return convertPointToOverlay(_trailHeads.get(i));
+	}
+
+	private OverlayItem convertPointToOverlay(TrailPoint trailPoint) {
+		return new OverlayItem(trailPoint.getLocation(), trailPoint.getTitle(), trailPoint.getSummary());
 	}
 
 	@Override
 	public int size() {
-		return _trailPoints.size();
+		return _trailHeads.size();
 	}
 }

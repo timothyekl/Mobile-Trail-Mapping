@@ -1,23 +1,46 @@
 package com.brousalis.test;
 
-import junit.framework.TestCase;
+import android.content.res.Configuration;
+import android.test.ActivityInstrumentationTestCase2;
 
 import com.brousalis.DataHandler;
+import com.brousalis.ShowMap;
 import com.brousalis.Trail;
+import com.google.android.maps.MapView;
 
-public class XMLDataTesting extends TestCase {
+public class XMLDataTesting extends ActivityInstrumentationTestCase2<ShowMap> {
+	
+public static final int GOOD_ZOOM_LEVEL = 17;
+	
+	private ShowMap mActivity;
+	private MapView mView;
+	private Configuration config;
+	
+	public XMLDataTesting() {
+		super("com.brousalis", ShowMap.class);
+	}
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		config = new Configuration();
+		config.setToDefaults();
+		
+		mActivity = this.getActivity();
+		mView = (MapView) mActivity.findViewById(com.brousalis.R.id.mapView);
+	}
 	
 	public static final String URL = "http://www.fernferret.com/samplexml.xml";
 	public static final String TRAIL_NAME = "Heritage";
 	
 	public void testXMLExists() {
 		DataHandler handler = new DataHandler(URL);
-		handler.parseDocument(null);
+		handler.parseDocument();
 		assertEquals(1, handler.getParsedTrails().size());
 	}
 	public void testBasicXML() {
 		DataHandler handler = new DataHandler(URL);
-		handler.parseDocument(null);
+		handler.parseDocument();
 		Trail t = handler.getParsedTrail(TRAIL_NAME);
 		t.resolveConnections();
 		//HashSet<Trail> trails = handler.getParsedTrails();

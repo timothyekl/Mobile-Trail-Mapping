@@ -11,7 +11,7 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
-public class InterestPoint extends OverlayItem {
+public class InterestPoint extends Overlay {
 	
 	private static final double METERS_PER_MILE = 1609.344;
 	
@@ -31,7 +31,7 @@ public class InterestPoint extends OverlayItem {
 	 * @param summary A brief summary or description of the point.  This can be "".
 	 */
 	public InterestPoint(int id, GeoPoint p, String category, String title, String summary) {
-		super(p, title, summary);
+		//super(p, title, summary);
 		this._ID = id;
 		this._location = p;
 		this._category = category;
@@ -45,14 +45,14 @@ public class InterestPoint extends OverlayItem {
 	/**
 	 * Draws this InterestPoint on the screen.
 	 */
-//	@Override
-//    public void draw(Canvas canvas, MapView mapView, boolean shadow) 
-//    {
-//        super.draw(canvas, mapView, shadow);                   
-//        Point screenPts = new Point();
-//        mapView.getProjection().toPixels(this._location, screenPts);
-//		canvas.drawCircle(screenPts.x, screenPts.y, 5, _color );
-//    }
+	
+    public void draw(Canvas canvas, MapView mapView, boolean shadow) 
+    {
+        super.draw(canvas, mapView, shadow);                
+        Point screenPts = new Point();
+        mapView.getProjection().toPixels(this._location, screenPts);
+		canvas.drawCircle(screenPts.x, screenPts.y, 5, _color );
+    }
 	
 	public void setID(int id) {
 		this._ID = id;
@@ -105,6 +105,8 @@ public class InterestPoint extends OverlayItem {
 	public Paint getColor() {
 		return this._color;
 	}
+	
+	
 	
 	/**
 	 * Returns True if the Points are within miles radius of each other.

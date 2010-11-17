@@ -9,8 +9,9 @@ import android.util.Log;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
 
-public class InterestPoint extends Overlay implements Overlay.Snappable {
+public class InterestPoint extends OverlayItem {
 	
 	private static final double METERS_PER_MILE = 1609.344;
 	
@@ -30,6 +31,7 @@ public class InterestPoint extends Overlay implements Overlay.Snappable {
 	 * @param summary A brief summary or description of the point.  This can be "".
 	 */
 	public InterestPoint(int id, GeoPoint p, String category, String title, String summary) {
+		super(p, title, summary);
 		this._ID = id;
 		this._location = p;
 		this._category = category;
@@ -43,14 +45,14 @@ public class InterestPoint extends Overlay implements Overlay.Snappable {
 	/**
 	 * Draws this InterestPoint on the screen.
 	 */
-	@Override
-    public void draw(Canvas canvas, MapView mapView, boolean shadow) 
-    {
-        super.draw(canvas, mapView, shadow);                   
-        Point screenPts = new Point();
-        mapView.getProjection().toPixels(this._location, screenPts);
-		canvas.drawCircle(screenPts.x, screenPts.y, 5, _color );
-    }
+//	@Override
+//    public void draw(Canvas canvas, MapView mapView, boolean shadow) 
+//    {
+//        super.draw(canvas, mapView, shadow);                   
+//        Point screenPts = new Point();
+//        mapView.getProjection().toPixels(this._location, screenPts);
+//		canvas.drawCircle(screenPts.x, screenPts.y, 5, _color );
+//    }
 	
 	public void setID(int id) {
 		this._ID = id;
@@ -136,52 +138,5 @@ public class InterestPoint extends Overlay implements Overlay.Snappable {
 		dest.setLatitude(p.getLatitudeE6() / 1E6);
 		dest.setLongitude(p.getLongitudeE6() / 1E6);
 		return dest;
-	}
-	
-	/**
-	 * Fires when a user taps on the screen.  Not currently Implemented.
-	 */
-	@Override
-	public boolean onTap(GeoPoint p, MapView mapView) {
-		Log.w("MTM", "MTM: Tap On Overlay #" + this._ID + ": " + this._title);
-		
-		return super.onTap(p, mapView);
-	}
-//	@Override
-//    public boolean onTap(GeoPoint point, MapView view) {
-//        checkTolerance(view);
-//
-//        // entry here?
-//        Entry e = finder.find(point.getLatitudeE6(), point.getLongitudeE6());
-//        if (e != null) {
-//            
-//            // OK, they picked an entry; show them the popup.
-//            visitor.setEntry(e);
-//            popup.setVisibility(View.VISIBLE);
-//            TextView text = (TextView) container.findViewById(R.id.title);
-//            text.setText(e.title());
-//        }
-//    
-//        return super.onTap(point, view);
-//    }
-//	@Override
-//    public boolean onTouchEvent(MotionEvent event, MapView mapView) 
-//    {   
-//        //---when user lifts his finger---
-//        if (event.getAction() == 1) {                
-//            GeoPoint p = mapView.getProjection().fromPixels(
-//                (int) event.getX(),
-//                (int) event.getY());
-//                Log.w("MTM", "MTM Location: " + 
-//                    p.getLatitudeE6() / 1E6 + "," + 
-//                    p.getLongitudeE6() /1E6 );
-//        }                            
-//        return false;
-//    } 
-
-	@Override
-	public boolean onSnapToItem(int x, int y, Point snapPoint, MapView mapView) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

@@ -2,6 +2,7 @@ package com.brousalis;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -34,9 +36,17 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
+import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
 
 public class ShowMap extends MapActivity {
 
+	/** Testing items **/
+	List<Overlay> mapOverlays;
+	Drawable drawable;
+	OverlayTester tester;
+	
+	// END
 	private static final int HTC_SENSE_ENTER = 0;
 	// SharedPreference Strings
 	public static final String SAVED_MAP_STATE = "SavedMapState";
@@ -114,6 +124,7 @@ public class ShowMap extends MapActivity {
 		}
 		// }
 		Log.w("MTM", "MTM: onCreate()");
+		
 	}
 
 	private void showOutOfDateDialog() {
@@ -320,15 +331,33 @@ public class ShowMap extends MapActivity {
 		this.initLocation();
 		this.initializeParser();
 		this.drawTrail();
+		this.drawDroids();
 		Log.w("MTM", "MTM: onStart()");
 	}
 
+	public void drawDroids() {
+		mapOverlays = _mapView.getOverlays();
+		drawable = this.getResources().getDrawable(R.drawable.droid);
+		Trail t = new Trail("Tester Trail", drawable);
+		
+		GeoPoint point = new GeoPoint(19240000,-99120000);
+		//TrailPoint overlayitem = new TrailPoint(point, "Title", "Description");
+		TrailPoint overlayitem = new TrailPoint(0, point, null);
+		
+		GeoPoint point2 = new GeoPoint(35410000, 139460000);
+		TrailPoint overlayitem2 = new TrailPoint(1, point2, null);
+		t.addPoint(overlayitem);
+		t.addPoint(overlayitem2);
+		mapOverlays.add(t);
+		_mapView.invalidate();
+	}
+	
 	/**
 	 * Initialize the XML Parser and Parse the data from the url.
 	 */
 	private void initializeParser() {
 		this._dataHandler = new DataHandler();
-		this._dataHandler.parseDocument();
+		this._dataHandler.parseDocument(this.getResources().getDrawable(R.drawable.dot));
 	}
 
 	/**
@@ -339,8 +368,9 @@ public class ShowMap extends MapActivity {
 		this._mapView.getOverlays().clear();
 		for (Trail t : trails) {
 			t.resolveConnections();
-			this._mapView.getOverlays().addAll(t.getTrailPoints());
+			this._mapView.getOverlays().add(t);
 		}
+		this._mapView.invalidate();
 	}
 
 	/**

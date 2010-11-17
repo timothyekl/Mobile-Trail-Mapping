@@ -1,27 +1,35 @@
 package com.brousalis;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
+import com.google.android.maps.ItemizedOverlay;
+import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
 
-public class Trail {
+public class Trail extends ItemizedOverlay{
 	
 	private Paint _linePaint;
 	private String _name;
-	private HashSet<TrailPoint> _trailPoints;
+	private ArrayList<TrailPoint> _trailPoints;
+	//private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
 	
-	public Trail(String name) {
+	public Trail(String name, Drawable defaultIcon) {
+		super(boundCenter(defaultIcon));
 		this._linePaint = new Paint();
 		this._linePaint.setAntiAlias(true);
 		this._linePaint.setARGB(255, 0, 255, 0);
 		this._name = name;
-		this._trailPoints = new HashSet<TrailPoint>();
+		this._trailPoints = new ArrayList<TrailPoint>();
 	}
 	
 	public void setName(String name) {
@@ -30,18 +38,27 @@ public class Trail {
 	public String getName() {
 		return this._name;
 	}
-
+	@Override
+	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
+		// TODO Auto-generated method stub
+		super.draw(canvas, mapView, false);
+	}
+	
 	/**
+	 * This method is DANGEROUS, it assumes each point is connected to the next.
+	 * 
 	 * Adds a List of TrailPoints to this trail.
 	 * It should be noted that the first point of 
 	 * this trail is NOT linked to any other point 
 	 * on this trail
+	 * 
 	 * @param trailPoints
 	 */
 	public void addLinkedPoints(LinkedList<TrailPoint> trailPoints) {
 		while(!trailPoints.isEmpty()) {
 			TrailPoint p = trailPoints.poll();
 			this._trailPoints.add(p);
+			populate();
 			p.addConnection(trailPoints.peek());
 		}
 	}
@@ -57,6 +74,7 @@ public class Trail {
 		while(!trailPoints.isEmpty()) {
 			TrailPoint p = trailPoints.poll();
 			this._trailPoints.add(p);
+			populate();
 			p.addConnection(trailPoints.peek());
 		}
 	}
@@ -81,6 +99,7 @@ public class Trail {
 		this._trailPoints.add(pNew);
 		if(this.hasPoint(pOld))
 			pOld.addConnection(pNew);
+		populate();
 		return true;
 	}
 
@@ -90,6 +109,7 @@ public class Trail {
 	 */
 	public void addPoint(TrailPoint point) {
 		this._trailPoints.add(point);
+		populate();
 	}
 
 	/**
@@ -121,7 +141,7 @@ public class Trail {
 	 * Returns the Set of all TrailPoints
 	 * @return The Set of all TrailPoints
 	 */
-	public Collection<? extends Overlay> getTrailPoints() {
+	public Collection<? extends OverlayItem> getTrailPoints() {
 		return this._trailPoints;
 	}
 
@@ -164,5 +184,15 @@ public class Trail {
 			trailList += p.getID() + ", ";
 		}
 		return trailList;
+	}
+
+	@Override
+	protected OverlayItem createItem(int i) {
+		return _trailPoints.get(i);
+	}
+
+	@Override
+	public int size() {
+		return _trailPoints.size();
 	}
 }

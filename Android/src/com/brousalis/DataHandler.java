@@ -13,6 +13,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
@@ -62,21 +63,21 @@ public class DataHandler {
 	/**
 	 * Parses the document into trails and points.
 	 */
-	public void parseDocument() {
+	public void parseDocument(Drawable defaultIcon) {
 		try {
 			_doc = _builder.parse(new InputSource(_xmlFile.openStream()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if(_doc != null)
-			extractTrails(_doc);
+			extractTrails(_doc, defaultIcon);
 	}
 	
 	/**
 	 * Extracts trail information from the DOM.  This will retrieve all trails currently
 	 * @param doc
 	 */
-	private void extractTrails(Document doc) {
+	private void extractTrails(Document doc, Drawable defaultIcon) {
 		NodeList itemList = doc.getElementsByTagName("trail");
 		Node currentNode = itemList.item(0);
 		while (currentNode != null) {
@@ -84,7 +85,7 @@ public class DataHandler {
 				String trailName = currentNode.getAttributes().getNamedItem("name").getNodeValue();
 				Log.w("MTM", "MTM: Trail ID   : " + currentNode.getAttributes().getNamedItem("id").getNodeValue());
 				Log.w("MTM", "MTM: Trail Name : " + trailName);
-				createTrail(trailName);
+				createTrail(trailName, defaultIcon);
 				extractTrail(currentNode);
 				saveTrail();
 			}
@@ -234,8 +235,8 @@ public class DataHandler {
 	 * Creates a new trail
 	 * @param trailName The name of the Trail
 	 */
-	private void createTrail(String trailName) {
-		this._trail = new Trail(trailName);
+	private void createTrail(String trailName, Drawable d) {
+		this._trail = new Trail(trailName, d);
 	}
 	
 	/**

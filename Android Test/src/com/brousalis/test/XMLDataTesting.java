@@ -1,7 +1,6 @@
 package com.brousalis.test;
 
 import junit.framework.TestCase;
-import android.util.Log;
 
 import com.brousalis.DataHandler;
 import com.brousalis.Trail;
@@ -13,12 +12,12 @@ public class XMLDataTesting extends TestCase {
 	
 	public void testXMLExists() {
 		DataHandler handler = new DataHandler(URL);
-		handler.parseDocument();
+		handler.parseDocument(null);
 		assertEquals(1, handler.getParsedTrails().size());
 	}
 	public void testBasicXML() {
 		DataHandler handler = new DataHandler(URL);
-		handler.parseDocument();
+		handler.parseDocument(null);
 		Trail t = handler.getParsedTrail(TRAIL_NAME);
 		t.resolveConnections();
 		//HashSet<Trail> trails = handler.getParsedTrails();

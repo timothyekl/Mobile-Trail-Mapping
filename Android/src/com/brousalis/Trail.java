@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.google.android.maps.ItemizedOverlay;
@@ -69,6 +70,9 @@ public class Trail extends ItemizedOverlay<OverlayItem> {
 	protected boolean onTap(int index) {
 		Log.w("MTM", "MTM: You just touched item: " + index);
 		Intent inMyTent = new Intent(ShowMap.thisActivity, ItemDetails.class);
+		
+		inMyTent.putExtra("title", this._name);
+		inMyTent.putExtra("summary", this._trailHeads.get(index).getSummary());
 		ShowMap.thisActivity.startActivity(inMyTent);
 		return true;
 	}

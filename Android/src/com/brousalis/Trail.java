@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.google.android.maps.ItemizedOverlay;
@@ -60,7 +59,7 @@ public class Trail extends ItemizedOverlay<OverlayItem> {
 	 */
 	private Paint getCoolPaint() {
     	Paint p = new Paint();
-    	Random r = new Random();
+    	Random r = new Random(1);
     	p.setARGB(255, 255 * r.nextInt(2), 255 * r.nextInt(2), 255 * r.nextInt(2));
     	p.setAntiAlias(true);
     	return p;

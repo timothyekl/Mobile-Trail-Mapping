@@ -2,7 +2,6 @@ package com.brousalis;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -35,13 +34,7 @@ import android.widget.TextView;
 import com.google.android.maps.*;
 
 public class ShowMap extends MapActivity {
-
-	/** Testing items **/
-	List<Overlay> mapOverlays;
-	Drawable drawable;
-	OverlayTester tester;
 	
-	// END
 	private static final int HTC_SENSE_ENTER = 0;
 	// SharedPreference Strings
 	public static final String SAVED_MAP_STATE = "SavedMapState";

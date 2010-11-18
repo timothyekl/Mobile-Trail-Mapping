@@ -1,7 +1,5 @@
 package com.brousalis;
 
-import java.util.Random;
-
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;

@@ -159,6 +159,10 @@ public class DataHandler {
 				trailPointInfo.put(name, value);
 			}
 			
+			if(localPoint.getNodeName().equals("category")) {
+				trailPointInfo.put("categoryID", localPoint.getAttributes().getNamedItem("id").getNodeValue());
+			}
+			
 			if(localPoint.getNodeName().equals("connection")) {
 				int connID = Integer.parseInt(localPoint.getFirstChild().getNodeValue());
 				_trailPoint.addConnectionByID(connID);
@@ -167,6 +171,7 @@ public class DataHandler {
 			}
 			if(localPoint.getNodeName().equals("longitude")) {
 				createNewTrailPoint(Integer.parseInt((String) trailPointInfo.get("id")), Double.parseDouble((String) trailPointInfo.get("latitude")), Double.parseDouble((String) trailPointInfo.get("longitude")));
+				_trailPoint.setCategoryID(Integer.parseInt((String) trailPointInfo.get("categoryID")));
 			}
 			if(localPoint.getNodeName().equals("connections")) {
 				localPoint = localPoint.getFirstChild();

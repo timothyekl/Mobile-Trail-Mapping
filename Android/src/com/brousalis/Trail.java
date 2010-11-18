@@ -5,13 +5,16 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.util.Log;
 
 import com.google.android.maps.ItemizedOverlay;
+import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 
-public class Trail extends ItemizedOverlay {
+public class Trail extends ItemizedOverlay<OverlayItem> {
 	
 	private Paint _linePaint;
 	private String _name;
@@ -19,7 +22,6 @@ public class Trail extends ItemizedOverlay {
 	private ArrayList<TrailPoint> _trailHeads;
 	
 	public Trail(String name) {
-		//super(null);
 		super(boundCenter(ShowMap.bubble));
 		this._linePaint = new Paint();
 		this._linePaint.setAntiAlias(true);
@@ -35,10 +37,21 @@ public class Trail extends ItemizedOverlay {
 	public String getName() {
 		return this._name;
 	}
-//	@Override
-//	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
-//		super.draw(canvas, mapView, false);
-//	}
+	@Override
+	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
+		
+		Point screenPts;
+		for(TrailPoint p : _trailHeads) {
+			screenPts = new Point();
+	        mapView.getProjection().toPixels(p.getLocation(), screenPts);
+	        canvas.drawCircle(screenPts.x, screenPts.y, 15, p.getColor());
+		}
+		super.draw(canvas, mapView, false);
+
+		//canvas.drawCircle(screenPts.x, screenPts.y, 5, getColor());
+		
+	}
+	
 	
 	/**
 	 * This method is DANGEROUS, it assumes each point is connected to the next.
@@ -93,7 +106,6 @@ public class Trail extends ItemizedOverlay {
 		this.addPoint(pNew);
 		if(this.hasPoint(pOld))
 			pOld.addConnection(pNew);
-		
 		return true;
 	}
 

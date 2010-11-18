@@ -87,22 +87,11 @@ public class ShowMap extends MapActivity {
 	private SharedPreferences _settings;
 
 	private DataHandler _dataHandler;
-
-	public ShowMap setupBubbleIfNeeded() {
-		if(bubble == null) {
-			bubble = this.getResources().getDrawable(R.drawable.dot);
-		}
-		return this;
-	}
-	
-	public static Drawable getBubble() {
-		return bubble;
-	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
-		this.setupBubbleIfNeeded();
+		bubble = this.getResources().getDrawable(R.drawable.dot_clear);
 		
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.main);
@@ -342,25 +331,7 @@ public class ShowMap extends MapActivity {
 		this.initLocation();
 		this.initializeParser();
 		this.drawTrail();
-		this.drawDroids();
 		Log.w("MTM", "MTM: onStart()");
-	}
-
-	public void drawDroids() {
-		//mapOverlays = _mapView.getOverlays();
-		//drawable = this.getResources().getDrawable(R.drawable.droid);
-		
-		
-		//GeoPoint point = new GeoPoint(19240000,-99120000);
-		//TrailPoint overlayitem = new TrailPoint(point, "Title", "Description");
-		//TrailPoint overlayitem = new TrailPoint(0, point, null);
-		
-		//GeoPoint point2 = new GeoPoint(35410000, 139460000);
-		//TrailPoint overlayitem2 = new TrailPoint(1, point2, null);
-		//t.addPoint(overlayitem);
-		//t.addPoint(overlayitem2);
-		//mapOverlays.add(t);
-		//_mapView.invalidate();
 	}
 	
 	/**
@@ -379,8 +350,9 @@ public class ShowMap extends MapActivity {
 		this._mapView.getOverlays().clear();
 		for (Trail t : trails) {
 			t.resolveConnections();
-			this._mapView.getOverlays().add(t);
 			this._mapView.getOverlays().addAll(t.getTrailPoints());
+			this._mapView.getOverlays().add(t);
+			
 		}
 		this._mapView.invalidate();
 	}

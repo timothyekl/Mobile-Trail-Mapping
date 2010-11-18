@@ -48,10 +48,10 @@ public class InterestPoint extends Overlay {
 	
     public void draw(Canvas canvas, MapView mapView, boolean shadow) 
     {
-        super.draw(canvas, mapView, shadow);                
+        super.draw(canvas, mapView, shadow);
         Point screenPts = new Point();
         mapView.getProjection().toPixels(this._location, screenPts);
-		canvas.drawCircle(screenPts.x, screenPts.y, 5, _color );
+		//canvas.drawCircle(screenPts.x, screenPts.y, 5, _color );
     }
 	
 	public void setID(int id) {

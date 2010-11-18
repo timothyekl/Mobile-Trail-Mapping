@@ -55,18 +55,18 @@ public class TrailPoint extends InterestPoint {
 		this._unresolvableLinks = new LinkedList<Integer>();
 	}
 	
+	@Override
 	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
 		super.draw(canvas, mapView, shadow);
 		Point screenPts = new Point();
         mapView.getProjection().toPixels(getLocation(), screenPts);
 
-		canvas.drawCircle(screenPts.x, screenPts.y, 5, getColor());
+		//canvas.drawCircle(screenPts.x, screenPts.y, 5, getColor());
 		
 		for(TrailPoint p : this._connections) {
 			Point newPt = new Point();
 			mapView.getProjection().toPixels(p.getLocation(), newPt);
-			Paint newP = new Paint();
-			newP.setARGB(255, 255, 0, 0);
+			Paint newP = getColor();
 			newP.setStrokeWidth(3);
 			newP.setFlags(Paint.ANTI_ALIAS_FLAG);
 			canvas.drawLine(screenPts.x, screenPts.y, newPt.x, newPt.y, newP);

@@ -104,7 +104,7 @@ public class Trail extends ItemizedOverlay {
 	public void addPoint(TrailPoint point) {
 		this._trailPoints.add(point);
 		
-		if(point.getID() == 0) {
+		if(point.getCategoryID() == 1) {
 			this._trailHeads.add(point);
 			populate();
 		}

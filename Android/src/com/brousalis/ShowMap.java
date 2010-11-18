@@ -56,6 +56,7 @@ public class ShowMap extends MapActivity {
 	public static final int DEFAULT_MAP_LONG = 0;
 	
 	public static Drawable bubble;
+	public static ShowMap thisActivity;
 
 	/**
 	 * The Standard Location manager for an Android Device
@@ -85,7 +86,7 @@ public class ShowMap extends MapActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		
 		bubble = this.getResources().getDrawable(R.drawable.dot_clear);
-		
+		thisActivity = ShowMap.this;
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.main);
 		this._mapView = (MapView) findViewById(R.id.mapView);

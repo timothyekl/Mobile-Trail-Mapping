@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -67,6 +68,8 @@ public class Trail extends ItemizedOverlay<OverlayItem> {
 	@Override
 	protected boolean onTap(int index) {
 		Log.w("MTM", "MTM: You just touched item: " + index);
+		Intent inMyTent = new Intent(ShowMap.thisActivity, ItemDetails.class);
+		ShowMap.thisActivity.startActivity(inMyTent);
 		return true;
 	}
 	

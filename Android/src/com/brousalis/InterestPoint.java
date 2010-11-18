@@ -1,5 +1,7 @@
 package com.brousalis;
 
+import java.util.Random;
+
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -37,15 +39,12 @@ public class InterestPoint extends Overlay {
 		this._summary = summary;
 		this._title = title;
 		this._color = new Paint();
-		this._color.setARGB(255, 0, 0, 255);
-		this._color.setAntiAlias(true);
 		this._categoryID = -1;
 	}
 	
 	/**
 	 * Draws this InterestPoint on the screen.
 	 */
-	
     public void draw(Canvas canvas, MapView mapView, boolean shadow) 
     {
         super.draw(canvas, mapView, shadow);
@@ -99,8 +98,8 @@ public class InterestPoint extends Overlay {
 		return this._title;
 	}
 	
-	public void setColor(int A, int R, int G, int B) {
-		this._color.setARGB(A, R, G, B);
+	public void setColor(Paint p) {
+		this._color = p;
 	}
 	public Paint getColor() {
 		return this._color;

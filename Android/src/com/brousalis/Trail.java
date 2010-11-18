@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Random;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -16,16 +17,14 @@ import com.google.android.maps.OverlayItem;
 
 public class Trail extends ItemizedOverlay<OverlayItem> {
 	
-	private Paint _linePaint;
+	private Paint _trailPaint;
 	private String _name;
 	private ArrayList<TrailPoint> _trailPoints;
 	private ArrayList<TrailPoint> _trailHeads;
 	
 	public Trail(String name) {
 		super(boundCenter(ShowMap.bubble));
-		this._linePaint = new Paint();
-		this._linePaint.setAntiAlias(true);
-		this._linePaint.setARGB(255, 0, 255, 0);
+		_trailPaint = getCoolPaint();
 		this._name = name;
 		this._trailPoints = new ArrayList<TrailPoint>();
 		this._trailHeads = new ArrayList<TrailPoint>();
@@ -52,6 +51,18 @@ public class Trail extends ItemizedOverlay<OverlayItem> {
 		
 	}
 	
+	/**
+	 * Returns what I think is, but what will have to be tuned with a 
+	 * better algorithm, a cool paint that is antialiased.
+	 * @return A cool Paint color
+	 */
+	private Paint getCoolPaint() {
+    	Paint p = new Paint();
+    	Random r = new Random();
+    	p.setARGB(255, 255 * r.nextInt(2), 255 * r.nextInt(2), 255 * r.nextInt(2));
+    	p.setAntiAlias(true);
+    	return p;
+    }
 	
 	/**
 	 * This method is DANGEROUS, it assumes each point is connected to the next.
@@ -114,8 +125,12 @@ public class Trail extends ItemizedOverlay<OverlayItem> {
 	 * @param point The new TrailPoint to add
 	 */
 	public void addPoint(TrailPoint point) {
+		point.setColor(this._trailPaint);
 		this._trailPoints.add(point);
 		
+		//TODO: Remove this static reference
+		// This is using a static category reference, when category parsing is implemented
+		// thsi will go away
 		if(point.getCategoryID() == 1) {
 			this._trailHeads.add(point);
 			populate();

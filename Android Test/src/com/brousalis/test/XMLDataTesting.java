@@ -48,6 +48,7 @@ public static final int GOOD_ZOOM_LEVEL = 17;
 		
 		assertEquals(0,t.getTrailPoint(0).getID());
 		assertEquals(1,t.getTrailPoint(0).getConnections().size());
+		assertEquals(1,t.getTrailPoint(0).getCategoryID());
 		
 		assertEquals(1,t.getTrailPoint(1).getID());
 		assertEquals(1,t.getTrailPoint(1).getConnections().size());
@@ -93,6 +94,7 @@ public static final int GOOD_ZOOM_LEVEL = 17;
 		
 		assertEquals(15,t.getTrailPoint(15).getID());
 		assertEquals(0,t.getTrailPoint(15).getConnections().size());
+		assertEquals(1,t.getTrailPoint(15).getCategoryID());
 	}
 
 }

@@ -4,12 +4,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.location.Location;
-import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
-import com.google.android.maps.OverlayItem;
 
 public class InterestPoint extends Overlay {
 	
@@ -21,6 +19,7 @@ public class InterestPoint extends Overlay {
 	private String _title;
 	private String _summary;
 	private Paint _color;
+	private int _categoryID;
 	
 	/**
 	 * Creates a new Interest point with the required params.
@@ -40,6 +39,7 @@ public class InterestPoint extends Overlay {
 		this._color = new Paint();
 		this._color.setARGB(255, 0, 0, 255);
 		this._color.setAntiAlias(true);
+		this._categoryID = -1;
 	}
 	
 	/**
@@ -104,6 +104,13 @@ public class InterestPoint extends Overlay {
 	}
 	public Paint getColor() {
 		return this._color;
+	}
+	
+	public void setCategoryID(int catID) {
+		this._categoryID = catID;
+	}
+	public int getCategoryID() {
+		return this._categoryID;
 	}
 	
 	

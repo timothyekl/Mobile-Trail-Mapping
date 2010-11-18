@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapView;
@@ -63,6 +64,12 @@ public class Trail extends ItemizedOverlay<OverlayItem> {
     	p.setAntiAlias(true);
     	return p;
     }
+	
+	@Override
+	protected boolean onTap(int index) {
+		Log.w("MTM", "MTM: You just touched item: " + index);
+		return true;
+	}
 	
 	/**
 	 * This method is DANGEROUS, it assumes each point is connected to the next.

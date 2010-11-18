@@ -20,18 +20,19 @@
 		<TextView
 			android:text="Condition: "
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"></TextView>
+			android:layout_height="wrap_content">
+		</TextView>
 		<TextView
 			android:id="@+id/detail_condition"
 			android:text="Open"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"></TextView>
+			android:layout_height="wrap_content">
+		</TextView>
 	</LinearLayout>
 	<TextView
 		android:id="@+id/detail_summary"
 		android:text="Summary"
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"></TextView>
-	
-
+		android:layout_height="wrap_content">
+	</TextView>
 </LinearLayout>

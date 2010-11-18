@@ -70,8 +70,11 @@ public class Trail extends ItemizedOverlay<OverlayItem> {
 		Log.w("MTM", "MTM: You just touched item: " + index);
 		Intent inMyTent = new Intent(ShowMap.thisActivity, ItemDetails.class);
 		
-		inMyTent.putExtra("title", this._name);
-		inMyTent.putExtra("summary", this._trailHeads.get(index).getSummary());
+		// Do we want to pull the name of the point, or of the trail?
+		TrailPoint touched = this._trailHeads.get(index);
+		//inMyTent.putExtra("title", this._name);
+		inMyTent.putExtra("title", touched.getTitle());
+		inMyTent.putExtra("summary", touched.getSummary());
 		ShowMap.thisActivity.startActivity(inMyTent);
 		return true;
 	}

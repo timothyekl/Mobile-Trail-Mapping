@@ -172,6 +172,7 @@ public class DataHandler {
 			if(localPoint.getNodeName().equals("longitude")) {
 				createNewTrailPoint(Integer.parseInt((String) trailPointInfo.get("id")), Double.parseDouble((String) trailPointInfo.get("latitude")), Double.parseDouble((String) trailPointInfo.get("longitude")));
 				_trailPoint.setCategoryID(Integer.parseInt((String) trailPointInfo.get("categoryID")));
+				_trailPoint.setTitle((String) trailPointInfo.get("title"));
 				_trailPoint.setSummary((String) trailPointInfo.get("description"));
 			}
 			if(localPoint.getNodeName().equals("connections")) {

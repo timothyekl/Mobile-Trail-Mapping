@@ -13,6 +13,8 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -31,7 +33,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.maps.*;
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapController;
+import com.google.android.maps.MapView;
 
 public class ShowMap extends MapActivity {
 	
@@ -95,6 +100,20 @@ public class ShowMap extends MapActivity {
 		this._mapController = this._mapView.getController();
 
 		this._locMgr = (LocationManager) getSystemService(LOCATION_SERVICE);
+		NetworkInfo cellConnMgr = ((ConnectivityManager) this.getSystemService(CONNECTIVITY_SERVICE)).getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+		NetworkInfo wifiConnMgr = ((ConnectivityManager) this.getSystemService(CONNECTIVITY_SERVICE)).getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+		
+		if(cellConnMgr.isConnected() || wifiConnMgr.isConnected()) {
+			checkBetaStatus();
+		}
+		else {
+			//showNotConnectedDialog();
+		}
+		Log.w("MTM", "MTM: onCreate()");
+		
+	}
+
+	private void checkBetaStatus() {
 		BETA_MODE = Boolean.parseBoolean(this.getString(R.string.beta));
 		if(!BetaChecker.isUpToDate( BETA_MODE, this.getString(R.string.beta_check_url) + this.getString(R.string.beta_version))) {
 			showOutOfDateDialog();
@@ -116,9 +135,6 @@ public class ShowMap extends MapActivity {
 		else if (!validUser && BETA_MODE) {
 			showNewBetaUserDialog(this.getString(R.string.register_device_url));
 		}
-		// }
-		Log.w("MTM", "MTM: onCreate()");
-		
 	}
 
 	private void showOutOfDateDialog() {

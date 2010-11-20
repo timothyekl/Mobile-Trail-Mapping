@@ -62,6 +62,7 @@ public class ShowMap extends MapActivity {
 	public static final int DEFAULT_MAP_LONG = 0;
 	private static final long GPS_UPDATE_TIME = 60000;
 	private static final float GPS_UPDATE_DISTANCE = 0;
+	private static boolean GPS_TRACK = false;
 	
 	public static Drawable bubble;
 	public static ShowMap thisActivity;
@@ -393,6 +394,13 @@ public class ShowMap extends MapActivity {
 		inflater.inflate(R.menu.mainmenu, menu);
 		return true;
 	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		menu.findItem(R.id.menu_track_enable).setVisible(!GPS_TRACK);
+		menu.findItem(R.id.menu_track_disable).setVisible(GPS_TRACK);
+		return super.onPrepareOptionsMenu(menu);
+	}
 
 	/**
 	 * Fired when an options menu item is selected.
@@ -409,8 +417,15 @@ public class ShowMap extends MapActivity {
 			this.startActivity(settings);
 			break;
 		case R.id.menu_center:
-			this.centerMapOnCurrentLocation(_settings.getBoolean(
-					SAVED_ZOOM_ON_CENTER, true));
+			this.centerMapOnCurrentLocation(_settings.getBoolean(SAVED_ZOOM_ON_CENTER, true));
+			break;
+		case R.id.menu_track_enable:
+			this.turnOnLocationUpdates();
+			GPS_TRACK = true;
+			break;
+		case R.id.menu_track_disable:
+			this.turnOffLocationUpdates();
+			GPS_TRACK = false;
 			break;
 		}
 		return true;

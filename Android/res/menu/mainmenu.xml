@@ -24,4 +24,20 @@
 		android:title="@string/quit_name"
 		android:icon="@drawable/ic_menu_exit">
 	</item>
+	<item
+		android:visible="true"
+		android:enabled="true"
+		android:id="@+id/menu_track_enable"
+		android:checkable="true"
+		android:titleCondensed="Enable"
+		android:title="Enable Tracking">
+	</item>
+	<item
+		android:visible="false"
+		android:enabled="true"
+		android:id="@+id/menu_track_disable"
+		android:checkable="true"
+		android:titleCondensed="Disable"
+		android:title="Disable Tracking">
+	</item>
 </menu>

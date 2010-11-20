@@ -12,6 +12,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -59,6 +60,8 @@ public class ShowMap extends MapActivity {
 	// TODO: Figure out some good value to init these to
 	public static final int DEFAULT_MAP_LAT = 0;
 	public static final int DEFAULT_MAP_LONG = 0;
+	private static final long GPS_UPDATE_TIME = 60000;
+	private static final float GPS_UPDATE_DISTANCE = 0;
 	
 	public static Drawable bubble;
 	public static ShowMap thisActivity;
@@ -87,6 +90,8 @@ public class ShowMap extends MapActivity {
 
 	private DataHandler _dataHandler;
 	
+	private static LocationListener _locationListen;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
@@ -98,7 +103,8 @@ public class ShowMap extends MapActivity {
 		this._mapView.setBuiltInZoomControls(true);
 
 		this._mapController = this._mapView.getController();
-
+		Drawable currentLocation = this.getResources().getDrawable(R.drawable.dot);
+		_locationListen = new CurrentLocation(_mapView, currentLocation);
 		this._locMgr = (LocationManager) getSystemService(LOCATION_SERVICE);
 		NetworkInfo cellConnMgr = ((ConnectivityManager) this.getSystemService(CONNECTIVITY_SERVICE)).getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 		NetworkInfo wifiConnMgr = ((ConnectivityManager) this.getSystemService(CONNECTIVITY_SERVICE)).getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -192,7 +198,6 @@ public class ShowMap extends MapActivity {
 		});
 		bannedUser.show();
 	}
-
 	private void showNewBetaUserDialog(String registerUrl) {
 		final BetaDialog newUser = new BetaDialog(ShowMap.this, R.layout.new_beta_user);
 		final String registrationUrl = registerUrl;
@@ -457,17 +462,14 @@ public class ShowMap extends MapActivity {
 	 */
 	private void centerMapOnCurrentLocation(boolean zoomOnCenter) {
 		GeoPoint p;
-		Location networkLoc = _locMgr
-				.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-		Location gpsLoc = _locMgr
-				.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		Location networkLoc = _locMgr.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		Location gpsLoc = _locMgr.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 		Location recentLoc = (gpsLoc != null) ? gpsLoc : networkLoc;
 		// CSN01
 		// We can't just pull this from prefs, as this function is shared
 		// It's sometimes called by the initializer, not the "center me" button.
 		if (zoomOnCenter) {
-			this._mapController.setZoom(Integer.parseInt(_settings.getString(
-					SAVED_DEFAULT_ZOOM, DEFAULT_MAP_ZOOM + "")));
+			this._mapController.setZoom(Integer.parseInt(_settings.getString(SAVED_DEFAULT_ZOOM, DEFAULT_MAP_ZOOM + "")));
 		}
 
 		if (recentLoc != null) {
@@ -477,5 +479,24 @@ public class ShowMap extends MapActivity {
 			this._mapView.setSatellite(true);
 			this._mapView.invalidate();
 		}
+	}
+	
+	/**
+	 * Enable Location based updating automatically.
+	 */
+	private void turnOnLocationUpdates() {
+		if (_locMgr != null) {
+		_locMgr = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+		_locMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_UPDATE_TIME, GPS_UPDATE_DISTANCE,_locationListen);
+		}
+	}
+	
+	/**
+	 * Turn off GPS Updates, saves us lots of battery.
+	 */
+	private void turnOffLocationUpdates() {
+		if (_locMgr != null)
+		_locMgr.removeUpdates(_locationListen);
 	}
 }

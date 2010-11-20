@@ -1,9 +1,7 @@
 package com.brousalis;
 
-import android.graphics.Canvas;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
+import android.content.Context;
+import android.graphics.*;
 import android.location.Location;
 
 import com.google.android.maps.GeoPoint;
@@ -13,12 +11,14 @@ import com.google.android.maps.Overlay;
 public class LocationMarker extends Overlay{
 	
 	private GeoPoint _point;
-	private Drawable _icon;
+	private Bitmap _icon;
 	private Point _screenPts;
 	
-	public LocationMarker(GeoPoint p, Drawable d) {
+	public LocationMarker(GeoPoint p, int id, Context context) {
 		_point = p;
-		_icon = d;
+		BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inJustDecodeBounds = true;
+        _icon = BitmapFactory.decodeResource(context.getResources(), id);
 	}
 	
 	@Override
@@ -28,14 +28,10 @@ public class LocationMarker extends Overlay{
 
         _screenPts = new Point();
         mapView.getProjection().toPixels(_point, _screenPts);
-
-		//canvas.drawCircle(_screenPts.x, _screenPts.y, 5, color );
-		//_icon.draw(canvas);
-		Rect bounds = _icon.getBounds();
-		
-		bounds.set(_screenPts.x - bounds.width()/2, _screenPts.y - bounds.width()/2, _screenPts.x + bounds.width()/2, _screenPts.y + bounds.width()/2);
-		//_icon.setBounds(bounds)
-		_icon.draw(canvas);
+        Paint p = new Paint();
+        p.setColor(Color.BLUE);
+		//canvas.drawCircle(_screenPts.x, _screenPts.y, 5, p);
+		canvas.drawBitmap(_icon, _screenPts.x, _screenPts.y, null);
 	}
 
 	public void setLocation(Location l) {

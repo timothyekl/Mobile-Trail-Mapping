@@ -60,7 +60,7 @@ public class ShowMap extends MapActivity {
 	// TODO: Figure out some good value to init these to
 	public static final int DEFAULT_MAP_LAT = 0;
 	public static final int DEFAULT_MAP_LONG = 0;
-	private static final long GPS_UPDATE_TIME = 60000;
+	private static final long GPS_UPDATE_TIME = 0;
 	private static final float GPS_UPDATE_DISTANCE = 0;
 	private static boolean GPS_TRACK = false;
 	
@@ -104,8 +104,7 @@ public class ShowMap extends MapActivity {
 		this._mapView.setBuiltInZoomControls(true);
 
 		this._mapController = this._mapView.getController();
-		Drawable currentLocation = this.getResources().getDrawable(R.drawable.dot);
-		_locationListen = new CurrentLocation(_mapView, currentLocation);
+		_locationListen = new CurrentLocation(_mapView, R.drawable.dot, this);
 		this._locMgr = (LocationManager) getSystemService(LOCATION_SERVICE);
 		NetworkInfo cellConnMgr = ((ConnectivityManager) this.getSystemService(CONNECTIVITY_SERVICE)).getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 		NetworkInfo wifiConnMgr = ((ConnectivityManager) this.getSystemService(CONNECTIVITY_SERVICE)).getNetworkInfo(ConnectivityManager.TYPE_WIFI);

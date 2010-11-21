@@ -43,6 +43,18 @@ public static final int GOOD_ZOOM_LEVEL = 17;
 		t.resolveConnections();
 		//HashSet<Trail> trails = handler.getParsedTrails();
 		assertEquals("Trail: "+ALT_TRAIL_NAME+" (4 TrailPoints)", t.toString());
+		assertEquals(17,t.getTrailPoint(17).getID());
+		assertEquals(1,t.getTrailPoint(17).getConnections().size());
+		assertEquals(1,t.getTrailPoint(17).getCategoryID());
+		
+		assertEquals(18,t.getTrailPoint(18).getID());
+		assertEquals(1,t.getTrailPoint(18).getConnections().size());
+		
+		assertEquals(19,t.getTrailPoint(19).getID());
+		assertEquals(1,t.getTrailPoint(19).getConnections().size());
+		
+		assertEquals(20,t.getTrailPoint(20).getID());
+		assertEquals(0,t.getTrailPoint(20).getConnections().size());
 	}
 	
 	public void testXMLExists() {

@@ -32,11 +32,23 @@ public static final int GOOD_ZOOM_LEVEL = 17;
 	
 	public static final String URL = "http://www.fernferret.com/samplexml.xml";
 	public static final String TRAIL_NAME = "Heritage";
+	public static final String ALT_TRAIL_NAME = "Sac and Fox";
+	
+	public void testSecondTrail() {
+		DataHandler handler = new DataHandler(URL);
+		handler.parseDocument();
+		assertEquals(2, handler.getParsedTrails().size());
+		
+		Trail t = handler.getParsedTrail(ALT_TRAIL_NAME);
+		t.resolveConnections();
+		//HashSet<Trail> trails = handler.getParsedTrails();
+		assertEquals("Trail: "+ALT_TRAIL_NAME+" (4 TrailPoints)", t.toString());
+	}
 	
 	public void testXMLExists() {
 		DataHandler handler = new DataHandler(URL);
 		handler.parseDocument();
-		assertEquals(1, handler.getParsedTrails().size());
+		assertEquals(2, handler.getParsedTrails().size());
 	}
 	public void testBasicXML() {
 		DataHandler handler = new DataHandler(URL);

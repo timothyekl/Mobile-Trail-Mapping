@@ -13,19 +13,46 @@ public class CurrentLocation implements LocationListener{
 
 	private MapView _mapView;
 	private LocationMarker _currentLoc;
-	public CurrentLocation(MapView mapView, int id, Context context) {
+	private int _locationReportsToGo = -1;
+	private Context _context;
+	public CurrentLocation(LocationMarker m, MapView mapView) {
+		_currentLoc = m;
 		_mapView = mapView;
-		_currentLoc = new LocationMarker(new GeoPoint(0, 0), id, context);
+		_mapView.getOverlays().remove(_currentLoc);
+		Log.w("MTM", "MTM: Location Initialized");
+		_mapView.getOverlays().add(_currentLoc);
+		_mapView.invalidate();
 	}
+	public CurrentLocation(Context context, LocationMarker m, MapView mapView, int timesToReportLocation) {
+		this(m, mapView);
+		_context = context;
+	}
+	
 	@Override
 	public void onLocationChanged(Location location) {
-		//_mapView.getOverlays().remove(_currentLoc);
+		if(_locationReportsToGo > 0 && _context != null) {
+			_locationReportsToGo--;
+			
+		}
+		if(_locationReportsToGo == 0) {
+			Log.w("MTM","MTM: Done Reporting");
+			((ShowMap)_context).turnOffLocationUpdates();
+		}
 		Log.w("MTM", "MTM: Location Changed");
+		_mapView.getOverlays().remove(_currentLoc);
 		_currentLoc.setLocation(location);
 		_mapView.getOverlays().add(_currentLoc);
 		_mapView.invalidate();
 	}
-
+	
+	public void setLocationDot(GeoPoint p) {
+		Log.w("MTM", "MTM: Location Set");
+		_mapView.getOverlays().remove(_currentLoc);
+		_currentLoc.setLocation(p);
+		_mapView.getOverlays().add(_currentLoc);
+		_mapView.invalidate();
+	}
+	
 	@Override
 	public void onProviderDisabled(String provider) {
 		// TODO Auto-generated method stub

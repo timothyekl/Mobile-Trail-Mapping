@@ -306,10 +306,8 @@ public class ShowMap extends MapActivity {
 		super.onStop();
 		// Always save the location, regardless if the user wants to go here
 		SharedPreferences.Editor editor = this._settings.edit();
-		editor.putInt(SAVED_MAP_LAT, this._mapView.getMapCenter()
-				.getLatitudeE6());
-		editor.putInt(SAVED_MAP_LONG, this._mapView.getMapCenter()
-				.getLongitudeE6());
+		editor.putInt(SAVED_MAP_LAT, this._mapView.getMapCenter().getLatitudeE6());
+		editor.putInt(SAVED_MAP_LONG, this._mapView.getMapCenter().getLongitudeE6());
 		editor.putInt(SAVED_MAP_ZOOM, this._mapView.getZoomLevel());
 		editor.commit();
 		Log.w("MTM", "MTM: onStop()");
@@ -394,6 +392,10 @@ public class ShowMap extends MapActivity {
 		return true;
 	}
 	
+	/**
+	 * Fired before the Options Menu is shown.  We use this to
+	 * enable/disable items based on their state
+	 */
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(R.id.menu_track_enable).setVisible(!GPS_TRACK);
@@ -440,9 +442,7 @@ public class ShowMap extends MapActivity {
 				.getDefaultSharedPreferences(getBaseContext());
 
 		if (this._settings.getBoolean(SAVED_MAP_STATE, false)) {
-			p = new GeoPoint(this._settings.getInt(SAVED_MAP_LAT,
-					DEFAULT_MAP_LAT), this._settings.getInt(SAVED_MAP_LONG,
-					DEFAULT_MAP_LONG));
+			p = new GeoPoint(this._settings.getInt(SAVED_MAP_LAT,DEFAULT_MAP_LAT), this._settings.getInt(SAVED_MAP_LONG,DEFAULT_MAP_LONG));
 
 			this._mapController.animateTo(p);
 			// Zoom to the Saved Map zoom. If none is present, get the Saved
@@ -459,13 +459,6 @@ public class ShowMap extends MapActivity {
 			this.centerMapOnCurrentLocation(false);
 		}
 	}
-
-	@Override
-	public boolean dispatchTouchEvent(android.view.MotionEvent ev) {
-		super.dispatchTouchEvent(ev);
-
-		return true;
-	};
 
 	/**
 	 * Centers the map on the current location (GPS, Cell or WiFi, whichever is

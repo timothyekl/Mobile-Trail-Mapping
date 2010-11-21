@@ -16,6 +16,10 @@ if [ ! -f "brousalis.keystore" ]; then
     exit;
 fi
 
+echo -e "Did you change the KeyStore from Debug to Production?  (yes/no)?"
+read ans
+[ $ans != "yes" ] && echo "Do it. Now." && exit 0
+
 if [ -d $1 ]; then
     echo "Found ${1} Directory...";
     if [ -f "${1}/mtmBETA_unsigned.${1}.apk" ]; then
@@ -33,6 +37,11 @@ if [ -d $1 ]; then
         /Applications/android-sdk-mac_86/tools/zipalign 4 "${1}/mtmBETA_signed.apk" "${1}/mtmBETA.${1}.apk"
         rm "${1}/mtmBETA_signed.apk"
         echo "Build Completed."
+        
+        echo -e "Are you sure you want to upload build ${1}?  (yes/no)?"
+        read ans
+        [ $ans != "yes" ] && echo "Did NOT upload. Done." && exit 0
+        
         if [ -d "/Volumes/eric-stokes.com" ]; then
             if [ -f "/Volumes/eric-stokes.com/public_html/mtmbeta/downloads/mtmBETA.${1}.apk" ]; then
                 echo "Removing old build of same version from server..."

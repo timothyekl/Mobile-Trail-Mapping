@@ -14,7 +14,7 @@
     <string name="beta_user_content">First of all, on behalf of the MTM Team, we thank you for taking time to take a look at our application. Since this is the first time you\'ve opened this application, we simply ask you to enter your name so we can figure out who\'s Android phone is associated with who. You will only have to do this once! Once you fill in your name, press the Submit button!</string>
     <string name="beta_user_title">Welcome to the MTM BETA!</string>
     <string name="beta_user_sample_name">John Doe</string>
-    <string name="beta_user_sample_network">Verizon</string>
+    <string name="beta_user_sample_network">Verizon, ATT, T-Mobile, etc.</string>
     <string name="beta_user_banned_title">ESN Error</string>
     <string name="beta_user_banned_content">Whoops... Looks like there\'s been an issue verifying the validity of your Android Device! To continue use of the BETA, please send fernferret@gmail.com an email including your IMEI and/or MEID number.  They can be found in Settings\>About Phone\>Phone Identity </string>
     <string name="beta_user_date_title">A new update has come out!</string>
@@ -28,9 +28,11 @@
     <string name="beta_user_latest_version">http://www.fernferret.com/mtmbeta/currentVersion.txt</string>
     
     <!-- Menu Item Names -->
-    <string name="settings_name">Settings</string>
-    <string name="quit_name">Quit</string>
-    <string name="center_name">Center</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_quit">Quit</string>
+    <string name="menu_center">Center</string>
+    <string name="menu_disable_tracking">Disable Tracking</string>
+    <string name="menu_enable_tracking">Enable Tracking</string>
     
     <!-- Common Button Actions -->
     <string name="cancel">Cancel</string>

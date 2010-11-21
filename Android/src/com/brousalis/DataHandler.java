@@ -32,13 +32,27 @@ public class DataHandler {
 	private Document _doc;
 	
 	/**
-	 * Initializes the DataHandler values
+	 * Initializes default DataHandler values
 	 */
 	public DataHandler() {
 		_trails = new HashSet<Trail>();
 		_factory = DocumentBuilderFactory.newInstance();
 		try {
 			_xmlFile = new URL(XML_FILE);
+			_builder = _factory.newDocumentBuilder();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Initializes the DataHandler values using a custom XML File
+	 */
+	public DataHandler(String XMLFILE) {
+		_trails = new HashSet<Trail>();
+		_factory = DocumentBuilderFactory.newInstance();
+		try {
+			_xmlFile = new URL(XMLFILE);
 			_builder = _factory.newDocumentBuilder();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,9 +110,9 @@ public class DataHandler {
 			if (point.getNodeType() == Node.ELEMENT_NODE && point.getNodeName().equals("point")) {
 				getPointInfo(point);
 			}
-			try{
-			point = point.getNextSibling();
-			}catch(Exception e) {
+			try {
+				point = point.getNextSibling();
+			} catch(Exception e) {
 				Log.w("MTM","MTM Fixed another part of the 2.1 xml parser");
 				point = null;
 			}
@@ -129,20 +143,24 @@ public class DataHandler {
 		Log.w("MTM", "MTM: Point Content : " + point.getNodeValue());
 		HashMap<String, Object> trailPointInfo = new HashMap<String, Object>();
 		trailPointInfo.put("id", point.getAttributes().getNamedItem("id").getNodeValue());
+		
 		localPoint = point.getFirstChild().getNextSibling();
+		localPoint = getPointAttrs(localPoint, trailPointInfo);
+		saveTrailPoint();
+	}
+
+	private Node getPointAttrs(Node localPoint, HashMap<String, Object> trailPointInfo) {
 		while(localPoint != null) {
-			
-			
 			if(localPoint.getNodeType() == Node.ELEMENT_NODE && !localPoint.getNodeName().equals("connection") && !localPoint.getNodeName().equals("connections")) {
 				String name = localPoint.getNodeName();
 				String value = localPoint.getFirstChild().getNodeValue();
 				Log.w("MTM", "MTM Value: " + name + " : " + value);
 				
 				trailPointInfo.put(name, value);
-				
-				if(localPoint.getNodeName().equals("category")) {
-					Log.w("MTM", "MTM: - I FOUND TEH CATEGORIEZZZZZZZZZZZZZZZ");
-				}
+			}
+			
+			if(localPoint.getNodeName().equals("category")) {
+				trailPointInfo.put("categoryID", localPoint.getAttributes().getNamedItem("id").getNodeValue());
 			}
 			
 			if(localPoint.getNodeName().equals("connection")) {
@@ -151,10 +169,15 @@ public class DataHandler {
 				
 				Log.w("MTM","Found the connections node " + localPoint.getFirstChild().getNodeValue());
 			}
-			
+			if(localPoint.getNodeName().equals("longitude")) {
+				createNewTrailPoint(Integer.parseInt((String) trailPointInfo.get("id")), Double.parseDouble((String) trailPointInfo.get("latitude")), Double.parseDouble((String) trailPointInfo.get("longitude")));
+				_trailPoint.setCategoryID(Integer.parseInt((String) trailPointInfo.get("categoryID")));
+				_trailPoint.setTitle((String) trailPointInfo.get("title"));
+				_trailPoint.setSummary((String) trailPointInfo.get("description"));
+			}
 			if(localPoint.getNodeName().equals("connections")) {
 				localPoint = localPoint.getFirstChild();
-				createNewTrailPoint(Integer.parseInt((String) trailPointInfo.get("id")), Double.parseDouble((String) trailPointInfo.get("latitude")), Double.parseDouble((String) trailPointInfo.get("longitude")));
+				
 				Log.w("MTM","Found the connections node");
 			}
 			else {
@@ -168,7 +191,7 @@ public class DataHandler {
 				}
 			}
 		}
-		saveTrailPoint();
+		return localPoint;
 	}
 	
 	/**
@@ -227,7 +250,7 @@ public class DataHandler {
 	 */
 	private void saveTrailPoint() {
 		this._trail.addPoint(this._trailPoint);
-		this._trailPoint = new TrailPoint(-1, new GeoPoint(0,0), null);
+		//this._trailPoint = new TrailPoint(-1, new GeoPoint(0,0), null);
 	}
 	
 	/**

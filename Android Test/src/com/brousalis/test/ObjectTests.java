@@ -5,12 +5,35 @@ import java.util.LinkedList;
 
 import junit.framework.TestCase;
 
+import android.content.res.Configuration;
+import android.test.ActivityInstrumentationTestCase2;
+
 import com.brousalis.InterestPoint;
+import com.brousalis.ShowMap;
 import com.brousalis.Trail;
 import com.brousalis.TrailPoint;
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapView;
 
-public class ObjectTests extends TestCase {
+public class ObjectTests extends ActivityInstrumentationTestCase2<ShowMap> {
+	
+	private ShowMap mActivity;
+	private MapView mView;
+	private Configuration config;
+	
+	public ObjectTests() {
+		super("com.brousalis", ShowMap.class);
+	}
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		config = new Configuration();
+		config.setToDefaults();
+		
+		mActivity = this.getActivity();
+		mView = (MapView) mActivity.findViewById(com.brousalis.R.id.mapView);
+	}
 	public void testItemIsTrue() {
 		assertTrue(true);
 	}

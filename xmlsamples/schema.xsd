@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.fernferret.com"
+xmlns="http://www.fernferret.com"
+elementFormDefault="qualified">
+  <xs:element name="data">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="trails">
+          <xs:complexType>
+            <xs:element name="trail" maxoccurs="unbounded">
+              <xs:complexType>
+                <xs:attribute name="id" type="xs:integer"/>
+                <xs:element name="points">
+                  <xs:complexType>
+                    <xs:element name="point" type="pointType" maxoccurs="unbounded">
+                    </xs:element>
+                  </xs:complexType>
+                </xs:element>
+              </xs:complexType>
+            </xs:element>
+          </xs:element>
+        </xs:element>
+        <xs:element name="misc">
+          <xs:complexType>
+            <xs:element name="points">
+              <xs:complexType>
+                <xs:element name="point" type="pointType" maxoccurs="unbounded"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+
+  <xs:complexType name="pointType">
+    <xs:attribute name="id" type="xs:integer"/>
+    <xs:sequence>
+      <xs:element name="title" type="xs:string" minoccurs="1"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element name="category">
+        <xs:attribute name="id" type="xs:integer"/>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Open"/>
+            <xs:enumeration value="Closed"/>
+            <xs:enumeration value="Limited"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="latitude">
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal">
+            <xs:mininclusive value="-90"/>
+            <xs:maxinclusive value="90"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="longitude">
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal">
+            <xs:mininclusive value="-180"/>
+            <xs:maxinclusive value="180"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="connections">
+        <xs:complexType>
+          <xs:element name="connection">
+            <xs:attribute name="id" type="xs:integer"/>
+          </xs:element>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+</xs:schema>

@@ -27,4 +27,4 @@ with open("points.xml", 'w') as out:
                 out.write('<connections><connection>{0}</connection></connections>'.format(i+1))
             out.write('</point>\n')
             i = i + 1
-    out.write('<misc></misc></data>\n')
+    out.write('</points></trail></trails><misc></misc></data>\n')

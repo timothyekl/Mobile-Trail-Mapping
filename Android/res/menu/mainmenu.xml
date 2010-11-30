@@ -1,10 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
-  xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/menu_center" android:icon="@drawable/ic_menu_center" android:titleCondensed="Center" android:title="Center"></item>
-<item android:id="@+id/menu_settings" android:titleCondensed="Settings" android:title="Settings" android:icon="@drawable/ic_menu_settings" android:visible="true" android:enabled="true"></item>
-<item android:visible="true" android:enabled="true" android:id="@+id/menu_quit" android:checkable="true" android:titleCondensed="Quit" android:title="Quit" android:icon="@drawable/ic_menu_exit"></item>
-
-
-
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:id="@+id/menu_center"
+		android:icon="@drawable/ic_menu_center"
+		android:titleCondensed="@string/menu_center"
+		android:title="@string/menu_center">
+	</item>
+	<item
+		android:id="@+id/menu_settings"
+		android:titleCondensed="@string/menu_settings"
+		android:title="@string/menu_settings"
+		android:icon="@drawable/ic_menu_settings"
+		android:visible="true"
+		android:enabled="true">
+	</item>
+	<item
+		android:visible="true"
+		android:enabled="true"
+		android:id="@+id/menu_quit"
+		android:checkable="true"
+		android:titleCondensed="@string/menu_quit"
+		android:title="@string/menu_quit"
+		android:icon="@drawable/ic_menu_exit">
+	</item>
+	<item
+		android:visible="true"
+		android:enabled="true"
+		android:id="@+id/menu_track_enable"
+		android:checkable="true"
+		android:titleCondensed="@string/menu_enable_tracking"
+		android:title="@string/menu_enable_tracking"
+		android:icon="@drawable/ic_menu_gps_e">
+	</item>
+	<item
+		android:visible="false"
+		android:enabled="true"
+		android:id="@+id/menu_track_disable"
+		android:checkable="true"
+		android:titleCondensed="@string/menu_disable_tracking"
+		android:title="@string/menu_disable_tracking"
+		android:icon="@drawable/ic_menu_gps_d">
+	</item>
 </menu>

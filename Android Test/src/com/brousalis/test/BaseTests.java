@@ -9,8 +9,6 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.util.Log;
 
-import com.brousalis.DataLoader;
-import com.brousalis.MobileTrailsApp;
 import com.brousalis.ShowMap;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
@@ -22,7 +20,6 @@ public class BaseTests extends ActivityInstrumentationTestCase2<ShowMap> {
 	private MapView mView;
 	private int initialZoomLevel;
 	private Configuration config;
-	private GeoPoint initialPosition;
 	
 	public BaseTests() {
 		super("com.brousalis", ShowMap.class);
@@ -37,7 +34,6 @@ public class BaseTests extends ActivityInstrumentationTestCase2<ShowMap> {
 		mActivity = this.getActivity();
 		mView = (MapView) mActivity.findViewById(com.brousalis.R.id.mapView);
 		initialZoomLevel = mView.getZoomLevel();
-		initialPosition = mView.getMapCenter();
 		setSaveLocation(true);
 	}
 	
@@ -132,6 +128,26 @@ public class BaseTests extends ActivityInstrumentationTestCase2<ShowMap> {
 		GeoPoint p1 = mView.getMapCenter();
 
 		TouchUtils.dragQuarterScreenDown(this, mActivity);
+		TouchUtils.longClickView(this, mView);
+		GeoPoint p2 = mView.getMapCenter();
+		
+		closeActivity();
+		openActivity();
+		
+		GeoPoint p3 = mView.getMapCenter();
+		
+		//assertFalse("P2 is On Center",p2.equals(p1));
+		assertEquals(p2, p1);
+		assertEquals("P3 did not resume in the same location as P2 Center",p3, p2);
+		
+	}
+	public void testMoveMapThenCloseAndReOpenNoSave() {
+		this.changeBooleanSetting(ShowMap.SAVED_MAP_STATE, false);
+		//closeActivity();
+		//openActivity();
+		GeoPoint p1 = mView.getMapCenter();
+
+		TouchUtils.dragQuarterScreenDown(this, mActivity);
 
 		GeoPoint p2 = mView.getMapCenter();
 		
@@ -140,9 +156,8 @@ public class BaseTests extends ActivityInstrumentationTestCase2<ShowMap> {
 		
 		GeoPoint p3 = mView.getMapCenter();
 		
-		assertEquals("P1 is Off Center",p1, initialPosition);
-		assertFalse("P2 is On Center",p2.equals(initialPosition));
-		assertEquals("P3 did not resume in the same location as P2 Center",p3, p2);
+		assertFalse("P2 should not be in the same place the same as P3",p2.equals(p3));
+		assertEquals("P3 did not resume in the same location as P1",p1, p3);
 		
 	}
 
@@ -155,16 +170,29 @@ public class BaseTests extends ActivityInstrumentationTestCase2<ShowMap> {
 	}
 	
 	public void testNoServerResponse() {
-		DataLoader d = new DataLoader("FailServer");
-		assertTrue(d.validConnection());
+		fail("Large structure change, fix this test.");
 	}
 	
 	public void testSuccessfulServerResponse() {
-		DataLoader d = new DataLoader("http://www.google.com");
-		assertTrue(d.validConnection());
+		fail("Large structure change, fix this test.");
 	}
-	public class MockServer{
+	
+	public void testChangeASetting() {
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mActivity);
+		changeBooleanSetting(ShowMap.SAVED_MAP_STATE, true);
+		assertTrue(settings.getBoolean(ShowMap.SAVED_MAP_STATE, false));
 		
+		changeBooleanSetting(ShowMap.SAVED_MAP_STATE, false);
+		assertFalse(settings.getBoolean(ShowMap.SAVED_MAP_STATE, true));
+	}
+	
+	private void changeBooleanSetting(String item, boolean value) {
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mActivity);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putBoolean(item, value);
+		editor.commit();
+		// Ensure that the setting got set
+		assertTrue(settings.getBoolean(item, !value) != !value);
 	}
 }
 

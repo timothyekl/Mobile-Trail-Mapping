@@ -14,93 +14,87 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 public class DOMTester {
-
-	static String SCHEMA_LANGUAGE = "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
-	static String XML_SCHEMA = "http://www.w3.org/2001/XMLSchema";
-	static String SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		StreamSource xmlSource = new StreamSource("http://www.fernferret.com/samplexml.xml");
-		//factory.setNamespaceAware(true);
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		//factory.setValidating(true);
-		DocumentBuilder builder = null;
-		
-		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
-
-		
+	
+	private String _xmlFile;
+	private String _xmlSchema;
+	private StreamSource _xmlSource;
+	private DocumentBuilderFactory _factory;
+	private DocumentBuilder _builder;
+	private SchemaFactory _schemaFactory;
+	private Document _doc;
+	
+	public DOMTester(String xmlFile, String xmlSchema) {
+		_xmlFile = xmlFile;
+		_xmlSchema = xmlSchema;
+		_xmlSource = new StreamSource(_xmlFile);
+		_factory = DocumentBuilderFactory.newInstance();
+		_builder = null;
+		_schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		_doc = null;
 		try {
-			URL schemaDoc = new URL("http://www.fernferret.com/mtmSchema.xsd");
-			URL xmlDoc = new URL("http://www.fernferret.com/samplexml.xml");
-			Schema schema = schemaFactory.newSchema(schemaDoc);
-			factory.setSchema(schema);
-			Validator validator = schema.newValidator();
-			validator.validate(xmlSource);
-			//validator.validate(new StreamSource("samplexml.xml"));
-			builder = factory.newDocumentBuilder();
-			System.out.println(builder.isValidating());
-			Document doc = builder.parse(new InputSource(xmlDoc.openStream()));
+			URL schemaDoc = new URL(_xmlSchema);
+			URL xmlDoc = new URL(_xmlFile);
+			Schema schema = _schemaFactory.newSchema(schemaDoc);
 
-			processDocument(doc);
+			Validator validator = schema.newValidator();
+			validator.validate(_xmlSource);
+
+			_builder = _factory.newDocumentBuilder();
+			_doc = _builder.parse(new InputSource(xmlDoc.openStream()));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+	}
+	public void parse() {
+		extractTrails(_doc);
+	}
+	private void extractTrails(Document doc) {
+		NodeList itemList = doc.getElementsByTagName("trail");
+		Node currentNode = itemList.item(0);
+		while (currentNode != null) {
+			if(currentNode.getNodeType() == Node.ELEMENT_NODE) {
+				System.out.println("Trail: "+currentNode.getAttributes().getNamedItem("name"));
+				extractTrail(currentNode);
+			}
+			currentNode = currentNode.getNextSibling();
+		}
 	}
 
-	private static void processDocument(Document doc) {
-		NodeList l = doc.getElementsByTagName("trail");
-		int i = 0;
-		Node currentNode = l.item(i);
-		NodeList points = null;
+	private void extractTrail(Node currentNode) {
 		Node point = null;
-		while (currentNode != null) {
-
-			System.out.println("Node Name : " + currentNode.getNodeName());
-			System.out.println("Node ID   : "
-					+ currentNode.getAttributes().getNamedItem("id")
-							.getNodeValue());
-			System.out.println("Node Type : " + currentNode.getNodeType());
-			System.out.println("Node Value: " + currentNode.getNodeValue());
-			points = currentNode.getChildNodes().item(1).getChildNodes();
-			int j = 0;
-			point = points.item(j);
-			while (point != null) {
-				if (point.getNodeType() == Node.ELEMENT_NODE) {
-					System.out.println("Point       : "
-							+ point.getNodeName());
-					System.out.println("Point ID    : "
-							+ point.getAttributes().getNamedItem("id")
-									.getNodeValue());
-					// while(point != null) {
-
-					// }
-					System.out.println("First Child : "
-							+ point.getFirstChild().getNextSibling()
-									.getNodeName());
-					System.out.println("First Value : "
-							+ point.getFirstChild().getNextSibling()
-									.getTextContent());
-					System.out.println("Second Child : "
-							+ point.getFirstChild().getNextSibling()
-									.getNextSibling().getNextSibling()
-									.getNodeName());
-					System.out.println();
-				}
-				j++;
-				point = points.item(j);
+		point = currentNode.getFirstChild().getNextSibling().getFirstChild().getNextSibling();
+		while (point != null) {
+			if (point.getNodeType() == Node.ELEMENT_NODE) {
+				getPointInfo(point);
 			}
-			System.out.println();
-			// System.out.println("Node" + l.)
-			i++;
-			currentNode = l.item(i);
+			point = point.getNextSibling();
 		}
 		System.out.println();
 	}
 
+	private void getPointInfo(Node point) {
+		Node localPoint = null;
+		System.out.println("Point       : " + point.getNodeName());
+		System.out.println("Point ID    : " + point.getAttributes().getNamedItem("id").getNodeValue());
+		
+		localPoint = point.getFirstChild().getNextSibling();
+		while(localPoint != null) {
+			if(localPoint.getNodeType() == Node.ELEMENT_NODE && localPoint.getNodeName() != "connections") {
+				System.out.print(localPoint.getNodeName() + " : " + localPoint.getTextContent());
+				if(localPoint.getNodeName() == "category") {
+					System.out.println(" - ID: " + localPoint.getAttributes().getNamedItem("id").getTextContent());
+				}
+				else {
+					System.out.println();
+				}
+			}
+			if(localPoint.getNodeName() == "connections") {
+				localPoint = localPoint.getFirstChild();
+			}
+			else {
+				localPoint = localPoint.getNextSibling();
+			}
+		}
+		System.out.println();
+	}
 }

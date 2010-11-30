@@ -25,7 +25,7 @@
     	android:title="Community Settings">
     	<EditTextPreference
     		android:dialogTitle="Enter your email"
-    		android:dialogMessage="Test Dialog Message"
+    		android:dialogMessage="Please enter your email address"
     		android:title="Email address"
     		android:summary="Enter your email address to enable community features!"
     		android:key="emailAddressPref" />

@@ -1,5 +1,14 @@
+require 'pp'
+
+get '/point/get' do
+  @trails = Trail.all - Trail.all(:name => 'misc') 
+  @misc = Trail.all(:name => 'misc').points
+  
+  builder :point
+end
+
 post '/point/add' do
-  point = Point.first_or_create(:lat => params[:lat], :long => params[:long], :desc => params[:desc])
+  point = Point.first_or_create(:lat => params[:lat], :long => params[:long], :desc => params[:desc], :title => params[:title])
   #not sure why you have to set these to variables first, but you do
   cat = Category.first_or_create(:name => params[:category])
   cond = Condition.first_or_create(:desc => params[:condition])
@@ -8,7 +17,9 @@ post '/point/add' do
   point.condition = cond
   point.trail = trail
 
-  params[:connections].split(',').each { |p| point.connections << Point.get(p.to_i) }
+  params[:connections].split(',').each do |conn|
+    point.connections << Connection.first_or_create(:connection => conn.to_i)
+  end
 
   point.save
 

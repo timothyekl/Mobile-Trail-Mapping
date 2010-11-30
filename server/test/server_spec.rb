@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/spec_helper'
+require 'libxml'
 
 describe "Server Tests" do
   include Rack::Test::Methods
@@ -14,6 +15,7 @@ describe "Server Tests" do
     @test_user = "test@brousalis.com"
     @test_pw = Digest::SHA1.hexdigest('password')
     @invalid_user = "invalid@brousalis.com"
+    @schema = LibXML::XML::Schema.new(File.dirname(__FILE__) + '/../schema.xsd')
   end
 
   describe "base actions" do
@@ -31,25 +33,16 @@ describe "Server Tests" do
   end
 
   describe "Point Actions" do
-    it "should return a test point" do
-      pending("haven't decided xml structure yet")
-      params = {:api_key => @api_key,
-                :user => @test_user,
-                :pwhash => @test_pw }
-
-      get "/point/get", params
-      last_response.body.should == 'test point'
-    end
-
     it "should add a point" do
       params = {:user => @test_user,
                 :pwhash => @test_pw,
+                :title => 'trail_point',
                 :lat => 4,
                 :long => 5,
-                :connections => "",
-                :condition => 'fair',
+                :connections => "1,2,3",
+                :condition => 'Open',
                 :category => 'test',
-                :trail => 'test',
+                :trail => 'trail',
                 :api_key => @api_key,
                 :desc => 'test'}
 
@@ -62,15 +55,39 @@ describe "Server Tests" do
       post '/point/add', {:user => @invalid_user, :pwhash => @test_pw, :api_key => @api_key}
       last_response.body.should == 'Invalid username or password'
     end
+
+    it "should return a test point" do
+      params = {:user => @test_user,
+                :pwhash => @test_pw,
+                :title => 'trail_point',
+                :lat => 4,
+                :long => 5,
+                :connections => "1,2,3",
+                :condition => 'Open',
+                :category => 'test',
+                :trail => 'misc',
+                :api_key => @api_key,
+                :desc => 'test'}
+
+      post "/point/add", params #need to have something in misc or builder shits itself
+
+      params = {:api_key => @api_key,
+                :user => @test_user,
+                :pwhash => @test_pw }
+
+      get "/point/get", params
+      doc = LibXML::XML::Document.string(last_response.body)
+      doc.validate_schema(@schema).should == true
+    end
   end
 
   describe "Trail Actions" do
     it "should add a trail" do
       trailname = 'trail'
       params = {:trail => trailname,
-                :api_key => @api_key,
-                :user => @test_user,
-                :pwhash => @test_pw }
+        :api_key => @api_key,
+        :user => @test_user,
+        :pwhash => @test_pw }
 
       post '/trail/add', params
       last_response.body.should == "Added Trail #{trailname}"
@@ -79,12 +96,16 @@ describe "Server Tests" do
 
     it "should error for an invalid user" do
       params = {:trail => 'trail',
-                :api_key => @api_key,
-                :user => @invalid_user,
-                :pwhash => @test_pw }
+        :api_key => @api_key,
+        :user => @invalid_user,
+        :pwhash => @test_pw }
 
       post '/trail/add', params
       last_response.body.should == "Invalid username or password"   
+    end
+
+    it "should find all trails except misc" do
+      (Trail.all - Trail.all(:name => :misc)).each { |trail| trail.name.should_not == 'misc' }
     end
   end
 
@@ -93,9 +114,9 @@ describe "Server Tests" do
       categoryName = 'category'
 
       params = {:category => categoryName,
-                :api_key => @api_key,
-                :user => @test_user,
-                :pwhash => @test_pw }
+        :api_key => @api_key,
+        :user => @test_user,
+        :pwhash => @test_pw }
 
       post '/category/add', params
       last_response.body.should == "Added Category #{categoryName}"
@@ -104,9 +125,9 @@ describe "Server Tests" do
 
     it "should error for an invalid user" do
       params = {:category => 'category',
-                :api_key => @api_key,
-                :user => @invalid_user,
-                :pwhash => @test_pw }
+        :api_key => @api_key,
+        :user => @invalid_user,
+        :pwhash => @test_pw }
 
       post '/category/add', params
       last_response.body.should == "Invalid username or password"   
@@ -117,9 +138,9 @@ describe "Server Tests" do
     it "should add a condition" do
       condition = 'condition'
       params = {:condition => condition,
-                :api_key => @api_key,
-                :user => @test_user,
-                :pwhash => @test_pw }
+        :api_key => @api_key,
+        :user => @test_user,
+        :pwhash => @test_pw }
 
       post '/condition/add', params
       last_response.body.should == "Added Condition #{condition}"
@@ -128,24 +149,12 @@ describe "Server Tests" do
 
     it "should error for an invalid user" do
       params = {:name => 'condition',
-                :api_key => @api_key,
-                :user => @invalid_user,
-                :pwhash => @test_pw }
+        :api_key => @api_key,
+        :user => @invalid_user,
+        :pwhash => @test_pw }
 
       post '/condition/add', params
       last_response.body.should == "Invalid username or password"   
-    end
-
-    it "should get a condition" do
-      pending("haven't decided on xml structure yet")
-      Condition.first_or_create(:desc => 'condition')
-
-      params = {:api_key => @api_key,
-                :user => @test_user,
-                :pwhash => @test_pw }
-
-      get '/condition/get', params
-      last_response.body.should == "condition"
     end
   end
 end

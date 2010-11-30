@@ -33,28 +33,18 @@ describe "Server Tests" do
   end
 
   describe "Point Actions" do
-    it "should return a test point" do
-      params = {:api_key => @api_key,
-        :user => @test_user,
-        :pwhash => @test_pw }
-
-      get "/point/get", params
-      doc = LibXML::XML::Document.string(last_response.body)
-      doc.validate_schema(@schema).should == true
-    end
-
     it "should add a point" do
       params = {:user => @test_user,
-        :pwhash => @test_pw,
-        :title => 'trail_point',
-        :lat => 4,
-        :long => 5,
-        :connections => "1,2,3",
-        :condition => 'Open',
-        :category => 'test',
-        :trail => 'trail',
-        :api_key => @api_key,
-        :desc => 'test'}
+                :pwhash => @test_pw,
+                :title => 'trail_point',
+                :lat => 4,
+                :long => 5,
+                :connections => "1,2,3",
+                :condition => 'Open',
+                :category => 'test',
+                :trail => 'trail',
+                :api_key => @api_key,
+                :desc => 'test'}
 
       post "/point/add", params
       last_response.body.should == "Added Point 4, 5"
@@ -64,6 +54,30 @@ describe "Server Tests" do
     it "should catch an invalid user" do
       post '/point/add', {:user => @invalid_user, :pwhash => @test_pw, :api_key => @api_key}
       last_response.body.should == 'Invalid username or password'
+    end
+
+    it "should return a test point" do
+      params = {:user => @test_user,
+                :pwhash => @test_pw,
+                :title => 'trail_point',
+                :lat => 4,
+                :long => 5,
+                :connections => "1,2,3",
+                :condition => 'Open',
+                :category => 'test',
+                :trail => 'misc',
+                :api_key => @api_key,
+                :desc => 'test'}
+
+      post "/point/add", params #need to have something in misc or builder shits itself
+
+      params = {:api_key => @api_key,
+                :user => @test_user,
+                :pwhash => @test_pw }
+
+      get "/point/get", params
+      doc = LibXML::XML::Document.string(last_response.body)
+      doc.validate_schema(@schema).should == true
     end
   end
 
@@ -88,6 +102,10 @@ describe "Server Tests" do
 
       post '/trail/add', params
       last_response.body.should == "Invalid username or password"   
+    end
+
+    it "should find all trails except misc" do
+      (Trail.all - Trail.all(:name => :misc)).each { |trail| trail.name.should_not == 'misc' }
     end
   end
 

@@ -26,6 +26,7 @@ xml.data do
 
   xml.misc do
     @misc.each do |point|
+      xml.point :id => point.id do
       xml.title point[:title]
       xml.description point[:desc]
       xml.catagory point.category[:name], :id => point.category.id

@@ -1,8 +1,8 @@
 require 'pp'
 
 get '/point/get' do
-  @trails = Trail.all 
-  @misc = Point.all(Point.trail.id => -1)
+  @trails = Trail.all - Trail.all(:name => 'misc') 
+  @misc = Trail.all(:name => 'misc').points
   
   builder :point
 end

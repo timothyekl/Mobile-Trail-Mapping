@@ -7,6 +7,7 @@ configure do
   API_KEY = 5500
   OBJECTS = ['user', 'point', 'trail', 'condition', 'category']
   User.first_or_create(:email => 'test@brousalis.com', :pwhash => Digest::SHA1.hexdigest('password'))
+  Trail.first_or_create(:name => 'misc')
 end
 
 before do

@@ -65,7 +65,7 @@ describe "Server Tests" do
                 :connections => "1,2,3",
                 :condition => 'Open',
                 :category => 'test',
-                :trail => 'misc',
+                :trail => 'trail',
                 :api_key => @api_key,
                 :desc => 'test'}
 
@@ -78,6 +78,24 @@ describe "Server Tests" do
       get "/point/get", params
       doc = LibXML::XML::Document.string(last_response.body)
       doc.validate_schema(@schema).should == true
+    end
+
+    it "should add a point with multiple connections" do
+      params = {:user => @test_user,
+                :pwhash => @test_pw,
+                :title => 'trail_point',
+                :lat => 4,
+                :long => 5,
+                :connections => "3:4,5:6",
+                :condition => 'Open',
+                :category => 'test',
+                :trail => 'misc',
+                :api_key => @api_key,
+                :desc => 'test'}
+
+      post "/point/add/coords", params #need to have something in misc or builder shits itself
+
+      last_response.body.should == "Added Point 4, 5"
     end
   end
 

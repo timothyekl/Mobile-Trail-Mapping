@@ -1,560 +1,0 @@
-TiPhone
-v7
-r0
-t313981056.277821
-cCheck dependencies
-cCpResource build/Debug-iphoneos/iPhone.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/ResourceRules.plist
-cProcessInfoPlistFile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/Info.plist iPhone-Info.plist
-cProcessPCH /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-enqtbcvyualayzgqsdmwaoctgkvx/iPhone_Prefix.pch.gch iPhone_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
-cProcessPCH /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-gnogoqbujguflpebwoqmxcjshdfb/iPhone_Prefix.pch.gch iPhone_Prefix.pch normal armv7 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/main.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/main.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/iPhoneAppDelegate.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/iPhoneViewController.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/MapView.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/Place.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/../Place.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/main.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/main.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/iPhoneAppDelegate.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/iPhoneViewController.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/MapView.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/Place.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/../Place.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-cCopyStringsFile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/en.lproj/InfoPlist.strings en.lproj/InfoPlist.strings
-cCompileXIB /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/en.lproj/MainWindow.xib
-cCompileXIB /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/en.lproj/iPhoneViewController.xib
-cProcessProductPackaging "/Users/ruN/Library/MobileDevice/Provisioning Profiles/D2F4CEB6-ABD5-4B49-8F2A-27D39DF34BE2.mobileprovision" /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/embedded.mobileprovision
-cProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/Entitlements.plist /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone.xcent
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk
-c000000004BDB847E0000000000000110
-t1272677502
-s272
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/Entitlements.plist
-c000000004BD66CEB00000000000001A7
-t1272343787
-s423
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/ResourceRules.plist
-c000000004BD66CEB00000000000001E5
-t1272343787
-s485
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
-c000000004BD7DDD40000000000546850
-t1272438228
-s5531728
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/System/Library/Frameworks/Foundation.framework/Foundation
-c000000004BD7DDFB000000000062FD30
-t1272438267
-s6487344
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
-c000000004BD7DDD60000000000001466
-t1272438230
-s5222
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/System/Library/Frameworks/MapKit.framework/Headers/MapKit.h
-c000000004BD7F36500000000000002F9
-t1272443749
-s761
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
-c000000004BDB68AD00000000000009CD
-t1272670381
-s2509
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/System/Library/Frameworks/UIKit.framework/UIKit
-c000000004BDB69AE0000000002D460E0
-t1272670638
-s47472864
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/usr/include/Availability.h
-c000000004BCCEA130000000000001A3B
-t1271720467
-s6715
-
-N/Users/ruN/Library/MobileDevice/Provisioning Profiles/D2F4CEB6-ABD5-4B49-8F2A-27D39DF34BE2.mobileprovision
-c000000004CDCAAA20000000000003E30
-t1289530018
-s15920
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/../Place.m
-c000000004D06B8DF00000000000000B1
-t1292286175
-s177
-i"Place.h"
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h
-c000000004D06B8770000000000000166
-t1292286071
-s358
-i<UIKit/UIKit.h>
-i<MapKit/MapKit.h>
-i"RegexKitLite.h"
-i"Place.h"
-i"PlaceMark.h"
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m
-c000000004D06B87F00000000000016C3
-t1292286079
-s5827
-i"MapView.h"
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/Place.h
-c000000004C019F2400000000000001CE
-t1275174692
-s462
-i<Foundation/Foundation.h>
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/PlaceMark.h
-c000000004C019F2400000000000001D4
-t1275174692
-s468
-i<Foundation/Foundation.h>
-i<MapKit/MapKit.h>
-i"Place.h"
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.h
-c000000004D06B8200000000000000149
-t1292285984
-s329
-i<UIKit/UIKit.h>
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m
-c000000004D06BF580000000000000190
-t1292287832
-s400
-i"iPhoneAppDelegate.h"
-i"iPhoneViewController.h"
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h
-c000000004D06B7B40000000000000082
-t1292285876
-s130
-i<UIKit/UIKit.h>
-i"MapView.h"
-i"Place.h"
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m
-c000000004D06B7D70000000000000541
-t1292285911
-s1345
-i"iPhoneViewController.h"
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Place.h
-c000000004D06B8DF00000000000000CC
-t1292286175
-s204
-i<Foundation/Foundation.h>
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app
-t1292288256
-s238
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app.dSYM
-t2
-s0
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/Info.plist
-t1292288250
-s679
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/PkgInfo
-t1292288250
-s8
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/ResourceRules.plist
-t1292288250
-s485
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/embedded.mobileprovision
-t1292288256
-s15920
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/en.lproj/InfoPlist.strings
-t1292288255
-s126
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/en.lproj/MainWindow.nib
-t1292288255
-s1679
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/en.lproj/iPhoneViewController.nib
-t1292288256
-s1269
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/iPhone
-t2
-s0
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/MapView.o
-t2
-s0
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/Place.o
-t1292288253
-s5204
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/iPhone
-t2
-s0
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/iPhone.LinkFileList
-c000000004D06C0FA0000000000000288
-t1292288250
-s648
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/iPhoneAppDelegate.o
-t2
-s0
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/iPhoneViewController.o
-t2
-s0
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/main.o
-t1292288253
-s6456
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/MapView.o
-t2
-s0
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/Place.o
-t1292288254
-s5204
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/iPhone
-t2
-s0
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/iPhone.LinkFileList
-c000000004D06C0FA0000000000000288
-t1292288250
-s648
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/iPhoneAppDelegate.o
-t2
-s0
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/iPhoneViewController.o
-t2
-s0
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/main.o
-t1292288253
-s6440
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone.xcent
-t1292288256
-s414
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/en.lproj/InfoPlist.strings
-c000000004CFD8DC20000000000000066
-t1291685314
-s102
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/en.lproj/MainWindow.xib
-c000000004CFD8DC20000000000004E1D
-t1291685314
-s19997
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/en.lproj/iPhoneViewController.xib
-c000000004CFD8DC20000000000001A41
-t1291685314
-s6721
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/iPhone_Prefix.pch
-c000000004CFD8DC2000000000000013E
-t1291685314
-s318
-i<Availability.h>
-i<UIKit/UIKit.h>
-i<Foundation/Foundation.h>
-
-N/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/main.m
-c000000004CFD8DC2000000000000015F
-t1291685314
-s351
-i<UIKit/UIKit.h>
-
-N/var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-enqtbcvyualayzgqsdmwaoctgkvx/iPhone_Prefix.pch.gch
-t1292288252
-s9852464
-
-N/var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-gnogoqbujguflpebwoqmxcjshdfb/iPhone_Prefix.pch.gch
-t1292288253
-s10315312
-
-NiPhone-Info.plist
-c000000004CFD8DC200000000000003D0
-t1291685314
-s976
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies313981050#313981050#0(0"0(0#1#0"3343187568374212096#0"0#
-
-CCodeSign /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app
-r0
-
-CCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/MapView.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s313981053.553083
-e313981053.849572
-r0
-xCompileC
-xbuild/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/MapView.o
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-oIn file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:1:
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h:3:25: error: RegexKitLite.h: No such file or directory
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m: In function '-[MapView calculateRoutesFrom:to:]':
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:80: warning: 'stringWithContentsOfURL:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSString.h:384)
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: 'NSString' may not respond to '-stringByMatching:capture:'
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: (Messages without a matching method signature
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: will be assumed to return 'id' and accept
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: '...' as arguments.)
-lSLF07#2@73"Compile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m313981053#313981053#0(1087"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:1:/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h:3:25: error: RegexKitLite.h: No such file or directory/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m: In function '-[MapView calculateRoutesFrom:to:]':/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:80: warning: 'stringWithContentsOfURL:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSString.h:384)/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: 'NSString' may not respond to '-stringByMatching:capture:'/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: (Messages without a matching method signature/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: will be assumed to return 'id' and accept/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: '...' as arguments.)4(4@41"RegexKitLite.h: No such file or directory313981053#91#121#2(7@87"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m313981053#18446744073709551615#0#0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m313978879#1#0#1#0#0"0(13@110"RegexKitLite.h: No such file or directory in /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313981053#18446744073709551615#0#0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313978871#3#0#3#0#0"0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313978871#3#0#3#0#28"*: No such file or directory0(22@194"'stringWithContentsOfURL:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSString.h:384)313981053#329#274#0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m313978879#80#0#80#0#33"'*' is deprecated (declared at *)0(22@58"'NSString' may not respond to '-stringByMatching:capture:'313981053#603#138#0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m313978879#81#0#81#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)313981053#741#125#0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m313978879#81#0#81#0#0"0(0#0#65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m3417213339966598656#1889"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-generated-files.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-own-target-headers.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-all-target-headers.hmap -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-project-headers.hmap -F/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/include -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources/armv6 -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources -include /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-enqtbcvyualayzgqsdmwaoctgkvx/iPhone_Prefix.pch -c /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m -o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/MapView.o1#
-
-CCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/Place.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/../Place.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s313981053.555535
-e313981053.697595
-r1
-xCompileC
-xbuild/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/Place.o
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/../Place.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@74"Compile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/../Place.m313981053#313981053#0(0"0(0#0#66"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/../Place.m8594601408#1888"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-generated-files.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-own-target-headers.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-all-target-headers.hmap -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-project-headers.hmap -F/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/include -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources/armv6 -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources -include /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-enqtbcvyualayzgqsdmwaoctgkvx/iPhone_Prefix.pch -c /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/../Place.m -o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/Place.o0#
-
-CCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/iPhoneAppDelegate.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s313981053.144959
-e313981053.552980
-r0
-xCompileC
-xbuild/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/iPhoneAppDelegate.o
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-oIn file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h:2,
-o                 from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m:2:
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h:3:25: error: RegexKitLite.h: No such file or directory
-lSLF07#2@83"Compile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m313981053#313981053#0(326"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h:2,                 from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m:2:/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h:3:25: error: RegexKitLite.h: No such file or directory1(4@41"RegexKitLite.h: No such file or directory313981053#205#121#3(7@97"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m313981053#18446744073709551615#0#0(6@75"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m313980632#2#0#2#0#0"0(7@100"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h313981053#18446744073709551615#0#0(6@78"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h313978676#2#0#2#0#0"0(13@110"RegexKitLite.h: No such file or directory in /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313981053#18446744073709551615#0#0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313978871#3#0#3#0#0"0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313978871#3#0#3#0#28"*: No such file or directory0(0#0#75"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m8608148096#1909"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-generated-files.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-own-target-headers.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-all-target-headers.hmap -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-project-headers.hmap -F/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/include -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources/armv6 -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources -include /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-enqtbcvyualayzgqsdmwaoctgkvx/iPhone_Prefix.pch -c /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m -o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/iPhoneAppDelegate.o1#
-
-CCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/iPhoneViewController.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s313981053.366473
-e313981053.555421
-r0
-xCompileC
-xbuild/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/iPhoneViewController.o
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-oIn file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h:2,
-o                 from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m:1:
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h:3:25: error: RegexKitLite.h: No such file or directory
-lSLF07#2@86"Compile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m313981053#313981053#0(329"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h:2,                 from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m:1:/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h:3:25: error: RegexKitLite.h: No such file or directory1(4@41"RegexKitLite.h: No such file or directory313981053#208#121#3(7@100"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m313981053#18446744073709551615#0#0(6@78"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m313978711#1#0#1#0#0"0(7@100"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h313981053#18446744073709551615#0#0(6@78"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h313978676#2#0#2#0#0"0(13@110"RegexKitLite.h: No such file or directory in /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313981053#18446744073709551615#0#0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313978871#3#0#3#0#0"0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313978871#3#0#3#0#28"*: No such file or directory0(0#0#78"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m8608108160#1915"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-generated-files.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-own-target-headers.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-all-target-headers.hmap -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-project-headers.hmap -F/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/include -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources/armv6 -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources -include /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-enqtbcvyualayzgqsdmwaoctgkvx/iPhone_Prefix.pch -c /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m -o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/iPhoneViewController.o1#
-
-CCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/main.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/main.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s313981053.143473
-e313981053.366370
-r1
-xCompileC
-xbuild/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/main.o
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/main.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@62"Compile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/main.m313981053#313981053#0(0"0(0#0#54"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/main.m8595123520#1875"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-generated-files.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-own-target-headers.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-all-target-headers.hmap -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-project-headers.hmap -F/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/include -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources/armv6 -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources -include /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-enqtbcvyualayzgqsdmwaoctgkvx/iPhone_Prefix.pch -c /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/main.m -o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/main.o0#
-
-CCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/MapView.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-s313981053.945437
-e313981054.181520
-r0
-xCompileC
-xbuild/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/MapView.o
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-oIn file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:1:
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h:3:25: error: RegexKitLite.h: No such file or directory
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m: In function '-[MapView calculateRoutesFrom:to:]':
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:80: warning: 'stringWithContentsOfURL:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSString.h:384)
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: 'NSString' may not respond to '-stringByMatching:capture:'
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: (Messages without a matching method signature
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: will be assumed to return 'id' and accept
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: '...' as arguments.)
-lSLF07#2@73"Compile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m313981053#313981054#0(1087"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:1:/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h:3:25: error: RegexKitLite.h: No such file or directory/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m: In function '-[MapView calculateRoutesFrom:to:]':/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:80: warning: 'stringWithContentsOfURL:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSString.h:384)/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: 'NSString' may not respond to '-stringByMatching:capture:'/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: (Messages without a matching method signature/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: will be assumed to return 'id' and accept/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m:81: warning: '...' as arguments.)4(4@41"RegexKitLite.h: No such file or directory313981054#91#121#2(7@87"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m313981054#18446744073709551615#0#0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m313978879#1#0#1#0#0"0(13@110"RegexKitLite.h: No such file or directory in /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313981054#18446744073709551615#0#0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313978871#3#0#3#0#0"0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313978871#3#0#3#0#28"*: No such file or directory0(22@194"'stringWithContentsOfURL:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSString.h:384)313981054#329#274#0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m313978879#80#0#80#0#33"'*' is deprecated (declared at *)0(22@58"'NSString' may not respond to '-stringByMatching:capture:'313981054#603#138#0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m313978879#81#0#81#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)313981054#741#125#0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m313978879#81#0#81#0#0"0(0#0#65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m8608495200#1889"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-generated-files.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-own-target-headers.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-all-target-headers.hmap -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-project-headers.hmap -F/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/include -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources/armv7 -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources -include /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-gnogoqbujguflpebwoqmxcjshdfb/iPhone_Prefix.pch -c /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.m -o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/MapView.o1#
-
-CCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/Place.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/../Place.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-s313981054.098614
-e313981054.172905
-r1
-xCompileC
-xbuild/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/Place.o
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/../Place.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@74"Compile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/../Place.m313981054#313981054#0(0"0(0#0#66"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/../Place.m8608930912#1888"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-generated-files.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-own-target-headers.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-all-target-headers.hmap -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-project-headers.hmap -F/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/include -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources/armv7 -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources -include /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-gnogoqbujguflpebwoqmxcjshdfb/iPhone_Prefix.pch -c /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/../Place.m -o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/Place.o0#
-
-CCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/iPhoneAppDelegate.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-s313981053.834083
-e313981053.945340
-r0
-xCompileC
-xbuild/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/iPhoneAppDelegate.o
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-oIn file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h:2,
-o                 from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m:2:
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h:3:25: error: RegexKitLite.h: No such file or directory
-lSLF07#2@83"Compile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m313981053#313981053#0(326"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h:2,                 from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m:2:/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h:3:25: error: RegexKitLite.h: No such file or directory1(4@41"RegexKitLite.h: No such file or directory313981053#205#121#3(7@97"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m313981053#18446744073709551615#0#0(6@75"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m313980632#2#0#2#0#0"0(7@100"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h313981053#18446744073709551615#0#0(6@78"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h313978676#2#0#2#0#0"0(13@110"RegexKitLite.h: No such file or directory in /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313981053#18446744073709551615#0#0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313978871#3#0#3#0#0"0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313978871#3#0#3#0#28"*: No such file or directory0(0#0#75"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m8595125440#1909"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-generated-files.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-own-target-headers.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-all-target-headers.hmap -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-project-headers.hmap -F/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/include -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources/armv7 -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources -include /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-gnogoqbujguflpebwoqmxcjshdfb/iPhone_Prefix.pch -c /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneAppDelegate.m -o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/iPhoneAppDelegate.o1#
-
-CCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/iPhoneViewController.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-s313981053.849676
-e313981054.098519
-r0
-xCompileC
-xbuild/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/iPhoneViewController.o
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-oIn file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h:2,
-o                 from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m:1:
-o/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h:3:25: error: RegexKitLite.h: No such file or directory
-lSLF07#2@86"Compile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m313981053#313981054#0(329"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h:2,                 from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m:1:/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h:3:25: error: RegexKitLite.h: No such file or directory1(4@41"RegexKitLite.h: No such file or directory313981053#208#121#3(7@100"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m313981053#18446744073709551615#0#0(6@78"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m313978711#1#0#1#0#0"0(7@100"In file included from /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h313981053#18446744073709551615#0#0(6@78"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.h313978676#2#0#2#0#0"0(13@110"RegexKitLite.h: No such file or directory in /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313981053#18446744073709551615#0#0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313978871#3#0#3#0#0"0(6@65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/MapView.h313978871#3#0#3#0#28"*: No such file or directory0(0#0#78"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m8594562496#1915"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-generated-files.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-own-target-headers.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-all-target-headers.hmap -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-project-headers.hmap -F/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/include -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources/armv7 -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources -include /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-gnogoqbujguflpebwoqmxcjshdfb/iPhone_Prefix.pch -c /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/Classes/iPhoneViewController.m -o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/iPhoneViewController.o1#
-
-CCompileC build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/main.o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/main.m normal armv7 objective-c com.apple.compilers.gcc.4_2
-s313981053.697702
-e313981053.833985
-r1
-xCompileC
-xbuild/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/main.o
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/main.m
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@62"Compile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/main.m313981053#313981053#0(0"0(0#0#54"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/main.m8602766048#1875"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-generated-files.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-own-target-headers.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-all-target-headers.hmap -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-project-headers.hmap -F/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/include -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources/armv7 -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources -include /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-gnogoqbujguflpebwoqmxcjshdfb/iPhone_Prefix.pch -c /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/main.m -o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/main.o0#
-
-CCompileXIB /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/en.lproj/MainWindow.xib
-s313981054.182643
-e313981055.910721
-r1
-xCompileXIB
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/en.lproj/MainWindow.xib
-lSLF07#2@34"CompileXIB en.lproj/MainWindow.xib313981054#313981055#0(0"0(0#0#71"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/en.lproj/MainWindow.xib8594804192#648"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.1    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/en.lproj/MainWindow.nib /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/en.lproj/MainWindow.xib --sdk /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk0#
-
-CCompileXIB /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/en.lproj/iPhoneViewController.xib
-s313981055.705440
-e313981056.246939
-r1
-xCompileXIB
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/en.lproj/iPhoneViewController.xib
-lSLF07#2@44"CompileXIB en.lproj/iPhoneViewController.xib313981055#313981056#0(0"0(0#0#81"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/en.lproj/iPhoneViewController.xib8608374112#668"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.1    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/en.lproj/iPhoneViewController.nib /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/en.lproj/iPhoneViewController.xib --sdk /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk0#
-
-CCopyStringsFile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/en.lproj/InfoPlist.strings en.lproj/InfoPlist.strings
-s313981054.181636
-e313981055.705231
-r1
-xCopyStringsFile
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/en.lproj/InfoPlist.strings
-xen.lproj/InfoPlist.strings
-lSLF07#2@31"Copy en.lproj/InfoPlist.strings313981054#313981055#0(0"0(0#0#74"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/en.lproj/InfoPlist.strings8608130688#548"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv ICONV /usr/bin/iconv    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding binary en.lproj/InfoPlist.strings --outdir /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/en.lproj0#
-
-CCpResource build/Debug-iphoneos/iPhone.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/ResourceRules.plist
-s313981050.522009
-e313981050.599132
-r1
-xCpResource
-xbuild/Debug-iphoneos/iPhone.app/ResourceRules.plist
-x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/ResourceRules.plist
-lSLF07#2@94"Copy /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/ResourceRules.plist313981050#313981050#0(0"0(0#0#89"/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/ResourceRules.plist4913266056747185152#559"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/ResourceRules.plist /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app0#
-
-CCreateUniversalBinary /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/iPhone normal "armv6 armv7"
-r0
-
-CGenerateDSYMFile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app.dSYM /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/iPhone
-r0
-
-CLd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv6/iPhone normal armv6
-r0
-
-CLd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/Objects-normal/armv7/iPhone normal armv7
-r0
-
-CProcessInfoPlistFile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/Info.plist iPhone-Info.plist
-s313981050.556677
-e313981050.569937
-r1
-xProcessInfoPlistFile
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/Info.plist
-xiPhone-Info.plist
-lSLF07#2@25"Process iPhone-Info.plist313981050#313981050#0(0"0(0#0#65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/iPhone-Info.plist8608027744#656"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    builtin-infoPlistUtility iPhone-Info.plist -genpkginfo /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -resourcerulesfile /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/ResourceRules.plist -o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/Info.plist0#
-
-CProcessPCH /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-enqtbcvyualayzgqsdmwaoctgkvx/iPhone_Prefix.pch.gch iPhone_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
-s313981050.599297
-e313981052.973720
-r1
-xProcessPCH
-x/var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-enqtbcvyualayzgqsdmwaoctgkvx/iPhone_Prefix.pch.gch
-xiPhone_Prefix.pch
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@28"Precompile iPhone_Prefix.pch313981050#313981052#0(0"0(0#0#65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/iPhone_Prefix.pch8608408768#1765"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch armv6 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-generated-files.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-own-target-headers.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-all-target-headers.hmap -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-project-headers.hmap -F/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/include -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources/armv6 -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources -c /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/iPhone_Prefix.pch -o /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-enqtbcvyualayzgqsdmwaoctgkvx/iPhone_Prefix.pch.gch0#
-
-CProcessPCH /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-gnogoqbujguflpebwoqmxcjshdfb/iPhone_Prefix.pch.gch iPhone_Prefix.pch normal armv7 objective-c com.apple.compilers.gcc.4_2
-s313981050.600734
-e313981053.143350
-r1
-xProcessPCH
-x/var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-gnogoqbujguflpebwoqmxcjshdfb/iPhone_Prefix.pch.gch
-xiPhone_Prefix.pch
-xnormal
-xarmv7
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@28"Precompile iPhone_Prefix.pch313981050#313981053#0(0"0(0#0#65"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/iPhone_Prefix.pch8594582368#1765"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch armv7 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.1 -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-generated-files.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-own-target-headers.hmap -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-all-target-headers.hmap -iquote /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone-project-headers.hmap -F/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/include -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources/armv7 -I/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/DerivedSources -c /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/iPhone_Prefix.pch -o /var/folders/uX/uXen34NlE3qcLhRrLlIOUE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iPhone_Prefix-gnogoqbujguflpebwoqmxcjshdfb/iPhone_Prefix.pch.gch0#
-
-CProcessProductPackaging "/Users/ruN/Library/MobileDevice/Provisioning Profiles/D2F4CEB6-ABD5-4B49-8F2A-27D39DF34BE2.mobileprovision" /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/embedded.mobileprovision
-s313981056.247054
-e313981056.248646
-r1
-xProcessProductPackaging
-x/Users/ruN/Library/MobileDevice/Provisioning Profiles/D2F4CEB6-ABD5-4B49-8F2A-27D39DF34BE2.mobileprovision
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/embedded.mobileprovision
-lSLF07#2@189"ProcessProductPackaging "/Users/ruN/Library/MobileDevice/Provisioning Profiles/D2F4CEB6-ABD5-4B49-8F2A-27D39DF34BE2.mobileprovision" build/Debug-iphoneos/iPhone.app/embedded.mobileprovision313981056#313981056#0(0"0(0#0#104"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/embedded.mobileprovision8608199104#500"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    <com.apple.tools.product-pkg-utility> "/Users/ruN/Library/MobileDevice/Provisioning Profiles/D2F4CEB6-ABD5-4B49-8F2A-27D39DF34BE2.mobileprovision" -o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app/embedded.mobileprovision0#
-
-CProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/Entitlements.plist /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone.xcent
-s313981056.248719
-e313981056.277745
-r1
-xProcessProductPackaging
-x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/Entitlements.plist
-x/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone.xcent
-lSLF07#2@172"ProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/Entitlements.plist build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone.xcent313981056#313981056#0(0"0(0#0#107"/Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone.xcent8607982496#509"    cd /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    <com.apple.tools.product-pkg-utility> /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/Entitlements.plist -entitlements -format xml -o /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/iPhone.build/Debug-iphoneos/iPhone.build/iPhone.xcent0#
-
-CTouch /Users/ruN/Projects/Mobile-Trail-Mapping/iPhone/build/Debug-iphoneos/iPhone.app
-r0
-

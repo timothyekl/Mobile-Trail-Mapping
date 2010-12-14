@@ -5,13 +5,13 @@
 @synthesize coordinate;
 @synthesize place;
 
--(id) initWithPlace: (Place*) p
+-(id) initWithPlace: (Place*) place
 {
 	self = [super init];
 	if (self != nil) {
-		coordinate.latitude = p.latitude;
-		coordinate.longitude = p.longitude;
-		self.place = p;
+		coordinate.latitude = place.latitude;
+		coordinate.longitude = place.longitude;
+		self.place = place;
 	}
 	return self;
 }

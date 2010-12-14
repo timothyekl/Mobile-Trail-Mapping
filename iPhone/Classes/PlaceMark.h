@@ -10,6 +10,6 @@
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 @property (nonatomic, retain) Place* place;
 
--(id) initWithPlace: (Place*) p;
+-(id) initWithPlace: (Place*) place;
 
 @end

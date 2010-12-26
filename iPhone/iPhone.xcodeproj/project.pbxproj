@@ -12,6 +12,7 @@
 		A752C9A612B6EFCB008D2B62 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = A752C9A512B6EFCB008D2B62 /* MapView.m */; };
 		A78514A712B6FA99000468E5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A78514A612B6FA99000468E5 /* MapKit.framework */; };
 		A792BDE612C71BEC005EFAC6 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A792BDE512C71BEC005EFAC6 /* XMLParser.m */; };
+		A792BE6812C7379E005EFAC6 /* InterestPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A792BE6712C7379E005EFAC6 /* InterestPoint.m */; };
 		A7D94A4F12ADC542003BDB1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D94A4E12ADC542003BDB1C /* UIKit.framework */; };
 		A7D94A5112ADC542003BDB1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D94A5012ADC542003BDB1C /* Foundation.framework */; };
 		A7D94A5312ADC542003BDB1C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D94A5212ADC542003BDB1C /* CoreGraphics.framework */; };
@@ -33,6 +34,8 @@
 		A78514A612B6FA99000468E5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MapKit.framework; sourceTree = "<group>"; };
 		A792BDE412C71BEC005EFAC6 /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParser.h; sourceTree = "<group>"; };
 		A792BDE512C71BEC005EFAC6 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParser.m; sourceTree = "<group>"; };
+		A792BE6612C7379E005EFAC6 /* InterestPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterestPoint.h; sourceTree = "<group>"; };
+		A792BE6712C7379E005EFAC6 /* InterestPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterestPoint.m; sourceTree = "<group>"; };
 		A7D94A4B12ADC542003BDB1C /* iPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7D94A4E12ADC542003BDB1C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A7D94A5012ADC542003BDB1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -76,6 +79,8 @@
 		A792BDE312C71BCB005EFAC6 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				A792BE6612C7379E005EFAC6 /* InterestPoint.h */,
+				A792BE6712C7379E005EFAC6 /* InterestPoint.m */,
 				A7306D6D12B6F8AA0099C0C2 /* TrailPoint.h */,
 				A7306D6E12B6F8AA0099C0C2 /* TrailPoint.m */,
 				A7306D6F12B6F8AA0099C0C2 /* LocationMarker.h */,
@@ -216,6 +221,7 @@
 				A7306D7112B6F8AA0099C0C2 /* TrailPoint.m in Sources */,
 				A7306D7212B6F8AA0099C0C2 /* LocationMarker.m in Sources */,
 				A792BDE612C71BEC005EFAC6 /* XMLParser.m in Sources */,
+				A792BE6812C7379E005EFAC6 /* InterestPoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

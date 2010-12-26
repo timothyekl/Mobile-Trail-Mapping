@@ -1,14 +1,14 @@
-#import "Place.h"
+#import "TrailPoint.h"
 
-@implementation Place
+@implementation TrailPoint
 
 @synthesize name;
 @synthesize description;
 @synthesize latitude;
 @synthesize longitude;
 
-- (void) dealloc
-{
+- (void) dealloc {
+    
 	[name release];
 	[description release];
 	[super dealloc];

@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "MapView.h"
-#import "Place.h"
+#import "TrailPoint.h"
 
 @interface iPhoneViewController : UIViewController {
 }

@@ -11,6 +11,9 @@
     [window makeKeyAndVisible];
 }
 
+#pragma mark -
+#pragma mark - Dealloc
+
 - (void)dealloc {
     [viewController release];
     [window release];

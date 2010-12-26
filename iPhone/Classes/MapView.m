@@ -2,8 +2,7 @@
 
 @implementation MapView
 
-- (id) initWithFrame:(CGRect) frame
-{
+- (id) initWithFrame:(CGRect) frame {
 	self = [super initWithFrame:frame];
 	if (self != nil) {
 		mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
@@ -13,6 +12,9 @@
 	}
 	return self;
 }
+
+#pragma mark -
+#pragma mark - Dealloc
 
 - (void)dealloc {
 	[mapView release];

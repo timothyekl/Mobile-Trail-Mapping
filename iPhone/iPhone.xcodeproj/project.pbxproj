@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A7306D7112B6F8AA0099C0C2 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = A7306D6E12B6F8AA0099C0C2 /* Place.m */; };
-		A7306D7212B6F8AA0099C0C2 /* PlaceMark.m in Sources */ = {isa = PBXBuildFile; fileRef = A7306D7012B6F8AA0099C0C2 /* PlaceMark.m */; };
+		A7306D7112B6F8AA0099C0C2 /* TrailPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A7306D6E12B6F8AA0099C0C2 /* TrailPoint.m */; };
+		A7306D7212B6F8AA0099C0C2 /* LocationMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = A7306D7012B6F8AA0099C0C2 /* LocationMarker.m */; };
 		A752C9A612B6EFCB008D2B62 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = A752C9A512B6EFCB008D2B62 /* MapView.m */; };
 		A78514A712B6FA99000468E5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A78514A612B6FA99000468E5 /* MapKit.framework */; };
+		A792BDE612C71BEC005EFAC6 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A792BDE512C71BEC005EFAC6 /* XMLParser.m */; };
 		A7D94A4F12ADC542003BDB1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D94A4E12ADC542003BDB1C /* UIKit.framework */; };
 		A7D94A5112ADC542003BDB1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D94A5012ADC542003BDB1C /* Foundation.framework */; };
 		A7D94A5312ADC542003BDB1C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D94A5212ADC542003BDB1C /* CoreGraphics.framework */; };
@@ -23,13 +24,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A7306D6D12B6F8AA0099C0C2 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
-		A7306D6E12B6F8AA0099C0C2 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
-		A7306D6F12B6F8AA0099C0C2 /* PlaceMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceMark.h; sourceTree = "<group>"; };
-		A7306D7012B6F8AA0099C0C2 /* PlaceMark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceMark.m; sourceTree = "<group>"; };
+		A7306D6D12B6F8AA0099C0C2 /* TrailPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPoint.h; sourceTree = "<group>"; };
+		A7306D6E12B6F8AA0099C0C2 /* TrailPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrailPoint.m; sourceTree = "<group>"; };
+		A7306D6F12B6F8AA0099C0C2 /* LocationMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationMarker.h; sourceTree = "<group>"; };
+		A7306D7012B6F8AA0099C0C2 /* LocationMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationMarker.m; sourceTree = "<group>"; };
 		A752C9A412B6EFCB008D2B62 /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
 		A752C9A512B6EFCB008D2B62 /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		A78514A612B6FA99000468E5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MapKit.framework; sourceTree = "<group>"; };
+		A792BDE412C71BEC005EFAC6 /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParser.h; sourceTree = "<group>"; };
+		A792BDE512C71BEC005EFAC6 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParser.m; sourceTree = "<group>"; };
 		A7D94A4B12ADC542003BDB1C /* iPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7D94A4E12ADC542003BDB1C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A7D94A5012ADC542003BDB1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -61,6 +64,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A792BDE212C71BC4005EFAC6 /* XML */ = {
+			isa = PBXGroup;
+			children = (
+				A792BDE412C71BEC005EFAC6 /* XMLParser.h */,
+				A792BDE512C71BEC005EFAC6 /* XMLParser.m */,
+			);
+			name = XML;
+			sourceTree = "<group>";
+		};
+		A792BDE312C71BCB005EFAC6 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				A7306D6D12B6F8AA0099C0C2 /* TrailPoint.h */,
+				A7306D6E12B6F8AA0099C0C2 /* TrailPoint.m */,
+				A7306D6F12B6F8AA0099C0C2 /* LocationMarker.h */,
+				A7306D7012B6F8AA0099C0C2 /* LocationMarker.m */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
 		A7D94A3C12ADC542003BDB1C = {
 			isa = PBXGroup;
 			children = (
@@ -75,10 +98,8 @@
 		A7D94A4312ADC542003BDB1C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A7306D6D12B6F8AA0099C0C2 /* Place.h */,
-				A7306D6E12B6F8AA0099C0C2 /* Place.m */,
-				A7306D6F12B6F8AA0099C0C2 /* PlaceMark.h */,
-				A7306D7012B6F8AA0099C0C2 /* PlaceMark.m */,
+				A792BDE312C71BCB005EFAC6 /* Objects */,
+				A792BDE212C71BC4005EFAC6 /* XML */,
 				A752C9A412B6EFCB008D2B62 /* MapView.h */,
 				A752C9A512B6EFCB008D2B62 /* MapView.m */,
 				A7D94A5B12ADC542003BDB1C /* iPhoneAppDelegate.h */,
@@ -155,6 +176,7 @@
 			isa = PBXProject;
 			buildConfigurationList = A7D94A4112ADC542003BDB1C /* Build configuration list for PBXProject "iPhone" */;
 			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -191,8 +213,9 @@
 				A7D94A5D12ADC542003BDB1C /* iPhoneAppDelegate.m in Sources */,
 				A7D94A6312ADC542003BDB1C /* iPhoneViewController.m in Sources */,
 				A752C9A612B6EFCB008D2B62 /* MapView.m in Sources */,
-				A7306D7112B6F8AA0099C0C2 /* Place.m in Sources */,
-				A7306D7212B6F8AA0099C0C2 /* PlaceMark.m in Sources */,
+				A7306D7112B6F8AA0099C0C2 /* TrailPoint.m in Sources */,
+				A7306D7212B6F8AA0099C0C2 /* LocationMarker.m in Sources */,
+				A792BDE612C71BEC005EFAC6 /* XMLParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

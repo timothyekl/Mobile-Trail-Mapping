@@ -39,8 +39,8 @@ class Point
   include DataMapper::Resource
 
   property :id, Serial
-  property :lat,  Integer, :required => true
-  property :long, Integer, :required => true
+  property :lat,  Float, :required => true
+  property :long, Float, :required => true
   property :desc, Text
   property :title, String
 
@@ -53,7 +53,7 @@ end
 
 class Connection
   include DataMapper::Resource
-  
+
   property :id, Serial
   property :connection, Integer, :required => true
 

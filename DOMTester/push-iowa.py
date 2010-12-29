@@ -1,8 +1,8 @@
 #!/usr/bin/env python3.1
 
 import hashlib
-import urllib.request
-import urllib.parse
+#import urllib.request
+#import urllib.parse
 import time
 
 lines = []

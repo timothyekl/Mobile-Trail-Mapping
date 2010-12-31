@@ -299,18 +299,19 @@ public class ShowMap extends MapActivity {
 	@Override
 	public void onPause() {
 		super.onPause();
-		Log.w("MTM", "MTM: onPause()");
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
 		// Always save the location, regardless if the user wants to go here
 		SharedPreferences.Editor editor = this._settings.edit();
 		editor.putInt(SAVED_MAP_LAT, this._mapView.getMapCenter().getLatitudeE6());
 		editor.putInt(SAVED_MAP_LONG, this._mapView.getMapCenter().getLongitudeE6());
 		editor.putInt(SAVED_MAP_ZOOM, this._mapView.getZoomLevel());
 		editor.commit();
+		Log.w("MTM", "MTM: onPause()");
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		
 		Log.w("MTM", "MTM: onStop()");
 	}
 

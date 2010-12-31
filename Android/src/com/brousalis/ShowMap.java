@@ -353,8 +353,8 @@ public class ShowMap extends MapActivity {
 	 */
 	private void initializeParser() {
 		// Swap these two lines to use different urls, one is actual data, other is sample
-		this._dataHandler = new DataHandler(getResources().getString(R.string.test_url));
-		//this._dataHandler = new DataHandler(getResources().getString(R.string.data_url));
+		//this._dataHandler = new DataHandler(getResources().getString(R.string.test_url));
+		this._dataHandler = new DataHandler(getResources().getString(R.string.data_url));
 		this._dataHandler.parseDocument();
 	}
 

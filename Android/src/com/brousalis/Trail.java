@@ -148,8 +148,9 @@ public class Trail extends ItemizedOverlay<OverlayItem> {
 		// thsi will go away
 		if(point.getCategoryID() == 1) {
 			this._trailHeads.add(point);
-			populate();
+			
 		}
+		populate();
 	}
 
 	/**

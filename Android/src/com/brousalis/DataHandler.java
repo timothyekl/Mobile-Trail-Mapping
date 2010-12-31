@@ -24,6 +24,7 @@ public class DataHandler {
 	private TrailPoint _trailPoint;
 	
 	//static String XML_FILE = "http://www.fernferret.com/samplexml.xml";
+	static String XML_LOC = "http://mtmserver.heroku.com/point/get";
 	static String XML_SCHEMA = "http://www.fernferret.com/mtmSchema.xsd";
 
 	private DocumentBuilderFactory _factory;
@@ -50,12 +51,14 @@ public class DataHandler {
 	 * Initializes the DataHandler values using a custom XML File
 	 */
 	public DataHandler(String XMLFILE) {
+		Log.w("MTM", "Handler initialized");
 		_trails = new HashSet<Trail>();
 		_factory = DocumentBuilderFactory.newInstance();
 		try {
-			_xmlFile = new URL(XMLFILE);
+			_xmlFile = new URL(XML_LOC);
 			_builder = _factory.newDocumentBuilder();
 		} catch (Exception e) {
+			Log.w("MTM", "Caught Exception!");
 			e.printStackTrace();
 		}
 	}
@@ -69,8 +72,15 @@ public class DataHandler {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(_doc != null)
+		Log.w("MTM", "Parsing Document...");
+		if(_doc != null) {
 			extractTrails(_doc);
+		}
+		else {
+			// Failure to parse XML
+			Log.w("MTM", "Failure to parse XML...");
+		}
+			
 	}
 	
 	/**
@@ -78,6 +88,7 @@ public class DataHandler {
 	 * @param doc
 	 */
 	private void extractTrails(Document doc) {
+		Log.w("MTM", "Extracting Trails...");
 		NodeList itemList = doc.getElementsByTagName("trail");
 		Node currentNode = itemList.item(0);
 		while (currentNode != null) {

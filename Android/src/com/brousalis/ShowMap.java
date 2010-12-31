@@ -352,7 +352,9 @@ public class ShowMap extends MapActivity {
 	 * Initialize the XML Parser and Parse the data from the url.
 	 */
 	private void initializeParser() {
-		this._dataHandler = new DataHandler();
+		// Swap these two lines to use different urls, one is actual data, other is sample
+		this._dataHandler = new DataHandler(getResources().getString(R.string.test_url));
+		//this._dataHandler = new DataHandler(getResources().getString(R.string.data_url));
 		this._dataHandler.parseDocument();
 	}
 

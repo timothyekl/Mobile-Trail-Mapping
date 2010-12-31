@@ -23,7 +23,7 @@ public class DataHandler {
 	private HashSet<Trail> _trails;
 	private TrailPoint _trailPoint;
 	
-	static String XML_FILE = "http://www.fernferret.com/samplexml.xml";
+	//static String XML_FILE = "http://www.fernferret.com/samplexml.xml";
 	static String XML_SCHEMA = "http://www.fernferret.com/mtmSchema.xsd";
 
 	private DocumentBuilderFactory _factory;
@@ -34,16 +34,17 @@ public class DataHandler {
 	/**
 	 * Initializes default DataHandler values
 	 */
-	public DataHandler() {
-		_trails = new HashSet<Trail>();
-		_factory = DocumentBuilderFactory.newInstance();
-		try {
-			_xmlFile = new URL(XML_FILE);
-			_builder = _factory.newDocumentBuilder();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	// Depreciated: Only accept input from the constructor with a string
+//	public DataHandler() {
+//		_trails = new HashSet<Trail>();
+//		_factory = DocumentBuilderFactory.newInstance();
+//		try {
+//			_xmlFile = new URL(XML_FILE);
+//			_builder = _factory.newDocumentBuilder();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	/**
 	 * Initializes the DataHandler values using a custom XML File

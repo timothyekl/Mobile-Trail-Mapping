@@ -40,10 +40,14 @@ File.open('iowa.txt', 'r') do |in_file|
 
   points.each do |point|
     point[:desc] = "point"
-    point[:category] = "open"
-    point[:condition] = "clear"
+    point[:category] = "Trail"
+    point[:condition] = "Open"
     point[:trail] = "iowa"
+    point[:title] = "title"
   end
+
+  points.first[:category] = "Trailhead"
+  points.last[:category] = "Trailhead"
 
   points.each do |point|
     Net::HTTP.post_form(URI.parse('http://localhost:4567/point/add'), point)

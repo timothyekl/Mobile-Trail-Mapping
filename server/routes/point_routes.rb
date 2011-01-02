@@ -42,7 +42,7 @@ post '/point/add' do
   point.trail = trail
 
   params[:connections].split(',').each do |conn|
-    point.connections << Connection.first_or_create(:connection => conn.to_i)
+    point.connections << Connection.first_or_create(:connected_to => conn.to_i, :connected_from => point.id)
   end
 
   point.save

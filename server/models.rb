@@ -55,7 +55,8 @@ class Connection
   include DataMapper::Resource
 
   property :id, Serial
-  property :connection, Integer, :required => true
+  property :connected_to, Integer, :required => true
+  property :connected_from, Integer, :required => true
 
   belongs_to :point
 end

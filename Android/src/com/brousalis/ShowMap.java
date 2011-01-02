@@ -8,6 +8,8 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -42,6 +44,7 @@ public class ShowMap extends MapActivity {
 	
 	private static final int HTC_SENSE_ENTER = 0;
 	// SharedPreference Strings
+	public static final String MTM = "MTM";
 	public static final String SAVED_MAP_STATE = "SavedMapState";
 	public static final String SAVED_MAP_LAT = "SavedMapLat";
 	public static final String SAVED_MAP_LONG = "SavedMapLong";
@@ -65,6 +68,8 @@ public class ShowMap extends MapActivity {
 	
 	public static Drawable bubble;
 	public static ShowMap thisActivity;
+	
+	private String mVersionName;
 	
 	private LocationMarker _locationMarker;
 
@@ -96,7 +101,16 @@ public class ShowMap extends MapActivity {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		
+		String pkg = getPackageName();
+		try {
+			mVersionName = getPackageManager().getPackageInfo(pkg, 0).versionName;
+			Log.w(MTM, "Current version: " + mVersionName);
+		} catch (NameNotFoundException e) {
+			// If the version name isn't found, default to the first version.
+			mVersionName = "0.0.1";
+		}
+		Log.w(MTM, "Package Name   : " + pkg);
+		Log.w(MTM, "Current version: " + mVersionName);
 		bubble = this.getResources().getDrawable(R.drawable.dot_clear);
 		thisActivity = ShowMap.this;
 		super.onCreate(savedInstanceState);
@@ -116,20 +130,20 @@ public class ShowMap extends MapActivity {
 		else {
 			//showNotConnectedDialog();
 		}
-		Log.w("MTM", "MTM: onCreate()");
+		Log.w(MTM, "MTM: onCreate()");
 		
 	}
 
 	private void checkBetaStatus() {
 		BETA_MODE = Boolean.parseBoolean(this.getString(R.string.beta));
-		if(!BetaChecker.isUpToDate( BETA_MODE, this.getString(R.string.beta_check_url) + this.getString(R.string.beta_version))) {
+		if(!BetaChecker.isUpToDate( BETA_MODE, this.getString(R.string.beta_check_url) + mVersionName)) {
 			showOutOfDateDialog();
 		}
 		TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		UNIQUE_ID = mTelephonyMgr.getDeviceId();
 
 		this._settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		Log.w("MTM", "MTM Settings: " + this._settings.getBoolean(REGISTERED_DEVICE, false));
+		Log.w(MTM, "MTM Settings: " + this._settings.getBoolean(REGISTERED_DEVICE, false));
 		String idCheckResult = BetaChecker.checkUser( this.getString(R.string.register_device_url), UNIQUE_ID);
 		Boolean validUser = idCheckResult.equals("registered");
 		Boolean bannedUser = idCheckResult.equals("banned");
@@ -202,7 +216,7 @@ public class ShowMap extends MapActivity {
 	private void showNewBetaUserDialog(String registerUrl) {
 		final BetaDialog newUser = new BetaDialog(ShowMap.this, R.layout.new_beta_user);
 		final String registrationUrl = registerUrl;
-		final String betaVersion = this.getString(R.string.beta_version);
+		//final String betaVersion = this.getString(R.string.beta_version);
 		final EditText name = (EditText) newUser.findViewById(R.id.beta_user_name);
 		final EditText network = (EditText) newUser.findViewById(R.id.beta_network);
 		final Button submitButton = (Button) newUser.findViewById(R.id.beta_user_submit);
@@ -223,7 +237,7 @@ public class ShowMap extends MapActivity {
 		submitButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BetaChecker.registerUser(registrationUrl, UNIQUE_ID, name.getEditableText().toString(), android.os.Build.VERSION.RELEASE, network.getEditableText().toString(), android.os.Build.BRAND, android.os.Build.DEVICE, android.os.Build.MANUFACTURER, betaVersion);
+				BetaChecker.registerUser(registrationUrl, UNIQUE_ID, name.getEditableText().toString(), android.os.Build.VERSION.RELEASE, network.getEditableText().toString(), android.os.Build.BRAND, android.os.Build.DEVICE, android.os.Build.MANUFACTURER, mVersionName);
 				registerDeviceLocally();
 				newUser.dismiss();
 			}
@@ -293,7 +307,7 @@ public class ShowMap extends MapActivity {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		Log.w("MTM", "MTM: conFigChanged()");
+		Log.w(MTM, "MTM: conFigChanged()");
 	}
 
 	@Override
@@ -305,33 +319,33 @@ public class ShowMap extends MapActivity {
 		editor.putInt(SAVED_MAP_LONG, this._mapView.getMapCenter().getLongitudeE6());
 		editor.putInt(SAVED_MAP_ZOOM, this._mapView.getZoomLevel());
 		editor.commit();
-		Log.w("MTM", "MTM: onPause()");
+		Log.w(MTM, "MTM: onPause()");
 	}
 
 	@Override
 	public void onStop() {
 		super.onStop();
 		
-		Log.w("MTM", "MTM: onStop()");
+		Log.w(MTM, "MTM: onStop()");
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		Log.w("MTM", "MTM: onDestroy()");
+		Log.w(MTM, "MTM: onDestroy()");
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		// drawTrail();
-		Log.w("MTM", "MTM: onResume()");
+		Log.w(MTM, "MTM: onResume()");
 	}
 
 	@Override
 	public void onRestart() {
 		super.onRestart();
-		Log.w("MTM", "MTM: onRestart()");
+		Log.w(MTM, "MTM: onRestart()");
 	}
 
 	@Override
@@ -346,7 +360,7 @@ public class ShowMap extends MapActivity {
 		this.initLocation();
 		this.initializeParser();
 		this.drawTrail();
-		Log.w("MTM", "MTM: onStart()");
+		Log.w(MTM, "MTM: onStart()");
 	}
 	
 	/**
@@ -459,7 +473,7 @@ public class ShowMap extends MapActivity {
 			this.centerMapOnCurrentLocation(false);
 		}
 		//this._mapView.getOverlays().add(new LocationMarker(p, R.drawable.dot, this));
-		Log.w("MTM", "MTM: Initializing Location Variables");
+		Log.w(MTM, "MTM: Initializing Location Variables");
 		_locationMarker = new LocationMarker(p, R.drawable.dot, this);
 		//_locationListen = new CurrentLocation(this, _locationMarker, _mapView, 1);
 		//this.turnOnLocationUpdates();

@@ -5,7 +5,7 @@
 @interface LocationMarker : NSObject <MKAnnotation> {
     
 	CLLocationCoordinate2D coordinate;
-	TrailPoint* point;
+	TrailPoint* _point;
 }
 
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;

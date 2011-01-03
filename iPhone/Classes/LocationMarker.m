@@ -3,7 +3,7 @@
 @implementation LocationMarker
 
 @synthesize coordinate;
-@synthesize point;
+@synthesize point = _point;
 
 -(id) initWithPoint: (TrailPoint*) point {
     
@@ -24,7 +24,7 @@
 
 - (void) dealloc {
     
-	[point release];
+	[_point release];
 	[super dealloc];
 }
 

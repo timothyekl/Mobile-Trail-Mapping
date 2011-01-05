@@ -11,14 +11,18 @@ import java.net.URLConnection;
 import org.apache.http.util.ByteArrayBuffer;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ItemDetails extends Activity {
-	
+
 	private Bundle _extras;
 	private final String IMAGEPATH = "/data/data/com.brousalis/files/";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,61 +30,69 @@ public class ItemDetails extends Activity {
 		_extras = this.getIntent().getExtras();
 		_extras.get("title");
 		_extras.get("summary");
-		TextView title = (TextView)this.findViewById(R.id.detail_title);
-		TextView summary = (TextView)this.findViewById(R.id.detail_summary);
-		//TextView condition = (TextView)this.findViewById(R.id.detail_condition);
-		
+		TextView title = (TextView) this.findViewById(R.id.detail_title);
+		TextView summary = (TextView) this.findViewById(R.id.detail_summary);
+		// TextView condition =
+		// (TextView)this.findViewById(R.id.detail_condition);
+
 		title.setText(_extras.get("title").toString());
 		summary.setText(_extras.get("summary").toString());
-		
-		//TODO: Conditions aren't implemented for a trail scale in the XML yet.  Do that, then this
+
+		// TODO: Conditions aren't implemented for a trail scale in the XML yet.
+		// Do that, then this
 		// Line gets uncommented.
-		//condition.setText(_extras.get("title").toString());
-		
-		// Still a few glitches in the download code, also we don't have images server side
+		// condition.setText(_extras.get("title").toString());
+
+		// Still a few glitches in the download code, also we don't have images
+		// server side
 		// function is still valid.
-		//DownloadFromUrl("forrest.png", "forrest.png");
+		
+		ImageView image = (ImageView) findViewById(R.id.imview);
+		
+		File imageFile = new File("/data/data/com.brousalis/files/forrest.png");
+		if(!imageFile.exists()) {
+			DownloadFromUrl("forrest.png", "forrest.png");
+		}
+		Bitmap bMap = BitmapFactory.decodeFile("/data/data/com.brousalis/files/forrest.png");
+		image.setImageBitmap(bMap);
+		
 	}
-	
-	
-	private void DownloadFromUrl(String imageURL, String fileName) {  //this is the downloader method
-        try {
-                URL url = new URL("http://www.fernferret.com/mtm/images/forrest.png"); //you can write here any link
-                File file = new File(fileName);
 
-                long startTime = System.currentTimeMillis();
-                Log.d("ImageManager", "download begining");
-                Log.d("ImageManager", "download url:" + url);
-                Log.d("ImageManager", "downloaded file name:" + fileName);
-                /* Open a connection to that URL. */
-                URLConnection ucon = url.openConnection();
+	/**
+	 * Downloads a file from a url and places it in the data directory named the
+	 * output filename. This function is intended to work with images.
+	 * 
+	 * @param imageURL
+	 *            The Url of the file to download
+	 * @param fileName
+	 *            Output name
+	 */
+	private void DownloadFromUrl(String imageURL, String fileName) {
+		try {
+			URL url = new URL("http://www.fernferret.com/mtm/images/forrest.png");
+			//URL url = new URL(imageURL);
+			File file = new File(fileName);
 
-                /*
-                 * Define InputStreams to read from the URLConnection.
-                 */
-                InputStream is = ucon.getInputStream();
-                BufferedInputStream bis = new BufferedInputStream(is);
+			URLConnection urlConnect = url.openConnection();
 
-                /*
-                 * Read bytes to the Buffer until there is nothing more to read(-1).
-                 */
-                ByteArrayBuffer baf = new ByteArrayBuffer(50);
-                int current = 0;
-                while ((current = bis.read()) != -1) {
-                        baf.append((byte) current);
-                }
+			InputStream inputStream = urlConnect.getInputStream();
+			BufferedInputStream bInputStream = new BufferedInputStream(inputStream);
 
-                /* Convert the Bytes read to a String. */
-                FileOutputStream fos = new FileOutputStream(IMAGEPATH+file);
-                fos.write(baf.toByteArray());
-                fos.close();
-                Log.d("ImageManager", "download ready in"
-                                + ((System.currentTimeMillis() - startTime) / 1000)
-                                + " sec");
+			ByteArrayBuffer bArrayBuffer = new ByteArrayBuffer(50);
+			int current = 0;
+			while ((current = bInputStream.read()) != -1) {
+				bArrayBuffer.append((byte) current);
+			}
 
-        } catch (IOException e) {
-                Log.d("ImageManager", "Error: " + e);
-        }
+			/* Convert the Bytes read to a String. */
+			FileOutputStream output = new FileOutputStream(IMAGEPATH + file);
+			output.write(bArrayBuffer.toByteArray());
+			output.close();
+			// FileInputStream
+
+		} catch (IOException e) {
+			Log.d("ImageManager", "Error: " + e);
+		}
 
 	}
 }

@@ -16,6 +16,7 @@ if [ ! -f "brousalis.keystore" ]; then
     exit;
 fi
 
+# This makes me super happy. - Tim
 echo -e "Did you change the KeyStore from Debug to Production?  (yes/no)?"
 read ans
 [ $ans != "yes" ] && echo "Do it. Now." && exit 0
@@ -42,13 +43,22 @@ if [ -d $1 ]; then
         read ans
         [ $ans != "yes" ] && echo "Did NOT upload. Done." && exit 0
         
-        if [ -d "/Volumes/eric-stokes.com" ]; then
-            if [ -f "/Volumes/eric-stokes.com/public_html/mtmbeta/downloads/mtmBETA.${1}.apk" ]; then
-                echo "Removing old build of same version from server..."
-                rm "/Volumes/eric-stokes.com/public_html/mtmbeta/downloads/mtmBETA.${1}.apk"
-            fi
-            echo "Uploading..."
-            cp "${1}/mtmBETA.${1}.apk" "/Volumes/eric-stokes.com/public_html/mtmbeta/downloads/mtmBETA.${1}.apk"
+        #if [ -d "/Volumes/eric-stokes.com" ]; then
+        #    if [ -f "/Volumes/eric-stokes.com/public_html/mtmbeta/downloads/mtmBETA.${1}.apk" ]; then
+        #        echo "Removing old build of same version from server..."
+        #        rm "/Volumes/eric-stokes.com/public_html/mtmbeta/downloads/mtmBETA.${1}.apk"
+        #    fi
+        #    echo "Uploading..."
+        #    cp "${1}/mtmBETA.${1}.apk" "/Volumes/eric-stokes.com/public_html/mtmbeta/downloads/mtmBETA.${1}.apk"
+        #    echo "Upload COMPLETE."
+        #else
+        #    echo "Could NOT upload."
+        #fi
+        
+        echo "About to attempt upload. You will be prompted for the upload password."
+        scp "mtmBETA.${1}.apk" "fernferr@eric-stokes.com:public_html/mtmbeta/downloads/mtmBETA.${1}.apk"
+        SUCCESS=$?
+        if [ $SUCCESS ]; then
             echo "Upload COMPLETE."
         else
             echo "Could NOT upload."

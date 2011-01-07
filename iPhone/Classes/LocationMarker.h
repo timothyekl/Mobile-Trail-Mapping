@@ -3,9 +3,8 @@
 #import "TrailPoint.h"
 
 @interface LocationMarker : NSObject <MKAnnotation> {
-    
-	CLLocationCoordinate2D coordinate;
-	TrailPoint* point;
+	CLLocationCoordinate2D _coordinate;
+	TrailPoint* _point;
 }
 
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;

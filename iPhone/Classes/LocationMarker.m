@@ -2,14 +2,14 @@
 
 @implementation LocationMarker
 
-@synthesize coordinate;
+@synthesize coordinate = _coordinate;
 @synthesize point = _point;
 
 -(id) initWithPoint: (TrailPoint*) point {
     
 	self = [super init];
 	if (self != nil) {
-		self.point = point;
+		_point = point;
 	}
 	return self;
 }
@@ -23,7 +23,6 @@
 #pragma mark - Dealloc
 
 - (void) dealloc {
-    
 	[_point release];
 	[super dealloc];
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A7306D7112B6F8AA0099C0C2 /* TrailPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A7306D6E12B6F8AA0099C0C2 /* TrailPoint.m */; };
 		A7306D7212B6F8AA0099C0C2 /* LocationMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = A7306D7012B6F8AA0099C0C2 /* LocationMarker.m */; };
+		A739508912D6AD850079EA7F /* Trail.m in Sources */ = {isa = PBXBuildFile; fileRef = A739508812D6AD850079EA7F /* Trail.m */; };
 		A752C9A612B6EFCB008D2B62 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = A752C9A512B6EFCB008D2B62 /* MapView.m */; };
 		A78514A712B6FA99000468E5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A78514A612B6FA99000468E5 /* MapKit.framework */; };
 		A792BDE612C71BEC005EFAC6 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A792BDE512C71BEC005EFAC6 /* XMLParser.m */; };
@@ -29,6 +30,8 @@
 		A7306D6E12B6F8AA0099C0C2 /* TrailPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrailPoint.m; sourceTree = "<group>"; };
 		A7306D6F12B6F8AA0099C0C2 /* LocationMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationMarker.h; sourceTree = "<group>"; };
 		A7306D7012B6F8AA0099C0C2 /* LocationMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationMarker.m; sourceTree = "<group>"; };
+		A739508712D6AD850079EA7F /* Trail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trail.h; sourceTree = "<group>"; };
+		A739508812D6AD850079EA7F /* Trail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trail.m; sourceTree = "<group>"; };
 		A752C9A412B6EFCB008D2B62 /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
 		A752C9A512B6EFCB008D2B62 /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		A78514A612B6FA99000468E5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MapKit.framework; sourceTree = "<group>"; };
@@ -79,6 +82,8 @@
 		A792BDE312C71BCB005EFAC6 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				A739508712D6AD850079EA7F /* Trail.h */,
+				A739508812D6AD850079EA7F /* Trail.m */,
 				A792BE6612C7379E005EFAC6 /* InterestPoint.h */,
 				A792BE6712C7379E005EFAC6 /* InterestPoint.m */,
 				A7306D6D12B6F8AA0099C0C2 /* TrailPoint.h */,
@@ -222,6 +227,7 @@
 				A7306D7212B6F8AA0099C0C2 /* LocationMarker.m in Sources */,
 				A792BDE612C71BEC005EFAC6 /* XMLParser.m in Sources */,
 				A792BE6812C7379E005EFAC6 /* InterestPoint.m in Sources */,
+				A739508912D6AD850079EA7F /* Trail.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

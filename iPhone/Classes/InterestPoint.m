@@ -10,11 +10,18 @@
 @synthesize color = _color;
 @synthesize categoryID = _categoryID;
 
--(id) initWithHmm: (NSInteger) id {
-    
+-(id) initWithParams:(NSInteger)id 
+    location:(CGPoint)p category:(NSString *)c title:(NSString *)t summary:(NSString *)s {
+        
 	self = [super init];
 	if (self != nil) {
-        
+        _id = id;
+        _location = p;
+        _category = c;
+        _title = t;
+        _summary = s;
+        _categoryID = -1;
+        _color = [UIColor redColor];
 	}
 	return self;
 }

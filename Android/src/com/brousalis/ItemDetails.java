@@ -21,7 +21,7 @@ import android.widget.TextView;
 public class ItemDetails extends Activity {
 
 	private Bundle _extras;
-	private final String IMAGEPATH = "/data/data/com.brousalis/files/";
+	private static final String DATA_PATH = "/data/data/com.brousalis/files/";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +43,14 @@ public class ItemDetails extends Activity {
 		// Line gets uncommented.
 		// condition.setText(_extras.get("title").toString());
 
-		// Still a few glitches in the download code, also we don't have images
-		// server side
-		// function is still valid.
+		String fromImage = "http://www.fernferret.com/mtm/images/forrest.png";
+		String toImage = "forrest.png";
 		
 		ImageView image = (ImageView) findViewById(R.id.imview);
 		
 		File imageFile = new File("/data/data/com.brousalis/files/forrest.png");
 		if(!imageFile.exists()) {
-			DownloadFromUrl("forrest.png", "forrest.png");
+			DownloadFromUrl(fromImage, toImage, DATA_PATH);
 		}
 		Bitmap bMap = BitmapFactory.decodeFile("/data/data/com.brousalis/files/forrest.png");
 		image.setImageBitmap(bMap);
@@ -67,28 +66,27 @@ public class ItemDetails extends Activity {
 	 * @param fileName
 	 *            Output name
 	 */
-	private void DownloadFromUrl(String imageURL, String fileName) {
+	private void DownloadFromUrl(String fileURL, String outputFileName, String dataPath) {
 		try {
-			URL url = new URL("http://www.fernferret.com/mtm/images/forrest.png");
-			//URL url = new URL(imageURL);
-			File file = new File(fileName);
+			URL url = new URL(fileURL);
+			File file = new File(outputFileName);
 
 			URLConnection urlConnect = url.openConnection();
 
 			InputStream inputStream = urlConnect.getInputStream();
 			BufferedInputStream bInputStream = new BufferedInputStream(inputStream);
 
+			/* Read the buffered input to a ByteArrayBuffer */
 			ByteArrayBuffer bArrayBuffer = new ByteArrayBuffer(50);
 			int current = 0;
 			while ((current = bInputStream.read()) != -1) {
 				bArrayBuffer.append((byte) current);
 			}
 
-			/* Convert the Bytes read to a String. */
-			FileOutputStream output = new FileOutputStream(IMAGEPATH + file);
+			/* Save the file to disk in our private directory */
+			FileOutputStream output = new FileOutputStream(dataPath + file);
 			output.write(bArrayBuffer.toByteArray());
 			output.close();
-			// FileInputStream
 
 		} catch (IOException e) {
 			Log.d("ImageManager", "Error: " + e);

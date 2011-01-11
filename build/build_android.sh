@@ -42,13 +42,22 @@ if [ -d $1 ]; then
         rm "${1}/mtmBETA_signed.apk"
         echo "Build Completed."
         
-        if [ -d "/Volumes/eric-stokes.com" ]; then
-            if [ -f "/Volumes/eric-stokes.com/public_html/mtmbeta/downloads/mtmBETA.${1}.apk" ]; then
-                echo "Removing old build of same version from server..."
-                rm "/Volumes/eric-stokes.com/public_html/mtmbeta/downloads/mtmBETA.${1}.apk"
-            fi
-            echo "Uploading..."
-            cp "${1}/mtmBETA.${1}.apk" "/Volumes/eric-stokes.com/public_html/mtmbeta/downloads/mtmBETA.${1}.apk"
+        #if [ -d "/Volumes/eric-stokes.com" ]; then
+        #    if [ -f "/Volumes/eric-stokes.com/public_html/mtmbeta/downloads/mtmBETA.${1}.apk" ]; then
+        #        echo "Removing old build of same version from server..."
+        #        rm "/Volumes/eric-stokes.com/public_html/mtmbeta/downloads/mtmBETA.${1}.apk"
+        #    fi
+        #    echo "Uploading..."
+        #    cp "${1}/mtmBETA.${1}.apk" "/Volumes/eric-stokes.com/public_html/mtmbeta/downloads/mtmBETA.${1}.apk"
+        #    echo "Upload COMPLETE."
+        #else
+        #    echo "Could NOT upload."
+        #fi
+        
+        echo "About to attempt upload. You will be prompted for the upload password."
+        scp "${1}/mtmBETA.${1}.apk" "fernferr@eric-stokes.com:public_html/mtmbeta/downloads/mtmBETA.${1}.apk"
+        SUCCESS=$?
+        if [ $SUCCESS ]; then
             echo "Upload COMPLETE."
         else
             echo "Could NOT upload."
